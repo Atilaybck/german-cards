@@ -1,0 +1,107 @@
+[
+  {
+    "de": "krank",
+    "tr": "hasta",
+    "oku": "krank",
+    "cumle": "Ich bin krank.",
+    "ceviri": "Hastayım."
+  },
+  {
+    "de": "heißen",
+    "tr": "adı olmak / denilmek",
+    "oku": "haysın",
+    "cumle": "Ich heiße Ali.",
+    "ceviri": "Benim adım Ali."
+  },
+  {
+    "de": "mit",
+    "tr": "ile",
+    "oku": "mit",
+    "cumle": "Ich arbeite mit dem Computer.",
+    "ceviri": "Bilgisayar ile çalışıyorum."
+  },
+  {
+    "de": "jetzt",
+    "tr": "şimdi / şu anda",
+    "oku": "yets",
+    "cumle": "Ich wohne jetzt in Berlin.",
+    "ceviri": "Şu anda Berlin’de yaşıyorum."
+  },
+  {
+    "de": "am Morgen",
+    "tr": "sabah(ları)",
+    "oku": "am morgın",
+    "cumle": "Am Morgen stehe ich früh auf.",
+    "ceviri": "Sabahları erken kalkarım."
+  },
+  {
+    "de": "aufstehen",
+    "tr": "kalkmak",
+    "oku": "aufşteyen",
+    "cumle": "Ich stehe früh auf.",
+    "ceviri": "Erken kalkarım."
+  },
+  {
+    "de": "früh",
+    "tr": "erken",
+    "oku": "frü",
+    "cumle": "Ich stehe früh auf.",
+    "ceviri": "Erken kalkarım."
+  },
+  {
+    "de": "aber",
+    "tr": "ama / fakat",
+    "oku": "aber",
+    "cumle": "Ich bin müde, aber ich arbeite.",
+    "ceviri": "Yorgunum ama çalışıyorum."
+  },
+  {
+    "de": "gern",
+    "tr": "severek",
+    "oku": "gern",
+    "cumle": "Ich trinke gern Kaffee.",
+    "ceviri": "Kahveyi severek içerim."
+  },
+  {
+    "de": "ein bisschen",
+    "tr": "biraz",
+    "oku": "bisşın",
+    "cumle": "Ich arbeite ein bisschen.",
+    "ceviri": "Biraz çalışıyorum."
+  },
+  {
+    "de": "am",
+    "tr": "de / da",
+    "oku": "am",
+    "cumle": "Am Morgen stehe ich früh auf.",
+    "ceviri": "Sabahları erken kalkarım."
+  },
+  {
+    "de": "sagen",
+    "tr": "söylemek / demek",
+    "oku": "zagen",
+    "cumle": "Sie sagt etwas.",
+    "ceviri": "O bir şey söylüyor."
+  },
+  {
+    "de": "etwas",
+    "tr": "bir şey",
+    "oku": "etvas",
+    "cumle": "Sie sagt etwas.",
+    "ceviri": "O bir şey söylüyor."
+  },
+  {
+    "de": "der Nachmittag",
+    "tr": "öğleden sonra",
+    "oku": "nahmitag",
+    "cumle": "Am Nachmittag lerne ich Deutsch.",
+    "ceviri": "Öğleden sonra Almanca öğreniyorum."
+  },
+  {
+    "de": "lange",
+    "tr": "uzun süre",
+    "oku": "langı",
+    "cumle": "Ich lerne nicht lange.",
+    "ceviri": "Uzun süre öğrenmiyorum."
+  }
+]

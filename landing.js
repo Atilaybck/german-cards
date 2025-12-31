@@ -1,3 +1,4 @@
+//landing.js
 const container  = document.getElementById("cards");
 const resetBtn   = document.getElementById("reset");
 const unlearnBtn = document.getElementById("unlearnedBtn");
@@ -7,7 +8,7 @@ const pageButtonsContainer = document.getElementById("pageButtons");
 let currentPage   = 1;
 let showUnlearned = false;
 let showRandom    = false;
-const totalPages = 14;
+const totalPages = 16;
 
 const getLS = (key) => JSON.parse(localStorage.getItem(key) || "[]");
 const setLS = (key, val) => localStorage.setItem(key, JSON.stringify(val));
