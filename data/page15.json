@@ -1,0 +1,107 @@
+[
+  {
+    "de": "der Besuch",
+    "tr": "ziyaret",
+    "oku": "de bizuh",
+    "cumle": "Ich habe Besuch von meinen Eltern.",
+    "ceviri": "Ailem ziyarete geldi."
+  },
+  {
+    "de": "Verspätung",
+    "tr": "gecikme",
+    "oku": "ferşpehtung",
+    "cumle": "Der Zug hat Verspätung.",
+    "ceviri": "Tren gecikmeli."
+  },
+  {
+    "de": "dauern",
+    "tr": "sürmek (zaman olarak)",
+    "oku": "daurn",
+    "cumle": "Der Film dauert zwei Stunden.",
+    "ceviri": "Film iki saat sürüyor."
+  },
+  {
+    "de": "die Einladung",
+    "tr": "davet",
+    "oku": "di aynladung",
+    "cumle": "Danke für die Einladung!",
+    "ceviri": "Davet için teşekkürler!"
+  },
+  {
+    "de": "absagen",
+    "tr": "iptal etmek",
+    "oku": "apzagen",
+    "cumle": "Ich muss den Termin absagen.",
+    "ceviri": "Randevuyu iptal etmem gerekiyor."
+  },
+  {
+    "de": "stattfinden",
+    "tr": "gerçekleşmek / yapılmak",
+    "oku": "ştatfındın",
+    "cumle": "Das Konzert findet morgen statt.",
+    "ceviri": "Konser yarın gerçekleşiyor."
+  },
+  {
+    "de": "unterwegs sein",
+    "tr": "yolda olmak",
+    "oku": "untaveks zayn",
+    "cumle": "Ich bin noch unterwegs.",
+    "ceviri": "Hâlâ yoldayım."
+  },
+  {
+    "de": "zuverlässig",
+    "tr": "güvenilir",
+    "oku": "tsuverlesih",
+    "cumle": "Er ist sehr zuverlässig.",
+    "ceviri": "O çok güvenilirdir."
+  },
+  {
+    "de": "der Vorschlag",
+    "tr": "öneri",
+    "oku": "der forşlag",
+    "cumle": "Ich habe einen Vorschlag.",
+    "ceviri": "Bir önerim var."
+  },
+  {
+    "de": "ablehnen",
+    "tr": "reddetmek",
+    "oku": "apleynın",
+    "cumle": "Ich muss das Angebot ablehnen.",
+    "ceviri": "Teklifi reddetmek zorundayım."
+  },
+  {
+    "de": "heute",
+    "tr": "bugün",
+    "oku": "hoytı",
+    "cumle": "Ich habe heute viel Arbeit.",
+    "ceviri": "Bugün çok işim var."
+  },
+  {
+    "de": "am Morgen",
+    "tr": "sabahleyin / sabah",
+    "oku": "am morgın",
+    "cumle": "Ich arbeite am Morgen.",
+    "ceviri": "Sabah çalışıyorum."
+  },
+  {
+    "de": "aber",
+    "tr": "ama / fakat",
+    "oku": "abır",
+    "cumle": "Ich will kommen, aber ich habe keine Zeit.",
+    "ceviri": "Gelmek istiyorum ama zamanım yok."
+  },
+  {
+    "de": "dann",
+    "tr": "sonra / ardından",
+    "oku": "dan",
+    "cumle": "Wir essen, dann gehen wir nach Hause.",
+    "ceviri": "Yemek yiyoruz, sonra eve gidiyoruz."
+  },
+  {
+    "de": "ein bisschen",
+    "tr": "biraz / azıcık",
+    "oku": "ayn bisın",
+    "cumle": "Dann arbeite ich ein bisschen.",
+    "ceviri": "Sonra biraz çalışıyorum."
+  }
+]
