@@ -1,107 +1,17 @@
 [
-  {
-    "de": "nur",
-    "tr": "sadece / yalnızca",
-    "oku": "nur",
-    "cumle": "Ich trinke nur Wasser.",
-    "ceviri": "Sadece su içiyorum."
-  },
-  {
-    "de": "kleines",
-    "tr": "küçük (Akkusativ / Nominativ – nötr)",
-    "oku": "klaynes",
-    "cumle": "Ich habe ein kleines Haus.",
-    "ceviri": "Küçük bir evim var."
-  },
-  {
-    "de": "der Termin",
-    "tr": "randevu",
-    "oku": "termin",
-    "cumle": "Ich habe einen Termin.",
-    "ceviri": "Bir randevum var."
-  },
-  {
-    "de": "oft",
-    "tr": "sık sık",
-    "oku": "oft",
-    "cumle": "Ich komme oft hierher.",
-    "ceviri": "Buraya sık sık gelirim."
-  },
-  {
-    "de": "wichtig",
-    "tr": "önemli",
-    "oku": "vihtig",
-    "cumle": "Das ist wichtig.",
-    "ceviri": "Bu önemli."
-  },
-  {
-    "de": "das Ding",
-    "tr": "şey",
-    "oku": "ding",
-    "cumle": "Ich verstehe dieses Ding.",
-    "ceviri": "Bu şeyi anlıyorum."
-  },
-  {
-    "de": "die Dinge",
-    "tr": "şeyler",
-    "oku": "dinge",
-    "cumle": "Ich habe viele Dinge.",
-    "ceviri": "Birçok şeyim var."
-  },
-  {
-    "de": "schalten",
-    "tr": "açmak / kapatmak / değiştirmek",
-    "oku": "şaltın",
-    "cumle": "Ich schalte das Licht ein.",
-    "ceviri": "Işığı açıyorum."
-  },
-  {
-    "de": "schreiben",
-    "tr": "yazmak",
-    "oku": "şraybın",
-    "cumle": "Ich schreibe eine Nachricht.",
-    "ceviri": "Bir mesaj yazıyorum."
-  },
-  {
-    "de": "die Nachrichten",
-    "tr": "haberler / mesajlar",
-    "oku": "nahrihtın",
-    "cumle": "Ich lese Nachrichten.",
-    "ceviri": "Haberleri okuyorum."
-  },
-  {
-    "de": "das Handy",
-    "tr": "cep telefonu",
-    "oku": "handi",
-    "cumle": "Ich benutze mein Handy.",
-    "ceviri": "Cep telefonumu kullanıyorum."
-  },
-  {
-    "de": "viele",
-    "tr": "çok / birçok",
-    "oku": "file",
-    "cumle": "Ich habe viele Termine.",
-    "ceviri": "Birçok randevum var."
-  },
-  {
-    "de": "über",
-    "tr": "hakkında / üzerinde",
-    "oku": "über",
-    "cumle": "Wir sprechen über Arbeit.",
-    "ceviri": "İş hakkında konuşuyoruz."
-  },
-  {
-    "de": "gleichen",
-    "tr": "aynı",
-    "oku": "glayhın",
-    "cumle": "Wir haben die gleichen Dinge.",
-    "ceviri": "Aynı şeylere sahibiz."
-  },
-  {
-    "de": "nützlich",
-    "tr": "faydalı",
-    "oku": "nütslih",
-    "cumle": "Das ist nützlich.",
-    "ceviri": "Bu faydalı."
-  }
+  { "de": "nur", "tr": "sadece / yalnızca", "oku": "nur" },
+  { "de": "kleines", "tr": "küçük (Akkusativ / Nominativ – nötr)", "oku": "klaynes" },
+  { "de": "der Termin", "tr": "randevu", "oku": "termin" },
+  { "de": "oft", "tr": "sık sık", "oku": "oft" },
+  { "de": "wichtig", "tr": "önemli", "oku": "vihtig" },
+  { "de": "das Ding", "tr": "şey", "oku": "ding" },
+  { "de": "die Dinge", "tr": "şeyler", "oku": "dinge" },
+  { "de": "schalten", "tr": "açmak / kapatmak / değiştirmek", "oku": "şaltın" },
+  { "de": "schreiben", "tr": "yazmak", "oku": "şraybın" },
+  { "de": "die Nachrichten", "tr": "haberler / mesajlar", "oku": "nahrihtın" },
+  { "de": "das Handy", "tr": "cep telefonu", "oku": "handi" },
+  { "de": "viele", "tr": "çok / birçok", "oku": "file" },
+  { "de": "über", "tr": "hakkında / üzerinde", "oku": "über" },
+  { "de": "gleichen", "tr": "aynı", "oku": "glayhın" },
+  { "de": "nützlich", "tr": "faydalı", "oku": "nütslih" }
 ]

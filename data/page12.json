@@ -1,107 +1,17 @@
 [
-  {
-    "de": "kompliziert",
-    "tr": "karmaşık / zor",
-    "oku": "komplitsiğrt",
-    "cumle": "Die Aufgabe ist kompliziert.",
-    "ceviri": "Görev karmaşık."
-  },
-  {
-    "de": "der Termin",
-    "tr": "randevu / görüşme zamanı",
-    "oku": "der termin",
-    "cumle": "Ich habe einen Termin beim Arzt.",
-    "ceviri": "Doktorda bir randevum var."
-  },
-  {
-    "de": "vorbereiten",
-    "tr": "hazırlamak",
-    "oku": "forberaytın",
-    "cumle": "Ich bereite das Essen vor.",
-    "ceviri": "Yemeği hazırlıyorum."
-  },
-  {
-    "de": "richtig",
-    "tr": "doğru",
-    "oku": "rihtih",
-    "cumle": "Die Antwort ist richtig.",
-    "ceviri": "Cevap doğru."
-  },
-  {
-    "de": "falsch",
-    "tr": "yanlış",
-    "oku": "falş",
-    "cumle": "Das ist falsch.",
-    "ceviri": "Bu yanlış."
-  },
-  {
-    "de": "schwer",
-    "tr": "zor / ağır",
-    "oku": "şvier",
-    "cumle": "Die Aufgabe ist schwer.",
-    "ceviri": "Görev zor."
-  },
-  {
-    "de": "einfach",
-    "tr": "kolay / basit",
-    "oku": "aynfah",
-    "cumle": "Das ist ganz einfach.",
-    "ceviri": "Bu oldukça kolay."
-  },
-  {
-    "de": "das Bild",
-    "tr": "resim",
-    "oku": "das bilt",
-    "cumle": "Das Bild hängt an der Wand.",
-    "ceviri": "Resim duvarda asılı."
-  },
-  {
-    "de": "malen",
-    "tr": "resim yapmak / boyamak",
-    "oku": "malın",
-    "cumle": "Das Kind malt ein Bild.",
-    "ceviri": "Çocuk bir resim yapıyor."
-  },
-  {
-    "de": "dunkel",
-    "tr": "karanlık",
-    "oku": "dunkel",
-    "cumle": "Es ist draußen dunkel.",
-    "ceviri": "Dışarısı karanlık."
-  },
-  {
-    "de": "hell",
-    "tr": "aydınlık",
-    "oku": "hel",
-    "cumle": "Das Zimmer ist hell.",
-    "ceviri": "Oda aydınlık."
-  },
-  {
-    "de": "die Küche",
-    "tr": "mutfak",
-    "oku": "di kühhe",
-    "cumle": "Die Küche ist sauber.",
-    "ceviri": "Mutfak temiz."
-  },
-  {
-    "de": "der See",
-    "tr": "göl",
-    "oku": "der zee",
-    "cumle": "Wir schwimmen im See.",
-    "ceviri": "Gölde yüzüyoruz."
-  },
-  {
-    "de": "backen",
-    "tr": "fırında pişirmek",
-    "oku": "bakın",
-    "cumle": "Ich backe einen Kuchen.",
-    "ceviri": "Bir kek pişiriyorum."
-  },
-  {
-    "de": "der Mantel",
-    "tr": "palto",
-    "oku": "der mantıl",
-    "cumle": "Der Mantel ist warm.",
-    "ceviri": "Palto sıcak."
-  }
+  { "de": "kompliziert", "tr": "karmaşık / zor", "oku": "komplitsiğrt" },
+  { "de": "der Termin", "tr": "randevu / görüşme zamanı", "oku": "termin" },
+  { "de": "vorbereiten", "tr": "hazırlamak", "oku": "forberaytın" },
+  { "de": "richtig", "tr": "doğru", "oku": "rihtih" },
+  { "de": "falsch", "tr": "yanlış", "oku": "falş" },
+  { "de": "schwer", "tr": "zor / ağır", "oku": "şveer" },
+  { "de": "einfach", "tr": "kolay / basit", "oku": "aynfah" },
+  { "de": "das Bild", "tr": "resim", "oku": "bilt" },
+  { "de": "malen", "tr": "resim yapmak / boyamak", "oku": "malın" },
+  { "de": "dunkel", "tr": "karanlık", "oku": "dunkıl" },
+  { "de": "hell", "tr": "aydınlık", "oku": "hel" },
+  { "de": "die Küche", "tr": "mutfak", "oku": "kühe" },
+  { "de": "der See", "tr": "göl", "oku": "zee" },
+  { "de": "backen", "tr": "fırında pişirmek", "oku": "bakın" },
+  { "de": "der Mantel", "tr": "palto", "oku": "mantıl" }
 ]

@@ -1,107 +1,17 @@
 [
-  {
-    "de": "jeden",
-    "tr": "her",
-    "oku": "yidın",
-    "cumle": "Ich lerne jeden Tag.",
-    "ceviri": "Her gün öğreniyorum."
-  },
-  {
-    "de": "leicht",
-    "tr": "kolay",
-    "oku": "layht",
-    "cumle": "Deutsch ist leicht.",
-    "ceviri": "Almanca kolaydır."
-  },
-  {
-    "de": "das Wörterbuch",
-    "tr": "sözlük",
-    "oku": "vörtırbuh",
-    "cumle": "Ich habe ein Wörterbuch.",
-    "ceviri": "Bir sözlüğüm var."
-  },
-  {
-    "de": "am Abend",
-    "tr": "akşam(ları)",
-    "oku": "am abınt",
-    "cumle": "Am Abend lerne ich Deutsch.",
-    "ceviri": "Akşamları Almanca öğrenirim."
-  },
-  {
-    "de": "zusammen",
-    "tr": "birlikte",
-    "oku": "suzamın",
-    "cumle": "Wir lernen zusammen.",
-    "ceviri": "Birlikte öğreniyoruz."
-  },
-  {
-    "de": "üben",
-    "tr": "pratik yapmak / çalışmak",
-    "oku": "übın",
-    "cumle": "Wir üben viel.",
-    "ceviri": "Biz çok pratik yapıyoruz."
-  },
-  {
-    "de": "viel",
-    "tr": "çok",
-    "oku": "fiil",
-    "cumle": "Wir üben viel.",
-    "ceviri": "Çok pratik yapıyoruz."
-  },
-  {
-    "de": "jetzt",
-    "tr": "şimdi / şu anda",
-    "oku": "yets",
-    "cumle": "Jetzt lernen wir Deutsch.",
-    "ceviri": "Şimdi Almanca öğreniyoruz."
-  },
-  {
-    "de": "zufrieden",
-    "tr": "memnun / tatmin olmuş",
-    "oku": "tsufriden",
-    "cumle": "Wir sind zufrieden.",
-    "ceviri": "Biz memnunuz."
-  },
-  {
-    "de": "morgen",
-    "tr": "yarın",
-    "oku": "morgın",
-    "cumle": "Ich arbeite morgen wieder.",
-    "ceviri": "Yarın yine çalışıyorum."
-  },
-  {
-    "de": "wieder",
-    "tr": "tekrar / yine",
-    "oku": "vidır",
-    "cumle": "Ich arbeite wieder.",
-    "ceviri": "Tekrar çalışıyorum."
-  },
-  {
-    "de": "am Wochenende",
-    "tr": "hafta sonu",
-    "oku": "am vohhenende",
-    "cumle": "Am Wochenende habe ich mehr Zeit.",
-    "ceviri": "Hafta sonu daha çok vaktim var."
-  },
-  {
-    "de": "mehr",
-    "tr": "daha fazla",
-    "oku": "mer",
-    "cumle": "Ich habe mehr Zeit.",
-    "ceviri": "Daha fazla vaktim var."
-  },
-  {
-    "de": "später",
-    "tr": "daha geç / sonradan",
-    "oku": "şpetır",
-    "cumle": "Ich stehe später auf.",
-    "ceviri": "Daha geç kalkarım."
-  },
-  {
-    "de": "die Ruhe",
-    "tr": "sakinlik / huzur",
-    "oku": "ruu",
-    "cumle": "Ich frühstücke in Ruhe.",
-    "ceviri": "Sakin bir şekilde kahvaltı yapıyorum."
-  }
+  { "de": "jeden", "tr": "her", "oku": "yidın" },
+  { "de": "leicht", "tr": "kolay", "oku": "layht" },
+  { "de": "das Wörterbuch", "tr": "sözlük", "oku": "vörtırbuh" },
+  { "de": "am Abend", "tr": "akşam(ları)", "oku": "am abınt" },
+  { "de": "zusammen", "tr": "birlikte", "oku": "suzamın" },
+  { "de": "üben", "tr": "pratik yapmak / çalışmak", "oku": "übın" },
+  { "de": "viel", "tr": "çok", "oku": "fiil" },
+  { "de": "jetzt", "tr": "şimdi / şu anda", "oku": "yets" },
+  { "de": "zufrieden", "tr": "memnun / tatmin olmuş", "oku": "tsufriden" },
+  { "de": "morgen", "tr": "yarın", "oku": "morgın" },
+  { "de": "wieder", "tr": "tekrar / yine", "oku": "vidır" },
+  { "de": "am Wochenende", "tr": "hafta sonu", "oku": "am vohhenende" },
+  { "de": "mehr", "tr": "daha fazla", "oku": "mer" },
+  { "de": "später", "tr": "daha geç / sonradan", "oku": "şpetır" },
+  { "de": "die Ruhe", "tr": "sakinlik / huzur", "oku": "ruu" }
 ]

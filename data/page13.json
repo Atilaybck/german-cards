@@ -1,107 +1,17 @@
 [
-  {
-    "de": "fliegen",
-    "tr": "uçmak",
-    "oku": "fliigın",
-    "cumle": "Wir fliegen nach Berlin.",
-    "cumle_tr": "Berlin’e uçuyoruz."
-  },
-  {
-    "de": "der Vogel",
-    "tr": "kuş",
-    "oku": "foogıl",
-    "cumle": "Der Vogel singt schön.",
-    "cumle_tr": "Kuş güzel ötüyor."
-  },
-  {
-    "de": "traurig",
-    "tr": "üzgün",
-    "oku": "traorih",
-    "cumle": "Er ist heute traurig.",
-    "cumle_tr": "O bugün üzgün."
-  },
-  {
-    "de": "schneiden",
-    "tr": "kesmek",
-    "oku": "şnaydın",
-    "cumle": "Ich schneide das Brot.",
-    "cumle_tr": "Ekmeği kesiyorum."
-  },
-  {
-    "de": "der Teppich",
-    "tr": "halı",
-    "oku": "tepih",
-    "cumle": "Der Teppich ist rot.",
-    "cumle_tr": "Halı kırmızı."
-  },
-  {
-    "de": "tragen",
-    "tr": "taşımak / giymek",
-    "oku": "tragın",
-    "cumle": "Ich trage eine Jacke.",
-    "cumle_tr": "Bir ceket giyiyorum."
-  },
-  {
-    "de": "die Frage",
-    "tr": "soru",
-    "oku": "di fraagı",
-    "cumle": "Ich habe eine Frage.",
-    "cumle_tr": "Bir sorum var."
-  },
-  {
-    "de": "bezahlen",
-    "tr": "ödemek",
-    "oku": "bitsalen",
-    "cumle": "Wir bezahlen an der Kasse.",
-    "cumle_tr": "Kasada ödüyoruz."
-  },
-  {
-    "de": "die Uhrzeit",
-    "tr": "saat / zaman",
-    "oku": "uğr-tsayt",
-    "cumle": "Weißt du die Uhrzeit?",
-    "cumle_tr": "Saati biliyor musun?"
-  },
-  {
-    "de": "das Frühstück",
-    "tr": "kahvaltı",
-    "oku": "früştük",
-    "cumle": "Das Frühstück ist fertig.",
-    "cumle_tr": "Kahvaltı hazır."
-  },
-  {
-    "de": "der Stau",
-    "tr": "trafik sıkışıklığı",
-    "oku": "ştau",
-    "cumle": "Im Zentrum gibt es einen Stau.",
-    "cumle_tr": "Merkezde trafik sıkışıklığı var."
-  },
-  {
-    "de": "der Zug",
-    "tr": "tren",
-    "oku": "tsuk",
-    "cumle": "Der Zug kommt um zehn Uhr.",
-    "cumle_tr": "Tren saat onda geliyor."
-  },
-  {
-    "de": "das Geld",
-    "tr": "para",
-    "oku": "gelt",
-    "cumle": "Ich habe kein Geld.",
-    "cumle_tr": "Param yok."
-  },
-  {
-    "de": "versuchen",
-    "tr": "denemek",
-    "oku": "ferzuhın",
-    "cumle": "Ich versuche, Deutsch zu sprechen.",
-    "cumle_tr": "Almanca konuşmayı deniyorum."
-  },
-  {
-    "de": "einfach",
-    "tr": "basit / sade",
-    "oku": "einfah",
-    "cumle": "Das ist einfach.",
-    "cumle_tr": "Bu basit."
-  }
+  { "de": "fliegen", "tr": "uçmak", "oku": "fliigın" },
+  { "de": "der Vogel", "tr": "kuş", "oku": "foogıl" },
+  { "de": "traurig", "tr": "üzgün", "oku": "traurih" },
+  { "de": "schneiden", "tr": "kesmek", "oku": "şnaydın" },
+  { "de": "der Teppich", "tr": "halı", "oku": "tepih" },
+  { "de": "tragen", "tr": "taşımak / giymek", "oku": "tragın" },
+  { "de": "die Frage", "tr": "soru", "oku": "fraage" },
+  { "de": "bezahlen", "tr": "ödemek", "oku": "bitsaalın" },
+  { "de": "die Uhrzeit", "tr": "saat / zaman", "oku": "uhrtsayt" },
+  { "de": "das Frühstück", "tr": "kahvaltı", "oku": "frühştük" },
+  { "de": "der Stau", "tr": "trafik sıkışıklığı", "oku": "ştau" },
+  { "de": "der Zug", "tr": "tren", "oku": "tsuug" },
+  { "de": "das Geld", "tr": "para", "oku": "gelt" },
+  { "de": "versuchen", "tr": "denemek", "oku": "ferzuuhın" },
+  { "de": "einfach", "tr": "basit / sade", "oku": "aynfah" }
 ]

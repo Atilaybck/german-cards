@@ -1,107 +1,17 @@
 [
-  {
-    "de": "manchmal",
-    "tr": "bazen",
-    "oku": "mançmal",
-    "cumle": "Manchmal lese ich ein Buch.",
-    "ceviri": "Bazen kitap okurum."
-  },
-  {
-    "de": "oder",
-    "tr": "ya da / veya",
-    "oku": "oder",
-    "cumle": "Ich lese ein Buch oder höre Musik.",
-    "ceviri": "Bir kitap okurum ya da müzik dinlerim."
-  },
-  {
-    "de": "spazieren (gehen)",
-    "tr": "yürüyüş yapmak",
-    "oku": "şpatsiren",
-    "cumle": "Ich gehe spazieren.",
-    "ceviri": "Yürüyüşe çıkıyorum."
-  },
-  {
-    "de": "am Abend",
-    "tr": "akşam(ları)",
-    "oku": "am abınt",
-    "cumle": "Am Abend schaue ich einen Film.",
-    "ceviri": "Akşamları bir film izlerim."
-  },
-  {
-    "de": "Österreich",
-    "tr": "Avusturya",
-    "oku": "österreich",
-    "cumle": "Ich komme aus Österreich.",
-    "ceviri": "Avusturya’dan geliyorum."
-  },
-  {
-    "de": "kleinen",
-    "tr": "küçük (Akkusativ / maskulin)",
-    "oku": "klaynın",
-    "cumle": "Ich habe einen kleinen Hund.",
-    "ceviri": "Küçük bir köpeğim var."
-  },
-  {
-    "de": "auch",
-    "tr": "de / da",
-    "oku": "ah",
-    "cumle": "Ich lerne auch Deutsch.",
-    "ceviri": "Ben de Almanca öğreniyorum."
-  },
-  {
-    "de": "denn",
-    "tr": "çünkü",
-    "oku": "denn",
-    "cumle": "Ich bin müde, denn ich arbeite viel.",
-    "ceviri": "Yorgunum, çünkü çok çalışıyorum."
-  },
-  {
-    "de": "möchten",
-    "tr": "istemek (kibar)",
-    "oku": "möhte",
-    "cumle": "Ich möchte einen Kaffee.",
-    "ceviri": "Bir kahve istiyorum."
-  },
-  {
-    "de": "zur",
-    "tr": "-e / -a (yönelme)",
-    "oku": "tsur",
-    "cumle": "Ich gehe zur Schule.",
-    "ceviri": "Okula gidiyorum."
-  },
-  {
-    "de": "Dienstag",
-    "tr": "Salı",
-    "oku": "dinstaag",
-    "cumle": "Am Dienstag arbeite ich.",
-    "ceviri": "Salı günü çalışıyorum."
-  },
-  {
-    "de": "Technik",
-    "tr": "teknoloji / teknik",
-    "oku": "tehnik",
-    "cumle": "Ich mag Technik.",
-    "ceviri": "Teknolojiyi severim."
-  },
-  {
-    "de": "nett",
-    "tr": "nazik / hoş",
-    "oku": "net",
-    "cumle": "Du bist nett.",
-    "ceviri": "Naziksin."
-  },
-  {
-    "de": "Pause machen",
-    "tr": "mola vermek",
-    "oku": "pauze mahın",
-    "cumle": "Ich mache eine Pause.",
-    "ceviri": "Mola veriyorum."
-  },
-  {
-    "de": "Mittagessen",
-    "tr": "öğle yemeği",
-    "oku": "mitagessen",
-    "cumle": "Ich esse Mittagessen.",
-    "ceviri": "Öğle yemeği yiyorum."
-  }
+  { "de": "manchmal", "tr": "bazen", "oku": "mançmal" },
+  { "de": "oder", "tr": "ya da / veya", "oku": "oder" },
+  { "de": "spazieren (gehen)", "tr": "yürüyüş yapmak", "oku": "şpatsiren" },
+  { "de": "am Abend", "tr": "akşam(ları)", "oku": "am abınt" },
+  { "de": "Österreich", "tr": "Avusturya", "oku": "österreich" },
+  { "de": "kleinen", "tr": "küçük (Akkusativ / maskulin)", "oku": "klaynın" },
+  { "de": "auch", "tr": "de / da", "oku": "ah" },
+  { "de": "denn", "tr": "çünkü", "oku": "denn" },
+  { "de": "möchten", "tr": "istemek (kibar)", "oku": "möhte" },
+  { "de": "zur", "tr": "-e / -a (yönelme)", "oku": "tsur" },
+  { "de": "Dienstag", "tr": "Salı", "oku": "dinstaag" },
+  { "de": "Technik", "tr": "teknoloji / teknik", "oku": "tehnik" },
+  { "de": "nett", "tr": "nazik / hoş", "oku": "net" },
+  { "de": "Pause machen", "tr": "mola vermek", "oku": "pauze mahın" },
+  { "de": "Mittagessen", "tr": "öğle yemeği", "oku": "mitagessen" }
 ]

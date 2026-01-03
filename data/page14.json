@@ -1,107 +1,17 @@
 [
-  {
-    "de": "genug",
-    "tr": "yeterli",
-    "oku": "genuğ",
-    "cumle": "Ich habe genug Zeit.",
-    "ceviri": "Yeterince zamanım var."
-  },
-  {
-    "de": "nötig",
-    "tr": "gerekli",
-    "oku": "nötih",
-    "cumle": "Ist das wirklich nötig?",
-    "ceviri": "Bu gerçekten gerekli mi?"
-  },
-  {
-    "de": "die Bewerbung",
-    "tr": "başvuru",
-    "oku": "di beverbung",
-    "cumle": "Ich schreibe eine Bewerbung.",
-    "ceviri": "Bir başvuru yazıyorum."
-  },
-  {
-    "de": "verbessern",
-    "tr": "iyileştirmek / geliştirmek",
-    "oku": "ferbessen",
-    "cumle": "Ich möchte mein Deutsch verbessern.",
-    "ceviri": "Almancamı geliştirmek istiyorum."
-  },
-  {
-    "de": "die Ausbildung",
-    "tr": "mesleki eğitim",
-    "oku": "di ausbildung",
-    "cumle": "Er macht eine Ausbildung als Koch.",
-    "ceviri": "O aşçı olarak meslek eğitimi yapıyor."
-  },
-  {
-    "de": "präsentieren",
-    "tr": "sunum yapmak",
-    "oku": "pırasentihın",
-    "cumle": "Ich präsentiere mein Projekt.",
-    "ceviri": "Projemi sunuyorum."
-  },
-  {
-    "de": "pünktlich",
-    "tr": "dakik",
-    "oku": "pünktlih",
-    "cumle": "Er ist immer pünktlich.",
-    "ceviri": "O her zaman dakiktir."
-  },
-  {
-    "de": "die Nachricht",
-    "tr": "mesaj / haber",
-    "oku": "di naahriht",
-    "cumle": "Ich habe eine Nachricht bekommen.",
-    "ceviri": "Bir mesaj aldım."
-  },
-  {
-    "de": "sich kümmern um",
-    "tr": "ilgilenmek / bakmak",
-    "oku": "zih kümarn um",
-    "cumle": "Ich kümmere mich um das Kind.",
-    "ceviri": "Çocukla ilgileniyorum."
-  },
-  {
-    "de": "das Ergebnis",
-    "tr": "sonuç",
-    "oku": "das ergeepnis",
-    "cumle": "Das Ergebnis ist gut.",
-    "ceviri": "Sonuç iyi."
-  },
-  {
-    "de": "herunterladen",
-    "tr": "indirmek (dijital)",
-    "oku": "heruntarlaadın",
-    "cumle": "Ich lade die Datei herunter.",
-    "ceviri": "Dosyayı indiriyorum."
-  },
-  {
-    "de": "anbieten",
-    "tr": "sunmak / teklif etmek",
-    "oku": "anbiitın",
-    "cumle": "Sie bietet ihre Hilfe an.",
-    "ceviri": "Yardım teklif ediyor."
-  },
-  {
-    "de": "verantwortlich",
-    "tr": "sorumlu",
-    "oku": "ferantvortlih",
-    "cumle": "Ich bin für das Projekt verantwortlich.",
-    "ceviri": "Projeden ben sorumluyum."
-  },
-  {
-    "de": "der Unfall",
-    "tr": "kaza",
-    "oku": "der unfal",
-    "cumle": "Ein Unfall ist passiert.",
-    "ceviri": "Bir kaza oldu."
-  },
-  {
-    "de": "unterwegs",
-    "tr": "yolda / seyahatte",
-    "oku": "untarveeks",
-    "cumle": "Ich bin gerade unterwegs.",
-    "ceviri": "Şu anda yoldayım."
-  }
+  { "de": "genug", "tr": "yeterli", "oku": "genuğ" },
+  { "de": "nötig", "tr": "gerekli", "oku": "nötih" },
+  { "de": "die Bewerbung", "tr": "başvuru", "oku": "bewerbung" },
+  { "de": "verbessern", "tr": "iyileştirmek / geliştirmek", "oku": "ferbessern" },
+  { "de": "die Ausbildung", "tr": "mesleki eğitim", "oku": "ausbildung" },
+  { "de": "präsentieren", "tr": "sunum yapmak", "oku": "prezentiiırın" },
+  { "de": "pünktlich", "tr": "dakik", "oku": "pünktlih" },
+  { "de": "die Nachricht", "tr": "mesaj / haber", "oku": "naahriht" },
+  { "de": "sich kümmern um", "tr": "ilgilenmek / bakmak", "oku": "zih kümmarn um" },
+  { "de": "das Ergebnis", "tr": "sonuç", "oku": "ergeepnis" },
+  { "de": "herunterladen", "tr": "indirmek (dijital)", "oku": "herunterlaadın" },
+  { "de": "anbieten", "tr": "sunmak / teklif etmek", "oku": "anbiitın" },
+  { "de": "verantwortlich", "tr": "sorumlu", "oku": "ferantvortlih" },
+  { "de": "der Unfall", "tr": "kaza", "oku": "unfal" },
+  { "de": "unterwegs", "tr": "yolda / seyahatte", "oku": "untarveeks" }
 ]
