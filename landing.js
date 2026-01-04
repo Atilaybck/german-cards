@@ -20,6 +20,19 @@ function shuffle(arr) {
   }
 }
 
+// ✅ SESLENDİRME (EKLENDİ)
+function speak(text) {
+  if (!text) return;
+  if (!("speechSynthesis" in window)) return;
+
+  window.speechSynthesis.cancel();
+
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = "de-DE";   // Almanca
+  u.rate = 0.95;
+  window.speechSynthesis.speak(u);
+}
+
 function fetchPages(pages) {
   return Promise.all(
     pages.map((p) =>
@@ -93,8 +106,8 @@ function makeCard({ de, tr, oku, page }) {
 
   tick.onclick = (e) => {
     e.stopPropagation();
-    const hidden = getLS("hiddenWords");      // taze oku
-    const unlearn = getLS("unlearnedWords");  // taze oku
+    const hidden = getLS("hiddenWords");
+    const unlearn = getLS("unlearnedWords");
 
     if (!hidden.includes(key)) {
       hidden.push(key);
@@ -115,7 +128,7 @@ function makeCard({ de, tr, oku, page }) {
 
   xBtn.onclick = (e) => {
     e.stopPropagation();
-    const unlearn = getLS("unlearnedWords");  // taze oku
+    const unlearn = getLS("unlearnedWords");
     if (!unlearn.includes(key)) {
       unlearn.push(key);
       setLS("unlearnedWords", unlearn);
@@ -128,7 +141,12 @@ function makeCard({ de, tr, oku, page }) {
     }
   };
 
-  card.onclick = () => card.classList.toggle("flipped");
+  // ✅ KARTA TIKLAYINCA OKU + FLIP (DEĞİŞTİ)
+  card.onclick = () => {
+    speak(de);
+    card.classList.toggle("flipped");
+  };
+
   inner.append(front, back);
   card.append(xBtn, tick, inner);
   return card;
@@ -169,12 +187,11 @@ function renderRandom() {
 
   const allPages = pageButtons.map((p) => p.page);
   fetchPages(allPages).then((words) => {
-    // görünür havuz: ne ✔ (hidden) ne ✘ (unlearn)
     let pool = words.filter((w) => {
       const key = `${w.page}_${w.de}`;
       return !hidden.includes(key) && !unlearn.includes(key);
     });
-    if (pool.length === 0) pool = words; // hepsi bittiyse tüm sözlükten seç
+    if (pool.length === 0) pool = words;
 
     const w = pool[Math.floor(Math.random() * pool.length)];
     if (!w) {
