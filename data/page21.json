@@ -1,0 +1,15 @@
+page21.json:
+[
+  { "de": "hören", "tr": "duymak / dinlemek", "oku": "hörın" },
+  { "de": "lesen", "tr": "okumak", "oku": "lezen" },
+  { "de": "die Schwester", "tr": "kız kardeş", "oku": "şvester" },
+  { "de": "fragen", "tr": "sormak", "oku": "fraagın" },
+  { "de": "am Mittag", "tr": "öğle vakti / öğlen", "oku": "am mitah" },
+  { "de": "die Suppe", "tr": "çorba", "oku": "zuppe" },
+  { "de": "ruhig", "tr": "sakin", "oku": "ruhiğ" },
+  { "de": "zwei", "tr": "iki", "oku": "tsvay" },
+  { "de": "lachen", "tr": "gülmek", "oku": "lahın" },
+  { "de": "nach", "tr": "-den sonra / -e doğru", "oku": "nah" },
+  { "de": "schlafen", "tr": "uyumak", "oku": "şlâfın" },
+  { "de": "spät", "tr": "geç", "oku": "şpeet" }
+]
