@@ -4,19 +4,36 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Almanca Kelime Kartları</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="landing.css" />
   <script src="landing.js" defer></script>
 </head>
 <body>
-  <button id="reset">Sıfırla</button>
-  <button id="unlearnedBtn">Ezberlenmemiş</button>
-  <button id="randomBtn">Rastgele</button>
+  <div class="app-container">
+    <header>
+      <h1>🇩🇪 Almanca Kartları</h1>
+      <div class="controls">
+        <button id="reset" class="action-btn danger">Sıfırla</button>
+        <button id="unlearnedBtn" class="action-btn warning">Ezberlenmemiş</button>
+        <button id="randomBtn" class="action-btn success">Rastgele</button>
+      </div>
+    </header>
 
-  <!-- Sayfa düğmelerinin ekleneceği alan -->
-  <div id="pageButtons"></div>
+    <main>
+      <!-- Sayfa düğmelerinin ekleneceği alan -->
+      <section class="pagination-section">
+        <div id="pageButtons" class="pagination-grid"></div>
+      </section>
 
-  <!-- Kartların geleceği alan -->
-  <div id="cards"></div>
+      <!-- Kartların geleceği alan -->
+      <section class="cards-section">
+        <div id="cards"></div>
+      </section>
+    </main>
+  </div>
 </body>
 </html>

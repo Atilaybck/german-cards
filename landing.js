@@ -1,14 +1,14 @@
 //landing.js
-const container  = document.getElementById("cards");
-const resetBtn   = document.getElementById("reset");
+const container = document.getElementById("cards");
+const resetBtn = document.getElementById("reset");
 const unlearnBtn = document.getElementById("unlearnedBtn");
-const randomBtn  = document.getElementById("randomBtn");
+const randomBtn = document.getElementById("randomBtn");
 const pageButtonsContainer = document.getElementById("pageButtons");
 
-let currentPage   = 1;
+let currentPage = 1;
 let showUnlearned = false;
-let showRandom    = false;
-const totalPages =20;
+let showRandom = false;
+const totalPages = 20;
 
 const getLS = (key) => JSON.parse(localStorage.getItem(key) || "[]");
 const setLS = (key, val) => localStorage.setItem(key, JSON.stringify(val));
@@ -46,7 +46,7 @@ function fetchPages(pages) {
 const pageButtons = [];
 for (let i = 1; i <= totalPages; i++) {
   const btn = document.createElement("button");
-  btn.textContent = `Sayfa ${i}`;
+  btn.textContent = `${i}`;
   btn.className = "pageBtn";
   btn.onclick = () => {
     currentPage = i;
@@ -65,7 +65,6 @@ function updateStrike() {
   const unlearn = getLS("unlearnedWords");
 
   pageButtons.forEach(({ page, btn }) => {
-    btn.style.textDecoration = "none";
     btn.classList.remove("completed");
 
     fetchPages([page]).then((words) => {
@@ -75,7 +74,6 @@ function updateStrike() {
       });
 
       if (visibleWords.length === 0) {
-        btn.style.textDecoration = "line-through";
         btn.classList.add("completed");
       }
     });
@@ -100,7 +98,7 @@ function makeCard({ de, tr, oku, page }) {
   xBtn.className = "unlearn";
 
   front.textContent = de;
-  back.innerHTML = `${tr}<br><span style="font-size:14px;color:#555">(${oku})</span>`;
+  back.innerHTML = `${tr}<br><span>(${oku})</span>`;
   tick.textContent = "✔";
   xBtn.textContent = "✘";
 
@@ -153,6 +151,7 @@ function makeCard({ de, tr, oku, page }) {
 }
 
 function renderWords() {
+  container.classList.remove("random-mode");
   container.innerHTML = "";
   const hidden = getLS("hiddenWords");
   const unlearn = getLS("unlearnedWords");
@@ -181,6 +180,7 @@ function renderWords() {
 function renderRandom() {
   showRandom = true;
   container.innerHTML = "";
+  container.classList.add("random-mode");
 
   const hidden = getLS("hiddenWords");
   const unlearn = getLS("unlearnedWords");
@@ -212,7 +212,6 @@ resetBtn.onclick = () => {
   showUnlearned = false;
   showRandom = false;
   pageButtons.forEach(({ btn }) => {
-    btn.style.textDecoration = "none";
     btn.classList.remove("completed");
   });
   renderWords();
