@@ -8,7 +8,7 @@ const pageButtonsContainer = document.getElementById("pageButtons");
 let currentPage = 1;
 let showUnlearned = false;
 let showRandom = false;
-const totalPages = 20;
+const totalPages = 23;
 
 const getLS = (key) => JSON.parse(localStorage.getItem(key) || "[]");
 const setLS = (key, val) => localStorage.setItem(key, JSON.stringify(val));
