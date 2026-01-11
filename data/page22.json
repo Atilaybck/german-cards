@@ -1,0 +1,17 @@
+[
+  { "de": "kurz", "tr": "kısa", "oku": "kurts" },
+  { "de": "der Satz", "tr": "cümle", "oku": "zats" },
+  { "de": "damit", "tr": "böylece / bununla", "oku": "da-mit" },
+  { "de": "besser", "tr": "daha iyi", "oku": "besser" },
+  { "de": "regelmäßig", "tr": "düzenli olarak", "oku": "regelmesih" },
+  { "de": "zuerst", "tr": "önce", "oku": "tsu-erst" },
+  { "de": "die Aufgabe", "tr": "görev / ödev", "oku": "aufgabe" },
+  { "de": "so", "tr": "böyle / bu şekilde", "oku": "zo" },
+  { "de": "der Schritt", "tr": "adım", "oku": "şrit" },
+  { "de": "Schritt für Schritt", "tr": "adım adım", "oku": "şrit für şrit" },
+  { "de": "werden", "tr": "olmak", "oku": "verden" },
+  { "de": "der Film", "tr": "film", "oku": "film" },
+  { "de": "einfach", "tr": "kolay / basit", "oku": "ayn-fah" },
+  { "de": "der Unterricht", "tr": "ders", "oku": "unterriht" },
+  { "de": "zuhören", "tr": "dinlemek", "oku": "tsu-hören" }
+]
