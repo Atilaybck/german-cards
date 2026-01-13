@@ -1,5 +1,5 @@
 :root {
-  --font-main: 'Outfit', sans-serif;
+  --font-main: "Outfit", sans-serif;
 
   --color-bg: #f8fafc;
   --color-surface: #ffffff;
@@ -170,14 +170,14 @@ h1 {
 }
 
 .pageBtn.completed::after {
-  content: '✓';
+  content: "✓";
   margin-left: 6px;
   font-size: 0.8em;
 }
 
 /* Pagination label */
 .pagination-section::before {
-  content: 'Sayfalar';
+  content: "Sayfalar";
   display: block;
   font-size: 0.85rem;
   color: var(--color-text-muted);
@@ -199,8 +199,9 @@ h1 {
 #cards.random-mode {
   display: flex;
   justify-content: center;
-  align-items: flex-start;
-  margin-top: 60px; /* kart aşağı */
+  align-items: center;   /* ✅ sabit */
+  margin-top: 0 !important; /* ✅ zıplama yok */
+  min-height: 420px;     /* ✅ alan sabit */
 }
 
 #cards.random-mode .card {
@@ -329,13 +330,15 @@ h1 {
 .random-controls {
   display: flex;
   justify-content: center;
-  margin-top: 16px;
-  position: relative;
+  margin-top: 0 !important; /* ✅ zıplama yok */
+  position: sticky;         /* ✅ yer sabit */
+  top: 12px;
+  z-index: 50;
 }
 
 .pages-popover {
   position: absolute;
-  top: 52px;
+  top: 56px; /* ✅ sticky'e uyum */
   width: 260px;
   background: rgba(15, 23, 42, 0.92);
   border: 1px solid rgba(255, 255, 255, 0.12);
@@ -343,6 +346,7 @@ h1 {
   padding: 14px;
   box-shadow: var(--shadow-lg);
   backdrop-filter: blur(10px);
+  z-index: 60;
 }
 
 .pages-list {
