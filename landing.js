@@ -1,4 +1,4 @@
-//landing.js
+// landing.js
 const container = document.getElementById("cards");
 const resetBtn = document.getElementById("reset");
 const unlearnBtn = document.getElementById("unlearnedBtn");
@@ -13,6 +13,28 @@ const totalPages = 23;
 const getLS = (key) => JSON.parse(localStorage.getItem(key) || "[]");
 const setLS = (key, val) => localStorage.setItem(key, JSON.stringify(val));
 
+const norm = (s = "") => String(s).trim().replace(/\s+/g, " ");
+const keyOf = (page, de) => `${page}_${norm(de)}`;
+
+// ✅ Eski key’leri (varsa) yeniye taşı
+(function migrateLS() {
+  const legacyKeys = ["unlearned", "unlearnedWord", "unlearnWords"];
+  const targetKey = "unlearnedWords";
+  const target = getLS(targetKey);
+
+  legacyKeys.forEach((k) => {
+    const legacy = JSON.parse(localStorage.getItem(k) || "[]");
+    if (Array.isArray(legacy) && legacy.length) {
+      legacy.forEach((item) => {
+        if (!target.includes(item)) target.push(item);
+      });
+      localStorage.removeItem(k);
+    }
+  });
+
+  setLS(targetKey, target);
+})();
+
 function shuffle(arr) {
   for (let i = arr.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -20,7 +42,7 @@ function shuffle(arr) {
   }
 }
 
-// ✅ SESLENDİRME (EKLENDİ)
+// ✅ SESLENDİRME
 function speak(text) {
   if (!text) return;
   if (!("speechSynthesis" in window)) return;
@@ -28,17 +50,25 @@ function speak(text) {
   window.speechSynthesis.cancel();
 
   const u = new SpeechSynthesisUtterance(text);
-  u.lang = "de-DE";   // Almanca
+  u.lang = "de-DE";
   u.rate = 0.95;
   window.speechSynthesis.speak(u);
 }
 
+/**
+ * ✅ KRİTİK FIX:
+ * Bazı page*.json yoksa fetch fail olur -> Promise.all patlar -> hiç kart basılmaz.
+ * Artık her sayfa ayrı try/catch: yoksa [] döner, sistem çalışır.
+ */
 function fetchPages(pages) {
   return Promise.all(
     pages.map((p) =>
-      fetch(`data/page${p}.json`).then((r) =>
-        r.json().then((data) => data.map((item) => ({ ...item, page: p })))
-      )
+      fetch(`data/page${p}.json`)
+        .then((r) => (r.ok ? r.json() : []))
+        .then((data) =>
+          Array.isArray(data) ? data.map((item) => ({ ...item, page: p })) : []
+        )
+        .catch(() => [])
     )
   ).then((arrs) => arrs.flat());
 }
@@ -69,7 +99,7 @@ function updateStrike() {
 
     fetchPages([page]).then((words) => {
       const visibleWords = words.filter((w) => {
-        const key = `${w.page}_${w.de}`;
+        const key = keyOf(w.page, w.de);
         return !hidden.includes(key) && !unlearn.includes(key);
       });
 
@@ -81,7 +111,7 @@ function updateStrike() {
 }
 
 function makeCard({ de, tr, oku, page }) {
-  const key = `${page}_${de}`;
+  const key = keyOf(page, de);
 
   const card = document.createElement("div");
   const inner = document.createElement("div");
@@ -97,7 +127,7 @@ function makeCard({ de, tr, oku, page }) {
   tick.className = "tick";
   xBtn.className = "unlearn";
 
-  front.textContent = de;
+  front.textContent = norm(de);
   back.innerHTML = `${tr}<br><span>(${oku})</span>`;
   tick.textContent = "✔";
   xBtn.textContent = "✘";
@@ -111,6 +141,7 @@ function makeCard({ de, tr, oku, page }) {
       hidden.push(key);
       setLS("hiddenWords", hidden);
     }
+
     const idx = unlearn.indexOf(key);
     if (idx !== -1) {
       unlearn.splice(idx, 1);
@@ -127,6 +158,7 @@ function makeCard({ de, tr, oku, page }) {
   xBtn.onclick = (e) => {
     e.stopPropagation();
     const unlearn = getLS("unlearnedWords");
+
     if (!unlearn.includes(key)) {
       unlearn.push(key);
       setLS("unlearnedWords", unlearn);
@@ -139,9 +171,8 @@ function makeCard({ de, tr, oku, page }) {
     }
   };
 
-  // ✅ KARTA TIKLAYINCA OKU + FLIP (DEĞİŞTİ)
   card.onclick = () => {
-    speak(de);
+    speak(norm(de));
     card.classList.toggle("flipped");
   };
 
@@ -153,17 +184,23 @@ function makeCard({ de, tr, oku, page }) {
 function renderWords() {
   container.classList.remove("random-mode");
   container.innerHTML = "";
+
   const hidden = getLS("hiddenWords");
   const unlearn = getLS("unlearnedWords");
-  const pagesToFetch = showUnlearned ? pageButtons.map((p) => p.page) : [currentPage];
+
+  const pagesToFetch = showUnlearned
+    ? pageButtons.map((p) => p.page)
+    : [currentPage];
 
   fetchPages(pagesToFetch).then((words) => {
     shuffle(words);
 
     words.forEach((w) => {
-      const key = `${w.page}_${w.de}`;
+      const key = keyOf(w.page, w.de);
+
       if (!showUnlearned && (hidden.includes(key) || unlearn.includes(key))) return;
       if (showUnlearned && !unlearn.includes(key)) return;
+
       container.append(makeCard(w));
     });
 
@@ -179,6 +216,8 @@ function renderWords() {
 
 function renderRandom() {
   showRandom = true;
+  showUnlearned = false;
+
   container.innerHTML = "";
   container.classList.add("random-mode");
 
@@ -188,7 +227,7 @@ function renderRandom() {
   const allPages = pageButtons.map((p) => p.page);
   fetchPages(allPages).then((words) => {
     let pool = words.filter((w) => {
-      const key = `${w.page}_${w.de}`;
+      const key = keyOf(w.page, w.de);
       return !hidden.includes(key) && !unlearn.includes(key);
     });
     if (pool.length === 0) pool = words;
@@ -198,6 +237,7 @@ function renderRandom() {
       container.innerHTML = "<p style='text-align:center;opacity:.7'>Kelime bulunamadı.</p>";
       return;
     }
+
     container.append(makeCard(w));
 
     pageButtons.forEach(({ btn }) => btn.classList.toggle("active", false));
@@ -211,20 +251,17 @@ resetBtn.onclick = () => {
   localStorage.removeItem("unlearnedWords");
   showUnlearned = false;
   showRandom = false;
-  pageButtons.forEach(({ btn }) => {
-    btn.classList.remove("completed");
-  });
+  pageButtons.forEach(({ btn }) => btn.classList.remove("completed"));
   renderWords();
 };
 
 unlearnBtn.onclick = () => {
-  showUnlearned = true;
+  showUnlearned = !showUnlearned; // toggle
   showRandom = false;
   renderWords();
 };
 
 randomBtn.onclick = () => {
-  showUnlearned = false;
   renderRandom();
 };
 
