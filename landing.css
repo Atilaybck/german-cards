@@ -14,8 +14,10 @@
   --color-danger: #ef4444;
 
   --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1),
+    0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1),
+    0 4px 6px -4px rgb(0 0 0 / 0.1);
 
   --radius-md: 0.5rem;
   --radius-lg: 0.75rem;
@@ -163,7 +165,6 @@ h1 {
   color: #94a3b8;
   border-color: #e2e8f0;
   text-decoration: none !important;
-  /* override inline style from JS */
   position: relative;
   opacity: 0.7;
 }
@@ -174,7 +175,7 @@ h1 {
   font-size: 0.8em;
 }
 
-/* Create a "Label" for the pagination area - optional, but helps structure */
+/* Pagination label */
 .pagination-section::before {
   content: 'Sayfalar';
   display: block;
@@ -186,7 +187,6 @@ h1 {
   font-weight: 600;
   text-align: center;
 }
-
 
 /* Cards Grid */
 #cards {
@@ -200,19 +200,20 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: flex-start;
+  margin-top: 60px; /* ✅ kart biraz daha aşağıda */
 }
 
 #cards.random-mode .card {
   width: 260px;
-  /* Slightly wider for single view focus */
   max-width: 100%;
+  height: 300px; /* ✅ kart boyu biraz daha uzun */
+  touch-action: pan-y; /* yatay swipe serbest, dikey scroll bozulmasın */
 }
 
 /* Card Styling */
 .card {
   position: relative;
   height: 200px;
-  /* Taller for better proportion */
   perspective: 1000px;
   cursor: pointer;
 }
@@ -230,17 +231,11 @@ h1 {
 .card:hover .inner {
   box-shadow: var(--shadow-lg);
   transform: translateY(-4px);
-  /* subtle lift on hover */
 }
 
-/* The flip happens on class toggle, so we keep that logic */
 .card.flipped .inner {
   transform: rotateY(180deg);
 }
-
-/* Re-add hover lift override for flipped state if needed, but transform overwrites. 
-   Usually better to handle lift on wrapper or separate element, but this is fine. 
-*/
 
 .side {
   position: absolute;
@@ -267,7 +262,6 @@ h1 {
 .back {
   transform: rotateY(180deg);
   background: #f0fdf4;
-  /* Very light green for answer */
   color: #15803d;
 }
 
@@ -276,7 +270,6 @@ h1 {
   display: block;
   font-size: 0.9rem;
   color: #64748b !important;
-  /* Override inline style */
 }
 
 /* Tick / Cross Buttons */
@@ -314,11 +307,8 @@ h1 {
   background: var(--color-warning);
   color: white;
 }
-/* Swipe animation (random mode) */
-#cards.random-mode .card {
-  touch-action: pan-y; /* yatay swipe serbest, dikey scroll bozulmasın */
-}
 
+/* Swipe animation (random mode) */
 .card.swiping {
   transition: none !important;
 }
