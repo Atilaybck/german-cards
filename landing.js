@@ -407,19 +407,30 @@ function renderRandom() {
   const selectedPages = getSelectedRandomPages();
 
   fetchPages(selectedPages).then((words) => {
-    let pool = words.filter((w) => {
-      const key = keyOf(w.page, w.de);
-      return !hidden.includes(key) && !unlearn.includes(key);
-    });
-    if (pool.length === 0) pool = words;
-
-    const w = pool[Math.floor(Math.random() * pool.length)];
-    if (!w) {
+    if (!words || words.length === 0) {
       container.innerHTML =
         "<p style='text-align:center;opacity:.7'>Kelime bulunamadı.</p>";
       return;
     }
 
+    // ✅ sadece gösterilecek (ne learned ne unlearned) kartlar
+    const pool = words.filter((w) => {
+      const key = keyOf(w.page, w.de);
+      return !hidden.includes(key) && !unlearn.includes(key);
+    });
+
+    // ✅ BİTTİ mesajı
+    if (pool.length === 0) {
+      container.innerHTML =
+        "<p style='text-align:center;font-weight:700;opacity:.85'>Gösterilecek kartlar bitti.</p>";
+
+      pageButtons.forEach(({ btn }) => btn.classList.toggle("active", false));
+      unlearnBtn.classList.toggle("active", false);
+      randomBtn.classList.toggle("active", true);
+      return;
+    }
+
+    const w = pool[Math.floor(Math.random() * pool.length)];
     container.append(makeCard(w));
 
     pageButtons.forEach(({ btn }) => btn.classList.toggle("active", false));
@@ -463,9 +474,7 @@ if (randomPagesBtn && randomPagesPopover && randomPagesList && applyRandomPagesB
       randomPagesList.querySelectorAll("input[type='checkbox']:checked")
     ).map((el) => Number(el.value));
 
-    setSelectedRandomPages(
-      checked.length ? checked : pageButtons.map((p) => p.page)
-    );
+    setSelectedRandomPages(checked.length ? checked : pageButtons.map((p) => p.page));
 
     closeRandomPagesPopover();
     if (showRandom) renderRandom();
