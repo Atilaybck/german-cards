@@ -4,6 +4,7 @@ const resetBtn = document.getElementById("reset");
 const unlearnBtn = document.getElementById("unlearnedBtn");
 const randomBtn = document.getElementById("randomBtn");
 const pageButtonsContainer = document.getElementById("pageButtons");
+const paginationSection = document.getElementById("paginationSection");
 
 let currentPage = 1;
 let showUnlearned = false;
@@ -56,9 +57,7 @@ function speak(text) {
 }
 
 /**
- * ✅ KRİTİK FIX:
- * Bazı page*.json yoksa fetch fail olur -> Promise.all patlar -> hiç kart basılmaz.
- * Artık her sayfa ayrı try/catch: yoksa [] döner, sistem çalışır.
+ * ✅ page*.json yoksa patlamasın
  */
 function fetchPages(pages) {
   return Promise.all(
@@ -88,6 +87,9 @@ for (let i = 1; i <= totalPages; i++) {
   pageButtonsContainer.appendChild(btn);
 }
 
+/**
+ * ✅ Fix: page dosyası yok/bozuk/boşsa completed yapma
+ */
 function updateStrike() {
   if (showUnlearned || showRandom) return;
 
@@ -97,17 +99,131 @@ function updateStrike() {
   pageButtons.forEach(({ page, btn }) => {
     btn.classList.remove("completed");
 
-    fetchPages([page]).then((words) => {
-      const visibleWords = words.filter((w) => {
-        const key = keyOf(w.page, w.de);
-        return !hidden.includes(key) && !unlearn.includes(key);
-      });
+    fetch(`data/page${page}.json`)
+      .then((r) => {
+        if (!r.ok) return null;
+        return r.json();
+      })
+      .then((data) => {
+        if (!Array.isArray(data) || data.length === 0) return;
 
-      if (visibleWords.length === 0) {
-        btn.classList.add("completed");
-      }
-    });
+        const visible = data
+          .map((item) => ({ ...item, page }))
+          .filter((w) => {
+            const key = keyOf(w.page, w.de);
+            return !hidden.includes(key) && !unlearn.includes(key);
+          });
+
+        if (visible.length === 0) btn.classList.add("completed");
+      })
+      .catch(() => {});
   });
+}
+
+/** ✅ Kartı ezberlendi/ezberlenmemiş olarak işaretle */
+function markLearned(key) {
+  const hidden = getLS("hiddenWords");
+  const unlearn = getLS("unlearnedWords");
+
+  if (!hidden.includes(key)) hidden.push(key);
+  setLS("hiddenWords", hidden);
+
+  const idx = unlearn.indexOf(key);
+  if (idx !== -1) {
+    unlearn.splice(idx, 1);
+    setLS("unlearnedWords", unlearn);
+  }
+}
+
+function markUnlearned(key) {
+  const unlearn = getLS("unlearnedWords");
+  if (!unlearn.includes(key)) {
+    unlearn.push(key);
+    setLS("unlearnedWords", unlearn);
+  }
+}
+
+/** ✅ Random modda swipe davranışı */
+function attachSwipeHandlers(card, key) {
+  let startX = 0;
+  let startY = 0;
+  let dx = 0;
+  let dy = 0;
+  let dragging = false;
+
+  const THRESHOLD = 80; // px
+
+  function onStart(e) {
+    if (!showRandom) return;
+
+    const t = e.touches ? e.touches[0] : e;
+    startX = t.clientX;
+    startY = t.clientY;
+    dx = 0;
+    dy = 0;
+    dragging = true;
+
+    card.classList.add("swiping");
+  }
+
+  function onMove(e) {
+    if (!dragging || !showRandom) return;
+
+    const t = e.touches ? e.touches[0] : e;
+    dx = t.clientX - startX;
+    dy = t.clientY - startY;
+
+    // yatay hareket baskınsa sayfayı kaydırmayı engelle
+    if (Math.abs(dx) > Math.abs(dy)) e.preventDefault();
+
+    const rot = dx / 20; // hafif dönüş
+    card.style.transform = `translateX(${dx}px) rotate(${rot}deg)`;
+  }
+
+  function finish(direction) {
+    // direction: "right" | "left"
+    dragging = false;
+    card.classList.remove("swiping");
+    card.style.transform = "";
+
+    if (direction === "right") {
+      markLearned(key);
+      card.classList.add("fly-right");
+    } else {
+      markUnlearned(key);
+      card.classList.add("fly-left");
+    }
+
+    // animasyon bitince yeni kart
+    setTimeout(() => {
+      if (showRandom) renderRandom();
+    }, 260);
+  }
+
+  function onEnd() {
+    if (!dragging || !showRandom) return;
+
+    dragging = false;
+    card.classList.remove("swiping");
+
+    if (Math.abs(dx) >= THRESHOLD && Math.abs(dx) > Math.abs(dy)) {
+      finish(dx > 0 ? "right" : "left");
+      return;
+    }
+
+    // geri snap
+    card.style.transition = "transform 0.15s ease";
+    card.style.transform = "translateX(0px) rotate(0deg)";
+    setTimeout(() => {
+      card.style.transition = "";
+      card.style.transform = "";
+    }, 160);
+  }
+
+  card.addEventListener("touchstart", onStart, { passive: true });
+  card.addEventListener("touchmove", onMove, { passive: false });
+  card.addEventListener("touchend", onEnd);
+  card.addEventListener("touchcancel", onEnd);
 }
 
 function makeCard({ de, tr, oku, page }) {
@@ -134,19 +250,7 @@ function makeCard({ de, tr, oku, page }) {
 
   tick.onclick = (e) => {
     e.stopPropagation();
-    const hidden = getLS("hiddenWords");
-    const unlearn = getLS("unlearnedWords");
-
-    if (!hidden.includes(key)) {
-      hidden.push(key);
-      setLS("hiddenWords", hidden);
-    }
-
-    const idx = unlearn.indexOf(key);
-    if (idx !== -1) {
-      unlearn.splice(idx, 1);
-      setLS("unlearnedWords", unlearn);
-    }
+    markLearned(key);
 
     if (showRandom) renderRandom();
     else {
@@ -157,12 +261,7 @@ function makeCard({ de, tr, oku, page }) {
 
   xBtn.onclick = (e) => {
     e.stopPropagation();
-    const unlearn = getLS("unlearnedWords");
-
-    if (!unlearn.includes(key)) {
-      unlearn.push(key);
-      setLS("unlearnedWords", unlearn);
-    }
+    markUnlearned(key);
 
     if (showRandom) renderRandom();
     else {
@@ -176,21 +275,25 @@ function makeCard({ de, tr, oku, page }) {
     card.classList.toggle("flipped");
   };
 
+  // ✅ Random modda swipe
+  attachSwipeHandlers(card, key);
+
   inner.append(front, back);
   card.append(xBtn, tick, inner);
   return card;
 }
 
 function renderWords() {
+  // ✅ normal modda sayfalar görünsün
+  if (paginationSection) paginationSection.style.display = "";
+
   container.classList.remove("random-mode");
   container.innerHTML = "";
 
   const hidden = getLS("hiddenWords");
   const unlearn = getLS("unlearnedWords");
 
-  const pagesToFetch = showUnlearned
-    ? pageButtons.map((p) => p.page)
-    : [currentPage];
+  const pagesToFetch = showUnlearned ? pageButtons.map((p) => p.page) : [currentPage];
 
   fetchPages(pagesToFetch).then((words) => {
     shuffle(words);
@@ -217,6 +320,9 @@ function renderWords() {
 function renderRandom() {
   showRandom = true;
   showUnlearned = false;
+
+  // ✅ rastgele modda sayfaları gizle
+  if (paginationSection) paginationSection.style.display = "none";
 
   container.innerHTML = "";
   container.classList.add("random-mode");

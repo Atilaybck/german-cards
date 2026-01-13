@@ -314,3 +314,23 @@ h1 {
   background: var(--color-warning);
   color: white;
 }
+/* Swipe animation (random mode) */
+#cards.random-mode .card {
+  touch-action: pan-y; /* yatay swipe serbest, dikey scroll bozulmasın */
+}
+
+.card.swiping {
+  transition: none !important;
+}
+
+.card.fly-right {
+  transition: transform 0.25s ease, opacity 0.25s ease;
+  transform: translateX(420px) rotate(10deg) !important;
+  opacity: 0;
+}
+
+.card.fly-left {
+  transition: transform 0.25s ease, opacity 0.25s ease;
+  transform: translateX(-420px) rotate(-10deg) !important;
+  opacity: 0;
+}
