@@ -27,6 +27,39 @@ const keyOf = (page, de) => `${page}_${norm(de)}`;
 // ✅ Rastgele modda seçilen sayfalar
 const RANDOM_PAGES_KEY = "randomSelectedPages";
 
+// ✅ Random progress
+const RANDOM_PROGRESS_KEY = "randomProgress"; // { sig: "1,2,3", seen: 0, total: 60 }
+
+function getRandomProgress() {
+  const obj = JSON.parse(localStorage.getItem(RANDOM_PROGRESS_KEY) || "{}");
+  return obj && typeof obj === "object" ? obj : {};
+}
+function setRandomProgress(obj) {
+  localStorage.setItem(RANDOM_PROGRESS_KEY, JSON.stringify(obj || {}));
+}
+function clearRandomProgress() {
+  localStorage.removeItem(RANDOM_PROGRESS_KEY);
+}
+function getRandomSig(selectedPages) {
+  return (selectedPages || []).slice().sort((a, b) => a - b).join(",");
+}
+function bumpRandomSeen(selectedPages) {
+  if (!showRandom) return;
+
+  const sig = getRandomSig(selectedPages);
+  const prog = getRandomProgress();
+
+  // sig değiştiyse sıfırla
+  if (prog.sig !== sig) {
+    setRandomProgress({ sig, seen: 0, total: Number(prog.total) || 0 });
+    return;
+  }
+
+  const total = Number(prog.total) || 0;
+  const seen = Number(prog.seen) || 0;
+  setRandomProgress({ sig, total, seen: Math.min(seen + 1, total) });
+}
+
 // ✅ ARTIK: hiç seçilmemişse default = BOŞ ([])
 function getSelectedRandomPages() {
   const arr = getLS(RANDOM_PAGES_KEY);
@@ -205,7 +238,7 @@ function markUnlearned(key) {
 }
 
 /** ✅ Random modda swipe davranışı */
-function attachSwipeHandlers(card, key) {
+function attachSwipeHandlers(card, key, selectedPages) {
   let startX = 0;
   let startY = 0;
   let dx = 0;
@@ -253,6 +286,9 @@ function attachSwipeHandlers(card, key) {
       card.classList.add("fly-left");
     }
 
+    // ✅ progress +1
+    bumpRandomSeen(selectedPages);
+
     setTimeout(() => {
       if (showRandom) renderRandom();
     }, 260);
@@ -283,7 +319,32 @@ function attachSwipeHandlers(card, key) {
   card.addEventListener("touchcancel", onEnd);
 }
 
-function makeCard({ de, tr, oku, page }) {
+function addProgressBadge(card, text) {
+  if (!text) return;
+
+  const badge = document.createElement("div");
+  badge.className = "progress-badge";
+  badge.textContent = text;
+
+  // inline style (CSS'e dokunmadan)
+  badge.style.position = "absolute";
+  badge.style.top = "-12px";
+  badge.style.left = "50%";
+  badge.style.transform = "translateX(-50%)";
+  badge.style.padding = "6px 10px";
+  badge.style.borderRadius = "999px";
+  badge.style.fontSize = "12px";
+  badge.style.fontWeight = "800";
+  badge.style.background = "rgba(15,23,42,0.92)";
+  badge.style.color = "#e2e8f0";
+  badge.style.border = "1px solid rgba(255,255,255,0.12)";
+  badge.style.boxShadow = "0 10px 15px -3px rgb(0 0 0 / 0.2)";
+  badge.style.zIndex = "20";
+
+  card.appendChild(badge);
+}
+
+function makeCard({ de, tr, oku, page }, opts = {}) {
   const key = keyOf(page, de);
 
   const card = document.createElement("div");
@@ -305,12 +366,17 @@ function makeCard({ de, tr, oku, page }) {
   tick.textContent = "✔";
   xBtn.textContent = "✘";
 
+  // ✅ progress badge (random mod)
+  if (opts.progressText) addProgressBadge(card, opts.progressText);
+
   tick.onclick = (e) => {
     e.stopPropagation();
     markLearned(key);
 
-    if (showRandom) renderRandom();
-    else {
+    if (showRandom) {
+      bumpRandomSeen(opts.selectedPages || []);
+      renderRandom();
+    } else {
       card.remove();
       updateStrike();
     }
@@ -320,8 +386,10 @@ function makeCard({ de, tr, oku, page }) {
     e.stopPropagation();
     markUnlearned(key);
 
-    if (showRandom) renderRandom();
-    else {
+    if (showRandom) {
+      bumpRandomSeen(opts.selectedPages || []);
+      renderRandom();
+    } else {
       card.remove();
       updateStrike();
     }
@@ -332,7 +400,8 @@ function makeCard({ de, tr, oku, page }) {
     card.classList.toggle("flipped");
   };
 
-  attachSwipeHandlers(card, key);
+  // ✅ Random modda swipe
+  attachSwipeHandlers(card, key, opts.selectedPages || []);
 
   inner.append(front, back);
   card.append(xBtn, tick, inner);
@@ -418,6 +487,25 @@ function renderRandom() {
       return !hidden.includes(key) && !unlearn.includes(key);
     });
 
+    // ✅ progress init (seçim değiştiyse / ilk kez)
+    const sig = getRandomSig(selectedPages);
+    const prog = getRandomProgress();
+    const progSig = prog.sig || "";
+    const progSeen = Number(prog.seen) || 0;
+
+    if (progSig !== sig) {
+      setRandomProgress({ sig, seen: 0, total: pool.length });
+    } else if (!Number.isFinite(Number(prog.total))) {
+      setRandomProgress({ sig, seen: progSeen, total: pool.length });
+    } else if (Number(prog.total) === 0) {
+      // total 0 kalmışsa güncelle
+      setRandomProgress({ sig, seen: progSeen, total: pool.length });
+    }
+
+    const prog2 = getRandomProgress();
+    const total = Number(prog2.total) || pool.length;
+    const seen = Math.min(Number(prog2.seen) || 0, total);
+
     if (pool.length === 0) {
       container.innerHTML =
         "<p style='text-align:center;font-weight:700;opacity:.85'>Gösterilecek kartlar bitti.</p>";
@@ -429,7 +517,9 @@ function renderRandom() {
     }
 
     const w = pool[Math.floor(Math.random() * pool.length)];
-    container.append(makeCard(w));
+    const progressText = `${Math.min(seen + 1, total)}/${total}`;
+
+    container.append(makeCard(w, { selectedPages, progressText }));
 
     pageButtons.forEach(({ btn }) => btn.classList.toggle("active", false));
     unlearnBtn.classList.toggle("active", false);
@@ -441,6 +531,8 @@ resetBtn.onclick = () => {
   localStorage.removeItem("hiddenWords");
   localStorage.removeItem("unlearnedWords");
   localStorage.removeItem(RANDOM_PAGES_KEY);
+  clearRandomProgress(); // ✅ progress da sıfırla
+
   showUnlearned = false;
   showRandom = false;
   pageButtons.forEach(({ btn }) => btn.classList.remove("completed"));
@@ -473,6 +565,7 @@ if (randomPagesBtn && randomPagesPopover && randomPagesList && applyRandomPagesB
     ).map((el) => Number(el.value));
 
     setSelectedRandomPages(checked); // ✅ artık boş da kaydediyoruz
+    clearRandomProgress(); // ✅ seçim değişince sayaç sıfır
 
     closeRandomPagesPopover();
     if (showRandom) renderRandom();
