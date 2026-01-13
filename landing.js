@@ -6,6 +6,13 @@ const randomBtn = document.getElementById("randomBtn");
 const pageButtonsContainer = document.getElementById("pageButtons");
 const paginationSection = document.getElementById("paginationSection");
 
+// ✅ Random mod UI
+const randomControls = document.getElementById("randomControls");
+const randomPagesBtn = document.getElementById("randomPagesBtn");
+const randomPagesPopover = document.getElementById("randomPagesPopover");
+const randomPagesList = document.getElementById("randomPagesList");
+const applyRandomPagesBtn = document.getElementById("applyRandomPages");
+
 let currentPage = 1;
 let showUnlearned = false;
 let showRandom = false;
@@ -16,6 +23,23 @@ const setLS = (key, val) => localStorage.setItem(key, JSON.stringify(val));
 
 const norm = (s = "") => String(s).trim().replace(/\s+/g, " ");
 const keyOf = (page, de) => `${page}_${norm(de)}`;
+
+// ✅ Rastgele modda seçilen sayfalar
+const RANDOM_PAGES_KEY = "randomSelectedPages";
+
+function getSelectedRandomPages() {
+  const arr = getLS(RANDOM_PAGES_KEY);
+  const valid = (Array.isArray(arr) ? arr : [])
+    .map((n) => Number(n))
+    .filter((n) => Number.isFinite(n) && n >= 1 && n <= totalPages);
+
+  // hiç seçilmemişse default: tüm sayfalar
+  return valid.length ? Array.from(new Set(valid)) : pageButtons.map((p) => p.page);
+}
+
+function setSelectedRandomPages(pages) {
+  setLS(RANDOM_PAGES_KEY, pages);
+}
 
 // ✅ Eski key’leri (varsa) yeniye taşı
 (function migrateLS() {
@@ -70,6 +94,46 @@ function fetchPages(pages) {
         .catch(() => [])
     )
   ).then((arrs) => arrs.flat());
+}
+
+// ✅ Random sayfa seçim UI (popover)
+function buildRandomPagesUI() {
+  if (!randomPagesList) return;
+  randomPagesList.innerHTML = "";
+
+  const selected = new Set(
+    Array.isArray(getLS(RANDOM_PAGES_KEY)) ? getLS(RANDOM_PAGES_KEY).map(Number) : []
+  );
+
+  for (let i = 1; i <= totalPages; i++) {
+    const row = document.createElement("label");
+    row.className = "page-row";
+
+    const cb = document.createElement("input");
+    cb.type = "checkbox";
+    cb.value = String(i);
+
+    // ilk kurulumda boşsa hepsi seçili gelsin
+    const hasAny = selected.size > 0;
+    cb.checked = hasAny ? selected.has(i) : true;
+
+    const txt = document.createElement("span");
+    txt.textContent = `${i}`;
+
+    row.append(cb, txt);
+    randomPagesList.appendChild(row);
+  }
+}
+
+function openRandomPagesPopover() {
+  if (!randomPagesPopover) return;
+  buildRandomPagesUI();
+  randomPagesPopover.hidden = false;
+}
+
+function closeRandomPagesPopover() {
+  if (!randomPagesPopover) return;
+  randomPagesPopover.hidden = true;
 }
 
 const pageButtons = [];
@@ -181,7 +245,6 @@ function attachSwipeHandlers(card, key) {
   }
 
   function finish(direction) {
-    // direction: "right" | "left"
     dragging = false;
     card.classList.remove("swiping");
     card.style.transform = "";
@@ -194,7 +257,6 @@ function attachSwipeHandlers(card, key) {
       card.classList.add("fly-left");
     }
 
-    // animasyon bitince yeni kart
     setTimeout(() => {
       if (showRandom) renderRandom();
     }, 260);
@@ -287,6 +349,10 @@ function renderWords() {
   // ✅ normal modda sayfalar görünsün
   if (paginationSection) paginationSection.style.display = "";
 
+  // ✅ random kontrol butonu gizle
+  if (randomControls) randomControls.hidden = true;
+  if (randomPagesPopover) randomPagesPopover.hidden = true;
+
   container.classList.remove("random-mode");
   container.innerHTML = "";
 
@@ -310,7 +376,10 @@ function renderWords() {
     updateStrike();
 
     pageButtons.forEach(({ btn, page }) =>
-      btn.classList.toggle("active", !showUnlearned && !showRandom && page === currentPage)
+      btn.classList.toggle(
+        "active",
+        !showUnlearned && !showRandom && page === currentPage
+      )
     );
     unlearnBtn.classList.toggle("active", showUnlearned);
     randomBtn.classList.toggle("active", showRandom);
@@ -324,14 +393,20 @@ function renderRandom() {
   // ✅ rastgele modda sayfaları gizle
   if (paginationSection) paginationSection.style.display = "none";
 
+  // ✅ random kontrol butonu göster
+  if (randomControls) randomControls.hidden = false;
+  if (randomPagesPopover) randomPagesPopover.hidden = true;
+
   container.innerHTML = "";
   container.classList.add("random-mode");
 
   const hidden = getLS("hiddenWords");
   const unlearn = getLS("unlearnedWords");
 
-  const allPages = pageButtons.map((p) => p.page);
-  fetchPages(allPages).then((words) => {
+  // ✅ sadece seçili sayfalardan random
+  const selectedPages = getSelectedRandomPages();
+
+  fetchPages(selectedPages).then((words) => {
     let pool = words.filter((w) => {
       const key = keyOf(w.page, w.de);
       return !hidden.includes(key) && !unlearn.includes(key);
@@ -340,7 +415,8 @@ function renderRandom() {
 
     const w = pool[Math.floor(Math.random() * pool.length)];
     if (!w) {
-      container.innerHTML = "<p style='text-align:center;opacity:.7'>Kelime bulunamadı.</p>";
+      container.innerHTML =
+        "<p style='text-align:center;opacity:.7'>Kelime bulunamadı.</p>";
       return;
     }
 
@@ -355,6 +431,7 @@ function renderRandom() {
 resetBtn.onclick = () => {
   localStorage.removeItem("hiddenWords");
   localStorage.removeItem("unlearnedWords");
+  localStorage.removeItem(RANDOM_PAGES_KEY); // ✅ seçili sayfaları da sıfırla
   showUnlearned = false;
   showRandom = false;
   pageButtons.forEach(({ btn }) => btn.classList.remove("completed"));
@@ -370,5 +447,39 @@ unlearnBtn.onclick = () => {
 randomBtn.onclick = () => {
   renderRandom();
 };
+
+// ✅ Random mod: dosyalar butonu
+if (randomPagesBtn && randomPagesPopover && randomPagesList && applyRandomPagesBtn) {
+  randomPagesBtn.onclick = (e) => {
+    e.stopPropagation();
+    if (randomPagesPopover.hidden) openRandomPagesPopover();
+    else closeRandomPagesPopover();
+  };
+
+  applyRandomPagesBtn.onclick = (e) => {
+    e.stopPropagation();
+
+    const checked = Array.from(
+      randomPagesList.querySelectorAll("input[type='checkbox']:checked")
+    ).map((el) => Number(el.value));
+
+    setSelectedRandomPages(
+      checked.length ? checked : pageButtons.map((p) => p.page)
+    );
+
+    closeRandomPagesPopover();
+    if (showRandom) renderRandom();
+  };
+
+  // dışarı tıklayınca kapansın
+  document.addEventListener("click", (e) => {
+    if (!showRandom) return;
+    if (randomPagesPopover.hidden) return;
+
+    const inside =
+      randomPagesPopover.contains(e.target) || randomPagesBtn.contains(e.target);
+    if (!inside) closeRandomPagesPopover();
+  });
+}
 
 renderWords();
