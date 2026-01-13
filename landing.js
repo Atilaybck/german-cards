@@ -27,14 +27,12 @@ const keyOf = (page, de) => `${page}_${norm(de)}`;
 // ✅ Rastgele modda seçilen sayfalar
 const RANDOM_PAGES_KEY = "randomSelectedPages";
 
+// ✅ ARTIK: hiç seçilmemişse default = BOŞ ([])
 function getSelectedRandomPages() {
   const arr = getLS(RANDOM_PAGES_KEY);
-  const valid = (Array.isArray(arr) ? arr : [])
+  return (Array.isArray(arr) ? arr : [])
     .map((n) => Number(n))
     .filter((n) => Number.isFinite(n) && n >= 1 && n <= totalPages);
-
-  // hiç seçilmemişse default: tüm sayfalar
-  return valid.length ? Array.from(new Set(valid)) : pageButtons.map((p) => p.page);
 }
 
 function setSelectedRandomPages(pages) {
@@ -113,9 +111,8 @@ function buildRandomPagesUI() {
     cb.type = "checkbox";
     cb.value = String(i);
 
-    // ilk kurulumda boşsa hepsi seçili gelsin
-    const hasAny = selected.size > 0;
-    cb.checked = hasAny ? selected.has(i) : true;
+    // ✅ Varsayılan olarak TİKSİZ (seçili varsa onu göster)
+    cb.checked = selected.has(i);
 
     const txt = document.createElement("span");
     txt.textContent = `${i}`;
@@ -237,10 +234,9 @@ function attachSwipeHandlers(card, key) {
     dx = t.clientX - startX;
     dy = t.clientY - startY;
 
-    // yatay hareket baskınsa sayfayı kaydırmayı engelle
     if (Math.abs(dx) > Math.abs(dy)) e.preventDefault();
 
-    const rot = dx / 20; // hafif dönüş
+    const rot = dx / 20;
     card.style.transform = `translateX(${dx}px) rotate(${rot}deg)`;
   }
 
@@ -273,7 +269,6 @@ function attachSwipeHandlers(card, key) {
       return;
     }
 
-    // geri snap
     card.style.transition = "transform 0.15s ease";
     card.style.transform = "translateX(0px) rotate(0deg)";
     setTimeout(() => {
@@ -337,7 +332,6 @@ function makeCard({ de, tr, oku, page }) {
     card.classList.toggle("flipped");
   };
 
-  // ✅ Random modda swipe
   attachSwipeHandlers(card, key);
 
   inner.append(front, back);
@@ -346,10 +340,8 @@ function makeCard({ de, tr, oku, page }) {
 }
 
 function renderWords() {
-  // ✅ normal modda sayfalar görünsün
   if (paginationSection) paginationSection.style.display = "";
 
-  // ✅ random kontrol butonu gizle
   if (randomControls) randomControls.hidden = true;
   if (randomPagesPopover) randomPagesPopover.hidden = true;
 
@@ -390,10 +382,8 @@ function renderRandom() {
   showRandom = true;
   showUnlearned = false;
 
-  // ✅ rastgele modda sayfaları gizle
   if (paginationSection) paginationSection.style.display = "none";
 
-  // ✅ random kontrol butonu göster
   if (randomControls) randomControls.hidden = false;
   if (randomPagesPopover) randomPagesPopover.hidden = true;
 
@@ -403,8 +393,18 @@ function renderRandom() {
   const hidden = getLS("hiddenWords");
   const unlearn = getLS("unlearnedWords");
 
-  // ✅ sadece seçili sayfalardan random
   const selectedPages = getSelectedRandomPages();
+
+  // ✅ Seçim yoksa: kart gösterme
+  if (selectedPages.length === 0) {
+    container.innerHTML =
+      "<p style='text-align:center;font-weight:700;opacity:.85'>Dosya seç (Dosyalar butonundan).</p>";
+
+    pageButtons.forEach(({ btn }) => btn.classList.toggle("active", false));
+    unlearnBtn.classList.toggle("active", false);
+    randomBtn.classList.toggle("active", true);
+    return;
+  }
 
   fetchPages(selectedPages).then((words) => {
     if (!words || words.length === 0) {
@@ -413,13 +413,11 @@ function renderRandom() {
       return;
     }
 
-    // ✅ sadece gösterilecek (ne learned ne unlearned) kartlar
     const pool = words.filter((w) => {
       const key = keyOf(w.page, w.de);
       return !hidden.includes(key) && !unlearn.includes(key);
     });
 
-    // ✅ BİTTİ mesajı
     if (pool.length === 0) {
       container.innerHTML =
         "<p style='text-align:center;font-weight:700;opacity:.85'>Gösterilecek kartlar bitti.</p>";
@@ -442,7 +440,7 @@ function renderRandom() {
 resetBtn.onclick = () => {
   localStorage.removeItem("hiddenWords");
   localStorage.removeItem("unlearnedWords");
-  localStorage.removeItem(RANDOM_PAGES_KEY); // ✅ seçili sayfaları da sıfırla
+  localStorage.removeItem(RANDOM_PAGES_KEY);
   showUnlearned = false;
   showRandom = false;
   pageButtons.forEach(({ btn }) => btn.classList.remove("completed"));
@@ -450,7 +448,7 @@ resetBtn.onclick = () => {
 };
 
 unlearnBtn.onclick = () => {
-  showUnlearned = !showUnlearned; // toggle
+  showUnlearned = !showUnlearned;
   showRandom = false;
   renderWords();
 };
@@ -474,13 +472,12 @@ if (randomPagesBtn && randomPagesPopover && randomPagesList && applyRandomPagesB
       randomPagesList.querySelectorAll("input[type='checkbox']:checked")
     ).map((el) => Number(el.value));
 
-    setSelectedRandomPages(checked.length ? checked : pageButtons.map((p) => p.page));
+    setSelectedRandomPages(checked); // ✅ artık boş da kaydediyoruz
 
     closeRandomPagesPopover();
     if (showRandom) renderRandom();
   };
 
-  // dışarı tıklayınca kapansın
   document.addEventListener("click", (e) => {
     if (!showRandom) return;
     if (randomPagesPopover.hidden) return;
