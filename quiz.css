@@ -187,3 +187,11 @@
 .quiz-card {
   touch-action: pan-y;
 }
+
+/* Dosyalar butonu rengi */
+#randomPagesBtn {
+  background: #38bdf8;
+  /* mor */
+  color: #fff;
+  border: none;
+}
