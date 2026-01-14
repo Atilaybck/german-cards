@@ -13,11 +13,14 @@ function shuffleLocal(arr) {
 }
 
 function loadQuestions() {
-  return fetch("data/questions/questions.json")
-    .then((r) => (r.ok ? r.json() : []))
-    .then((data) => (Array.isArray(data) ? data : []))
+  return Promise.all([
+    fetch("data/questions/questions6.json").then(r => r.ok ? r.json() : []),
+    fetch("data/questions/questions7.json").then(r => r.ok ? r.json() : [])
+  ])
+    .then(([q6, q7]) => [...q6, ...q7])
     .catch(() => []);
 }
+
 
 function ensureQuizPool() {
   if (!quizPool.length) {
