@@ -119,7 +119,7 @@ function updateStrike() {
 
         if (visible.length === 0) btn.classList.add("completed");
       })
-      .catch(() => { });
+      .catch(() => {});
   });
 }
 
@@ -247,7 +247,9 @@ function renderWords() {
 
   // quiz elements handling
   const quizControls = document.getElementById("quizControls");
+  const quizFilesPopover = document.getElementById("quizFilesPopover");
   if (quizControls) quizControls.hidden = true;
+  if (quizFilesPopover) quizFilesPopover.hidden = true;
 
   container.classList.remove("random-mode");
   container.classList.remove("quiz-mode");
@@ -292,7 +294,7 @@ resetBtn.onclick = () => {
   if (typeof clearRandomProgress === "function") clearRandomProgress();
 
   // quiz storage (varsa)
-  if (typeof clearQuizProgress === "function") clearQuizProgress();
+  localStorage.removeItem("quizSelectedFiles");
 
   showUnlearned = false;
   showRandom = false;

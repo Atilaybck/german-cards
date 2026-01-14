@@ -245,7 +245,7 @@ function attachSwipeHandlers(card, key, selectedPages) {
   function onStart(e) {
     if (!showRandom) return;
 
-    spokeOnSwipe = false; // ✅ eklendi
+    spokeOnSwipe = false;
 
     const t = e.touches ? e.touches[0] : e;
     startX = t.clientX;
@@ -342,6 +342,13 @@ function attachSwipeHandlers(card, key, selectedPages) {
 function renderRandom() {
   showRandom = true;
   showUnlearned = false;
+  showQuiz = false; // ✅ eklendi (tutarlılık)
+
+  // ✅ quiz UI kapat (Sorular → Rastgele geçişinde 2 buton bug fix)
+  const quizControlsEl = document.getElementById("quizControls");
+  const quizFilesPopoverEl = document.getElementById("quizFilesPopover");
+  if (quizControlsEl) quizControlsEl.hidden = true;
+  if (quizFilesPopoverEl) quizFilesPopoverEl.hidden = true;
 
   if (paginationSection) paginationSection.style.display = "none";
 
@@ -361,6 +368,7 @@ function renderRandom() {
     pageButtons.forEach(({ btn }) => btn.classList.toggle("active", false));
     unlearnBtn.classList.toggle("active", false);
     randomBtn.classList.toggle("active", true);
+    if (quizBtn) quizBtn.classList.toggle("active", false);
     return;
   }
 
@@ -378,11 +386,17 @@ function renderRandom() {
     pageButtons.forEach(({ btn }) => btn.classList.toggle("active", false));
     unlearnBtn.classList.toggle("active", false);
     randomBtn.classList.toggle("active", true);
+    if (quizBtn) quizBtn.classList.toggle("active", false);
   });
 }
 
 // ✅ Random mod: dosyalar butonu
-if (randomPagesBtn && randomPagesPopover && randomPagesList && applyRandomPagesBtn) {
+if (
+  randomPagesBtn &&
+  randomPagesPopover &&
+  randomPagesList &&
+  applyRandomPagesBtn
+) {
   randomPagesBtn.onclick = (e) => {
     e.stopPropagation();
     if (randomPagesPopover.hidden) openRandomPagesPopover();
@@ -432,3 +446,10 @@ window.resetRandomDeck = () => {
   randomDeck.progressText = "";
   randomDeck.lastKey = "";
 };
+
+// expose for landing.js makeCard()
+window.renderRandom = renderRandom;
+window.bumpRandomSeen = bumpRandomSeen;
+window.advanceRandomDeck = advanceRandomDeck;
+window.attachSwipeHandlers = attachSwipeHandlers;
+window.clearRandomProgress = clearRandomProgress;

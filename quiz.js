@@ -1,8 +1,8 @@
 // quiz.js
 
 let quizQuestions = [];
-let quizOrder = [];        // shuffle edilmiş sabit sıra
-let quizIndex = 0;         // o anki soru index
+let quizOrder = []; // shuffle edilmiş sabit sıra
+let quizIndex = 0; // o anki soru index
 let quizTop = null;
 let quizLocked = false;
 
@@ -11,6 +11,72 @@ let quizTotalCount = 0;
 // her soru için seçimi sakla (index -> { picked, correct })
 const quizState = {};
 
+/* =========================
+   ✅ Quiz mod: Dosya seçimi UI
+========================= */
+const quizControls = document.getElementById("quizControls");
+const quizFilesBtn = document.getElementById("quizFilesBtn");
+const quizFilesPopover = document.getElementById("quizFilesPopover");
+const quizFilesList = document.getElementById("quizFilesList");
+const applyQuizFilesBtn = document.getElementById("applyQuizFiles");
+
+const QUIZ_FILES_KEY = "quizSelectedFiles";
+
+// mevcut questions dosyaları (buraya yenilerini ekleyebilirsin)
+const QUIZ_FILES = [
+  { id: "questions6", label: "6", path: "data/questions/questions6.json" },
+  { id: "questions7", label: "7", path: "data/questions/questions7.json" },
+];
+
+function getSelectedQuizFiles() {
+  const arr = JSON.parse(localStorage.getItem(QUIZ_FILES_KEY) || "[]");
+  const selected = Array.isArray(arr) ? arr : [];
+
+  const allowed = new Set(QUIZ_FILES.map((f) => f.id));
+  const cleaned = selected.filter((id) => allowed.has(id));
+
+  return cleaned;
+}
+function setSelectedQuizFiles(ids) {
+  localStorage.setItem(QUIZ_FILES_KEY, JSON.stringify(ids || []));
+}
+
+function buildQuizFilesUI() {
+  if (!quizFilesList) return;
+  quizFilesList.innerHTML = "";
+
+  const selected = new Set(getSelectedQuizFiles());
+
+  QUIZ_FILES.forEach((f) => {
+    const row = document.createElement("label");
+    row.className = "page-row";
+
+    const cb = document.createElement("input");
+    cb.type = "checkbox";
+    cb.value = f.id;
+    cb.checked = selected.has(f.id);
+
+    const txt = document.createElement("span");
+    txt.textContent = `questions${f.label}.json`;
+
+    row.append(cb, txt);
+    quizFilesList.appendChild(row);
+  });
+}
+
+function openQuizFilesPopover() {
+  if (!quizFilesPopover) return;
+  buildQuizFilesUI();
+  quizFilesPopover.hidden = false;
+}
+function closeQuizFilesPopover() {
+  if (!quizFilesPopover) return;
+  quizFilesPopover.hidden = true;
+}
+
+/* =========================
+   Core helpers
+========================= */
 function shuffleLocal(arr) {
   for (let i = arr.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -19,11 +85,20 @@ function shuffleLocal(arr) {
 }
 
 function loadQuestions() {
-  return Promise.all([
-    fetch("data/questions/questions6.json").then((r) => (r.ok ? r.json() : [])),
-    fetch("data/questions/questions7.json").then((r) => (r.ok ? r.json() : [])),
-  ])
-    .then(([q6, q7]) => [...q6, ...q7])
+  const selected = getSelectedQuizFiles();
+
+  // hiç seçilmediyse boş döndür
+  if (!selected.length) return Promise.resolve([]);
+
+  const paths = selected
+    .map((id) => QUIZ_FILES.find((f) => f.id === id))
+    .filter(Boolean)
+    .map((f) => f.path);
+
+  return Promise.all(
+    paths.map((p) => fetch(p).then((r) => (r.ok ? r.json() : [])))
+  )
+    .then((lists) => lists.flat())
     .catch(() => []);
 }
 
@@ -113,6 +188,10 @@ function renderQuizCard() {
   if (randomControlsEl) randomControlsEl.hidden = true;
   if (randomPopoverEl) randomPopoverEl.hidden = true;
 
+  // quiz dosya seçimi UI göster
+  if (quizControls) quizControls.hidden = false;
+  if (quizFilesPopover) quizFilesPopover.hidden = true;
+
   if (!quizTop) {
     container.innerHTML = `
       <div class='quiz-finished'>
@@ -134,7 +213,7 @@ function renderQuizCard() {
   progressContainer.className = "quiz-progress-container";
   const progressBar = document.createElement("div");
   progressBar.className = "quiz-progress-bar";
-  const percent = (answeredCount() / quizTotalCount) * 100;
+  const percent = quizTotalCount ? (answeredCount() / quizTotalCount) * 100 : 0;
   progressBar.style.width = `${percent}%`;
   progressContainer.appendChild(progressBar);
 
@@ -182,7 +261,8 @@ function renderQuizCard() {
     Array.from(opts.querySelectorAll(".quiz-opt")).forEach((b) => {
       const txt = String(b.textContent).trim();
       if (txt === saved.correct) b.classList.add("correct");
-      if (txt === saved.picked && saved.picked !== saved.correct) b.classList.add("wrong");
+      if (txt === saved.picked && saved.picked !== saved.correct)
+        b.classList.add("wrong");
     });
   } else {
     quizLocked = false;
@@ -211,6 +291,12 @@ function renderQuiz() {
   showRandom = false;
   showUnlearned = false;
 
+  // ✅ FIX: Random UI kapat (Rastgele → Sorular geçişinde 2 Dosyalar bug fix)
+  const randomControlsEl = document.getElementById("randomControls");
+  const randomPopoverEl = document.getElementById("randomPagesPopover");
+  if (randomControlsEl) randomControlsEl.hidden = true;
+  if (randomPopoverEl) randomPopoverEl.hidden = true;
+
   if (paginationSection) paginationSection.style.display = "none";
 
   pageButtons.forEach(({ btn }) => btn.classList.toggle("active", false));
@@ -218,11 +304,20 @@ function renderQuiz() {
   randomBtn.classList.toggle("active", false);
   quizBtn.classList.toggle("active", true);
 
+  // quiz dosya seçimi UI
+  if (quizControls) quizControls.hidden = false;
+  if (quizFilesPopover) quizFilesPopover.hidden = true;
+
   loadQuestions().then((qs) => {
     quizQuestions = Array.isArray(qs) ? qs : [];
     quizTotalCount = quizQuestions.length;
 
-    // sıfırla
+    if (!quizTotalCount) {
+      container.innerHTML =
+        "<p style='text-align:center;font-weight:700;opacity:.85'>Dosya seç (Dosyalar butonundan).</p>";
+      return;
+    }
+
     quizOrder = quizQuestions.slice();
     shuffleLocal(quizOrder);
 
@@ -230,10 +325,42 @@ function renderQuiz() {
     quizTop = quizOrder[quizIndex] || null;
     quizLocked = false;
 
-    // state temizle
     for (const k in quizState) delete quizState[k];
 
     renderQuizCard();
+  });
+}
+
+/* =========================
+   ✅ Quiz mod: buton eventleri
+========================= */
+if (quizFilesBtn && quizFilesPopover && quizFilesList && applyQuizFilesBtn) {
+  quizFilesBtn.onclick = (e) => {
+    e.stopPropagation();
+    if (quizFilesPopover.hidden) openQuizFilesPopover();
+    else closeQuizFilesPopover();
+  };
+
+  applyQuizFilesBtn.onclick = (e) => {
+    e.stopPropagation();
+
+    const checked = Array.from(
+      quizFilesList.querySelectorAll("input[type='checkbox']:checked")
+    ).map((el) => el.value);
+
+    setSelectedQuizFiles(checked);
+
+    closeQuizFilesPopover();
+    if (showQuiz) renderQuiz();
+  };
+
+  document.addEventListener("click", (e) => {
+    if (!showQuiz) return;
+    if (quizFilesPopover.hidden) return;
+
+    const inside =
+      quizFilesPopover.contains(e.target) || quizFilesBtn.contains(e.target);
+    if (!inside) closeQuizFilesPopover();
   });
 }
 
