@@ -4,6 +4,7 @@ let quizQuestions = [];
 let quizPool = [];
 let quizTop = null;
 let quizLocked = false;
+let quizTotalCount = 0; // Toplam soru sayısı takibi
 
 function shuffleLocal(arr) {
   for (let i = arr.length - 1; i > 0; i--) {
@@ -44,13 +45,26 @@ function renderQuizCard() {
   if (randomPopoverEl) randomPopoverEl.hidden = true;
 
   if (!quizTop) {
-    container.innerHTML =
-      "<div class='quiz-finished'>🎉 Tebrikler! Tüm soruları tamamladın.</div>";
+    container.innerHTML = `
+      <div class='quiz-finished'>
+        <h2>🎉 Tebrikler!</h2>
+        <p>Tüm soruları başarıyla tamamladın.</p>
+        <button class="action-btn" onclick="renderQuiz()">Yeniden Başla</button>
+      </div>`;
     return;
   }
 
   const wrap = document.createElement("div");
   wrap.className = "quiz-card";
+
+  // Progress Bar
+  const progressContainer = document.createElement("div");
+  progressContainer.className = "quiz-progress-container";
+  const progressBar = document.createElement("div");
+  progressBar.className = "quiz-progress-bar";
+  const progressPercent = ((quizTotalCount - (quizPool.length + 1)) / quizTotalCount) * 100;
+  progressBar.style.width = `${progressPercent}%`;
+  progressContainer.appendChild(progressBar);
 
   const q = document.createElement("div");
   q.className = "quiz-q";
@@ -90,7 +104,7 @@ function renderQuizCard() {
 
   const meta = document.createElement("div");
   meta.className = "quiz-meta";
-  meta.textContent = `Kalan: ${quizPool.length + 1}`;
+  meta.textContent = `Soru: ${quizTotalCount - quizPool.length} / ${quizTotalCount}`;
 
   const next = document.createElement("button");
   next.className = "quiz-next";
@@ -102,7 +116,7 @@ function renderQuizCard() {
 
   footer.append(meta, next);
 
-  wrap.append(q, opts, footer);
+  wrap.append(progressContainer, q, opts, footer);
   container.appendChild(wrap);
 }
 
@@ -121,6 +135,7 @@ function renderQuiz() {
   loadQuestions().then((qs) => {
     quizQuestions = qs;
     quizPool = [];
+    quizTotalCount = qs.length; // Toplam sayıyı kaydet
     ensureQuizPool();
     renderQuizCard();
   });
@@ -128,3 +143,4 @@ function renderQuiz() {
 
 // global
 window.renderQuiz = renderQuiz;
+
