@@ -27,6 +27,7 @@
     opacity: 0;
     transform: translateY(20px) scale(0.98);
   }
+
   to {
     opacity: 1;
     transform: translateY(0) scale(1);
@@ -181,4 +182,8 @@
   color: var(--color-text-muted);
   font-size: 1.1rem;
   margin-bottom: 24px;
+}
+
+.quiz-card {
+  touch-action: pan-y;
 }

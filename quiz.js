@@ -1,10 +1,15 @@
 // quiz.js
 
 let quizQuestions = [];
-let quizPool = [];
+let quizOrder = [];        // shuffle edilmiş sabit sıra
+let quizIndex = 0;         // o anki soru index
 let quizTop = null;
 let quizLocked = false;
-let quizTotalCount = 0; // Toplam soru sayısı takibi
+
+let quizTotalCount = 0;
+
+// her soru için seçimi sakla (index -> { picked, correct })
+const quizState = {};
 
 function shuffleLocal(arr) {
   for (let i = arr.length - 1; i > 0; i--) {
@@ -15,21 +20,85 @@ function shuffleLocal(arr) {
 
 function loadQuestions() {
   return Promise.all([
-    fetch("data/questions/questions6.json").then(r => r.ok ? r.json() : []),
-    fetch("data/questions/questions7.json").then(r => r.ok ? r.json() : [])
+    fetch("data/questions/questions6.json").then((r) => (r.ok ? r.json() : [])),
+    fetch("data/questions/questions7.json").then((r) => (r.ok ? r.json() : [])),
   ])
     .then(([q6, q7]) => [...q6, ...q7])
     .catch(() => []);
 }
 
+function answeredCount() {
+  return Object.keys(quizState).length;
+}
 
-function ensureQuizPool() {
-  if (!quizPool.length) {
-    quizPool = quizQuestions.slice();
-    shuffleLocal(quizPool);
+function goNext() {
+  if (!quizLocked) return; // ✅ sadece cevapladıysan
+  if (quizIndex < quizTotalCount - 1) {
+    quizIndex++;
+    quizTop = quizOrder[quizIndex] || null;
+    quizLocked = !!quizState[quizIndex]; // daha önce görüldüyse kilitli gelsin
+    renderQuizCard();
+  } else {
+    quizTop = null;
+    renderQuizCard();
   }
-  quizTop = quizPool.shift() || null;
-  quizLocked = false;
+}
+
+function goPrev() {
+  if (!quizLocked) return; // ✅ sadece cevapladıysan
+  if (quizIndex > 0) {
+    quizIndex--;
+    quizTop = quizOrder[quizIndex] || null;
+    quizLocked = !!quizState[quizIndex]; // önceki soru zaten cevaplı ise kilitli
+    renderQuizCard();
+  }
+}
+
+// mobil swipe
+function attachSwipe(el) {
+  let sx = 0;
+  let sy = 0;
+  let tracking = false;
+
+  const TH = 50; // px
+  const VLOCK = 80; // dikey scroll güvenliği
+
+  el.addEventListener(
+    "touchstart",
+    (e) => {
+      if (!e.touches || !e.touches[0]) return;
+      tracking = true;
+      sx = e.touches[0].clientX;
+      sy = e.touches[0].clientY;
+    },
+    { passive: true }
+  );
+
+  el.addEventListener(
+    "touchend",
+    (e) => {
+      if (!tracking) return;
+      tracking = false;
+
+      const t = (e.changedTouches && e.changedTouches[0]) || null;
+      if (!t) return;
+
+      const dx = t.clientX - sx;
+      const dy = t.clientY - sy;
+
+      // dikey hareket fazlaysa swipe sayma
+      if (Math.abs(dy) > VLOCK) return;
+
+      if (dx <= -TH) {
+        // sola swipe => geri
+        goPrev();
+      } else if (dx >= TH) {
+        // sağa swipe => ileri
+        goNext();
+      }
+    },
+    { passive: true }
+  );
 }
 
 function renderQuizCard() {
@@ -57,13 +126,16 @@ function renderQuizCard() {
   const wrap = document.createElement("div");
   wrap.className = "quiz-card";
 
-  // Progress Bar
+  // swipe dinle (mobil)
+  attachSwipe(wrap);
+
+  // Progress Bar (cevaplanan sayısına göre)
   const progressContainer = document.createElement("div");
   progressContainer.className = "quiz-progress-container";
   const progressBar = document.createElement("div");
   progressBar.className = "quiz-progress-bar";
-  const progressPercent = ((quizTotalCount - (quizPool.length + 1)) / quizTotalCount) * 100;
-  progressBar.style.width = `${progressPercent}%`;
+  const percent = (answeredCount() / quizTotalCount) * 100;
+  progressBar.style.width = `${percent}%`;
   progressContainer.appendChild(progressBar);
 
   const q = document.createElement("div");
@@ -83,9 +155,13 @@ function renderQuizCard() {
 
     btn.onclick = () => {
       if (quizLocked) return;
+
       quizLocked = true;
 
       const picked = String(optText).trim();
+
+      // state kaydet
+      quizState[quizIndex] = { picked, correct };
 
       // doğruyu yeşil yap
       Array.from(opts.querySelectorAll(".quiz-opt")).forEach((b) => {
@@ -99,20 +175,30 @@ function renderQuizCard() {
     opts.appendChild(btn);
   });
 
+  // ✅ daha önce bu soruya dönüldüyse: aynı işaretlemeleri geri bas
+  const saved = quizState[quizIndex];
+  if (saved) {
+    quizLocked = true;
+    Array.from(opts.querySelectorAll(".quiz-opt")).forEach((b) => {
+      const txt = String(b.textContent).trim();
+      if (txt === saved.correct) b.classList.add("correct");
+      if (txt === saved.picked && saved.picked !== saved.correct) b.classList.add("wrong");
+    });
+  } else {
+    quizLocked = false;
+  }
+
   const footer = document.createElement("div");
   footer.className = "quiz-footer";
 
   const meta = document.createElement("div");
   meta.className = "quiz-meta";
-  meta.textContent = `Soru: ${quizTotalCount - quizPool.length} / ${quizTotalCount}`;
+  meta.textContent = `Soru: ${quizIndex + 1} / ${quizTotalCount}`;
 
   const next = document.createElement("button");
   next.className = "quiz-next";
   next.textContent = "Sonraki →";
-  next.onclick = () => {
-    ensureQuizPool();
-    renderQuizCard();
-  };
+  next.onclick = goNext;
 
   footer.append(meta, next);
 
@@ -133,14 +219,23 @@ function renderQuiz() {
   quizBtn.classList.toggle("active", true);
 
   loadQuestions().then((qs) => {
-    quizQuestions = qs;
-    quizPool = [];
-    quizTotalCount = qs.length; // Toplam sayıyı kaydet
-    ensureQuizPool();
+    quizQuestions = Array.isArray(qs) ? qs : [];
+    quizTotalCount = quizQuestions.length;
+
+    // sıfırla
+    quizOrder = quizQuestions.slice();
+    shuffleLocal(quizOrder);
+
+    quizIndex = 0;
+    quizTop = quizOrder[quizIndex] || null;
+    quizLocked = false;
+
+    // state temizle
+    for (const k in quizState) delete quizState[k];
+
     renderQuizCard();
   });
 }
 
 // global
 window.renderQuiz = renderQuiz;
-
