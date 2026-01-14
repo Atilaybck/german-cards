@@ -54,6 +54,7 @@ function bumpRandomSeen(selectedPages) {
 }
 
 // ✅ ARTIK: hiç seçilmemişse default = BOŞ ([])
+
 function getSelectedRandomPages() {
   const arr = getLS(RANDOM_PAGES_KEY);
   return (Array.isArray(arr) ? arr : [])
@@ -173,9 +174,16 @@ function advanceRandomDeck() {
 
   // DOM animasyon bitince yenilemek için küçük timeout
   setTimeout(() => {
+    // ✅ pool bitti mi? (swipe ile pool azalıyor)
+    if (!randomDeck.pool || randomDeck.pool.length === 0) {
+      randomDeck.top = null;
+      randomDeck.next = null;
+      renderRandomFromDeck();
+      return;
+    }
+
     // seen ilerlediği için progress text'i güncelle
     const selectedPages = randomDeck.selectedPages || [];
-    const sig = getRandomSig(selectedPages);
     const prog2 = getRandomProgress();
     const total = Number(prog2.total) || (randomDeck.pool || []).length;
     const seen = Math.min(Number(prog2.seen) || 0, total);
@@ -202,7 +210,7 @@ function renderRandomFromDeck() {
 
   if (!randomDeck.top) {
     container.innerHTML =
-      "<p style='text-align:center;font-weight:700;opacity:.85'>Gösterilecek kartlar bitti.</p>";
+      "<p style='text-align:center;font-weight:800;opacity:.9'>Tebrikler! Seçtiğin sayfalardaki tüm kartları gördün ✅</p>";
     return;
   }
 
@@ -286,6 +294,17 @@ function attachSwipeHandlers(card, key, selectedPages) {
       card.classList.add("fly-left");
     }
 
+    // ✅ FIX: aynı kelime tekrar seçilmesin diye pool'dan çıkar
+    randomDeck.pool = (randomDeck.pool || []).filter(
+      (w) => keyOf(w.page, w.de) !== key
+    );
+    if (
+      randomDeck.next &&
+      keyOf(randomDeck.next.page, randomDeck.next.de) === key
+    ) {
+      randomDeck.next = null;
+    }
+
     bumpRandomSeen(selectedPages);
 
     // ✅ kritik: renderRandom() yok -> flicker yok
@@ -350,7 +369,7 @@ function renderRandom() {
 
     if (!randomDeck.pool || randomDeck.pool.length === 0) {
       container.innerHTML =
-        "<p style='text-align:center;font-weight:700;opacity:.85'>Gösterilecek kartlar bitti.</p>";
+        "<p style='text-align:center;font-weight:800;opacity:.9'>Tebrikler! Seçtiğin sayfalardaki tüm kartları gördün ✅</p>";
       return;
     }
 
