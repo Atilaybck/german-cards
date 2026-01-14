@@ -291,6 +291,9 @@ function renderQuiz() {
   showRandom = false;
   showUnlearned = false;
 
+  // ✅ Hemen temizle (Landing'deki kelimeler kalmasın)
+  container.innerHTML = "";
+
   // ✅ FIX: Random UI kapat (Rastgele → Sorular geçişinde 2 Dosyalar bug fix)
   const randomControlsEl = document.getElementById("randomControls");
   const randomPopoverEl = document.getElementById("randomPagesPopover");
@@ -305,7 +308,11 @@ function renderQuiz() {
   quizBtn.classList.toggle("active", true);
 
   // quiz dosya seçimi UI
-  if (quizControls) quizControls.hidden = false;
+  if (quizControls) {
+    quizControls.hidden = false;
+    const existingHint = quizControls.querySelector("#quizHint");
+    if (existingHint) existingHint.remove();
+  }
   if (quizFilesPopover) quizFilesPopover.hidden = true;
 
   loadQuestions().then((qs) => {
@@ -313,8 +320,10 @@ function renderQuiz() {
     quizTotalCount = quizQuestions.length;
 
     if (!quizTotalCount) {
-      container.innerHTML =
-        "<p style='text-align:center;font-weight:700;opacity:.85'>Dosya seç (Dosyalar butonundan).</p>";
+      if (!quizControls.querySelector("#quizHint")) {
+        quizControls.insertAdjacentHTML('afterbegin',
+          "<p id='quizHint' style='text-align:center;font-weight:700;opacity:.85;margin-bottom:10px'>Dosya seç (Dosyalar butonundan).</p>");
+      }
       return;
     }
 

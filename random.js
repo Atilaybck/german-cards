@@ -352,7 +352,12 @@ function renderRandom() {
 
   if (paginationSection) paginationSection.style.display = "none";
 
-  if (randomControls) randomControls.hidden = false;
+  if (randomControls) {
+    randomControls.hidden = false;
+    // Temizle
+    const existingHint = randomControls.querySelector("#randomHint");
+    if (existingHint) existingHint.remove();
+  }
   if (randomPagesPopover) randomPagesPopover.hidden = true;
 
   container.innerHTML = "";
@@ -362,8 +367,10 @@ function renderRandom() {
   const selectedPages = getSelectedRandomPages();
 
   if (selectedPages.length === 0) {
-    container.innerHTML =
-      "<p style='text-align:center;font-weight:700;opacity:.85'>Sayfa seç (Dosyalar butonundan).</p>";
+    if (!randomControls.querySelector("#randomHint")) {
+      randomControls.insertAdjacentHTML('afterbegin',
+        "<p id='randomHint' style='text-align:center;font-weight:700;opacity:.85;margin-bottom:10px'>Sayfa seç (Dosyalar butonundan).</p>");
+    }
 
     pageButtons.forEach(({ btn }) => btn.classList.toggle("active", false));
     unlearnBtn.classList.toggle("active", false);
