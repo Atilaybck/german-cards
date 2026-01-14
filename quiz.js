@@ -24,9 +24,14 @@ const QUIZ_FILES_KEY = "quizSelectedFiles";
 
 // mevcut questions dosyaları (buraya yenilerini ekleyebilirsin)
 const QUIZ_FILES = [
+  { id: "questions3", label: "3", path: "data/questions/questions3.json" },
+  { id: "questions4", label: "4", path: "data/questions/questions4.json" },
+  { id: "questions5", label: "5", path: "data/questions/questions5.json" },
   { id: "questions6", label: "6", path: "data/questions/questions6.json" },
   { id: "questions7", label: "7", path: "data/questions/questions7.json" },
+  { id: "questions8", label: "8", path: "data/questions/questions8.json" },
 ];
+
 
 function getSelectedQuizFiles() {
   const arr = JSON.parse(localStorage.getItem(QUIZ_FILES_KEY) || "[]");

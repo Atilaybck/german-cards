@@ -1,0 +1,17 @@
+[
+  { "id": 1, "q": "Ich ___ Deutsch.", "options": ["lerne", "lernst", "lernt"], "answer": "lerne" },
+  { "id": 2, "q": "Heute ___ ich Deutsch.", "options": ["lerne", "lernst", "lernt"], "answer": "lerne" },
+  { "id": 3, "q": "Wir ___ aus Türkiye.", "options": ["kommen", "kommt", "kommst"], "answer": "kommen" },
+  { "id": 4, "q": "Morgen ___ ich.", "options": ["komme", "kommst", "kommt"], "answer": "komme" },
+  { "id": 5, "q": "Er ___ Zeit.", "options": ["hat", "haben", "hast"], "answer": "hat" },
+  { "id": 6, "q": "Heute ___ er Zeit.", "options": ["hat", "haben", "hast"], "answer": "hat" },
+  { "id": 7, "q": "Zu Hause ___ ich.", "options": ["arbeite", "arbeitest", "arbeitet"], "answer": "arbeite" },
+  { "id": 8, "q": "Wir ___ heute Unterricht.", "options": ["haben", "hat", "habt"], "answer": "haben" },
+  { "id": 9, "q": "Jetzt ___ ich.", "options": ["komme", "kommst", "kommt"], "answer": "komme" },
+  { "id": 10, "q": "In Berlin ___ ich.", "options": ["wohne", "wohnt", "wohnst"], "answer": "wohne" },
+  { "id": 11, "q": "Heute ich lerne Deutsch.", "options": ["Doğru", "Yanlış"], "answer": "Yanlış" },
+  { "id": 12, "q": "Morgen arbeite ich.", "options": ["Doğru", "Yanlış"], "answer": "Doğru" },
+  { "id": 13, "q": "Zu Hause ich arbeite.", "options": ["Doğru", "Yanlış"], "answer": "Yanlış" },
+  { "id": 14, "q": "Hier ist ein Café.", "options": ["Doğru", "Yanlış"], "answer": "Doğru" },
+  { "id": 15, "q": "Heute lerne ich Deutsch.", "options": ["Doğru", "Yanlış"], "answer": "Doğru" }
+]
