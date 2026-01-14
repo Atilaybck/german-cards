@@ -64,7 +64,7 @@ function speak(text) {
 function fetchPages(pages) {
   return Promise.all(
     pages.map((p) =>
-      fetch(`data/page${p}.json`)
+      fetch(`data/page/page${p}.json`)
         .then((r) => (r.ok ? r.json() : []))
         .then((data) =>
           Array.isArray(data) ? data.map((item) => ({ ...item, page: p })) : []
@@ -102,7 +102,7 @@ function updateStrike() {
   pageButtons.forEach(({ page, btn }) => {
     btn.classList.remove("completed");
 
-    fetch(`data/page${page}.json`)
+    fetch(`data/page/page${page}.json`)
       .then((r) => {
         if (!r.ok) return null;
         return r.json();
@@ -119,7 +119,7 @@ function updateStrike() {
 
         if (visible.length === 0) btn.classList.add("completed");
       })
-      .catch(() => {});
+      .catch(() => { });
   });
 }
 

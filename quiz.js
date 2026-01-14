@@ -13,7 +13,7 @@ function shuffleLocal(arr) {
 }
 
 function loadQuestions() {
-  return fetch("data/questions.json")
+  return fetch("data/questions/questions.json")
     .then((r) => (r.ok ? r.json() : []))
     .then((data) => (Array.isArray(data) ? data : []))
     .catch(() => []);
@@ -42,7 +42,7 @@ function renderQuizCard() {
 
   if (!quizTop) {
     container.innerHTML =
-      "<p style='text-align:center;font-weight:800;opacity:.9'>Soru kalmadı ✅</p>";
+      "<div class='quiz-finished'>🎉 Tebrikler! Tüm soruları tamamladın.</div>";
     return;
   }
 
@@ -91,7 +91,7 @@ function renderQuizCard() {
 
   const next = document.createElement("button");
   next.className = "quiz-next";
-  next.textContent = "Sonraki";
+  next.textContent = "Sonraki →";
   next.onclick = () => {
     ensureQuizPool();
     renderQuizCard();
