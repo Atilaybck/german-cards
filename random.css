@@ -138,12 +138,18 @@
   box-shadow: var(--shadow-lg);
   backdrop-filter: blur(10px);
   z-index: 60;
+  max-height: calc(100vh - 140px);
+  /* üstten/ alttan pay bırak */
+  overflow-y: auto;
 }
 
 .pages-list {
   display: grid;
   gap: 10px;
   padding: 8px 6px 14px;
+  max-height: calc(100vh - 220px);
+  overflow-y: auto;
+  padding-right: 6px;
 }
 
 .page-row {
