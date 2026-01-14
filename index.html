@@ -1,54 +1,59 @@
 <!DOCTYPE html>
 <html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Almanca Kelime Kartları</title>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Almanca Kelime Kartları</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="landing.css" />
+    <link rel="stylesheet" href="random.css" />
+    <link rel="stylesheet" href="quiz.css" />
 
-  <link rel="stylesheet" href="landing.css" />
-  <link rel="stylesheet" href="random.css" />
-  <script src="landing.js" defer></script>
-  <script src="random.js" defer></script>
-</head>
+    <script src="landing.js" defer></script>
+    <script src="random.js" defer></script>
+    <script src="quiz.js" defer></script>
+  </head>
 
-<body>
-  <div class="app-container">
-    <header>
-      <h1>🇩🇪 Almanca Kartları</h1>
-      <div class="controls">
-        <button id="reset" class="action-btn danger">Sıfırla</button>
-        <button id="unlearnedBtn" class="action-btn warning">Ezberlenmemiş</button>
-        <button id="randomBtn" class="action-btn success">Rastgele</button>
-      </div>
-    </header>
-
-    <main>
-      <!-- Sayfa düğmelerinin ekleneceği alan -->
-      <section id="paginationSection" class="pagination-section">
-        <div id="pageButtons" class="pagination-grid"></div>
-      </section>
-
-      <!-- Kartların geleceği alan -->
-      <section class="cards-section">
-        <div id="cards"></div>
-
-        <!-- ✅ Random mod: dosya seçme -->
-        <div id="randomControls" class="random-controls" hidden>
-          <button id="randomPagesBtn" class="action-btn">Dosyalar</button>
-
-          <div id="randomPagesPopover" class="pages-popover" hidden>
-            <div id="randomPagesList" class="pages-list"></div>
-            <button id="applyRandomPages" class="pages-apply">Seçimleri Yükle</button>
-          </div>
+  <body>
+    <div class="app-container">
+      <header>
+        <h1>🇩🇪 Almanca Kartları</h1>
+        <div class="controls">
+          <button id="reset" class="action-btn danger">Sıfırla</button>
+          <button id="unlearnedBtn" class="action-btn warning">Ezberlenmemiş</button>
+          <button id="randomBtn" class="action-btn success">Rastgele</button>
+          <button id="quizBtn" class="action-btn success">Sorular</button>
         </div>
-      </section>
-    </main>
-  </div>
-</body>
+      </header>
 
+      <main>
+        <!-- Sayfa düğmelerinin ekleneceği alan -->
+        <section id="paginationSection" class="pagination-section">
+          <div id="pageButtons" class="pagination-grid"></div>
+        </section>
+
+        <!-- Kartların geleceği alan -->
+        <section class="cards-section">
+          <div id="cards"></div>
+
+          <!-- ✅ Random mod: dosya seçme -->
+          <div id="randomControls" class="random-controls" hidden>
+            <button id="randomPagesBtn" class="action-btn">Dosyalar</button>
+
+            <div id="randomPagesPopover" class="pages-popover" hidden>
+              <div id="randomPagesList" class="pages-list"></div>
+              <button id="applyRandomPages" class="pages-apply">Seçimleri Yükle</button>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </body>
 </html>

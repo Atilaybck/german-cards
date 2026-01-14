@@ -3,12 +3,14 @@ const container = document.getElementById("cards");
 const resetBtn = document.getElementById("reset");
 const unlearnBtn = document.getElementById("unlearnedBtn");
 const randomBtn = document.getElementById("randomBtn");
+const quizBtn = document.getElementById("quizBtn");
 const pageButtonsContainer = document.getElementById("pageButtons");
 const paginationSection = document.getElementById("paginationSection");
 
 let currentPage = 1;
 let showUnlearned = false;
 let showRandom = false;
+let showQuiz = false;
 const totalPages = 23;
 
 const getLS = (key) => JSON.parse(localStorage.getItem(key) || "[]");
@@ -81,6 +83,7 @@ for (let i = 1; i <= totalPages; i++) {
     currentPage = i;
     showUnlearned = false;
     showRandom = false;
+    showQuiz = false;
     renderWords();
   };
   pageButtons.push({ page: i, btn });
@@ -91,7 +94,7 @@ for (let i = 1; i <= totalPages; i++) {
  * ✅ Fix: page dosyası yok/bozuk/boşsa completed yapma
  */
 function updateStrike() {
-  if (showUnlearned || showRandom) return;
+  if (showUnlearned || showRandom || showQuiz) return;
 
   const hidden = getLS("hiddenWords");
   const unlearn = getLS("unlearnedWords");
@@ -116,7 +119,7 @@ function updateStrike() {
 
         if (visible.length === 0) btn.classList.add("completed");
       })
-      .catch(() => { });
+      .catch(() => {});
   });
 }
 
@@ -195,7 +198,8 @@ function makeCard({ de, tr, oku, page }, opts = {}) {
     markLearned(key);
 
     if (showRandom) {
-      if (typeof bumpRandomSeen === "function") bumpRandomSeen(opts.selectedPages || []);
+      if (typeof bumpRandomSeen === "function")
+        bumpRandomSeen(opts.selectedPages || []);
       if (typeof advanceRandomDeck === "function") advanceRandomDeck();
     } else {
       card.remove();
@@ -208,7 +212,8 @@ function makeCard({ de, tr, oku, page }, opts = {}) {
     markUnlearned(key);
 
     if (showRandom) {
-      if (typeof bumpRandomSeen === "function") bumpRandomSeen(opts.selectedPages || []);
+      if (typeof bumpRandomSeen === "function")
+        bumpRandomSeen(opts.selectedPages || []);
       if (typeof advanceRandomDeck === "function") advanceRandomDeck();
     } else {
       card.remove();
@@ -240,7 +245,12 @@ function renderWords() {
   if (randomControls) randomControls.hidden = true;
   if (randomPagesPopover) randomPagesPopover.hidden = true;
 
+  // quiz elements handling
+  const quizControls = document.getElementById("quizControls");
+  if (quizControls) quizControls.hidden = true;
+
   container.classList.remove("random-mode");
+  container.classList.remove("quiz-mode");
   container.classList.remove("swiping-stack");
   container.innerHTML = "";
 
@@ -264,10 +274,14 @@ function renderWords() {
     updateStrike();
 
     pageButtons.forEach(({ btn, page }) =>
-      btn.classList.toggle("active", !showUnlearned && !showRandom && page === currentPage)
+      btn.classList.toggle(
+        "active",
+        !showUnlearned && !showRandom && !showQuiz && page === currentPage
+      )
     );
     unlearnBtn.classList.toggle("active", showUnlearned);
     randomBtn.classList.toggle("active", showRandom);
+    if (quizBtn) quizBtn.classList.toggle("active", showQuiz);
   });
 }
 
@@ -277,10 +291,15 @@ resetBtn.onclick = () => {
   localStorage.removeItem("randomSelectedPages");
   if (typeof clearRandomProgress === "function") clearRandomProgress();
 
+  // quiz storage (varsa)
+  if (typeof clearQuizProgress === "function") clearQuizProgress();
+
   showUnlearned = false;
   showRandom = false;
+  showQuiz = false;
 
   if (typeof window.resetRandomDeck === "function") window.resetRandomDeck();
+  if (typeof window.resetQuizDeck === "function") window.resetQuizDeck();
 
   pageButtons.forEach(({ btn }) => btn.classList.remove("completed"));
   renderWords();
@@ -289,12 +308,25 @@ resetBtn.onclick = () => {
 unlearnBtn.onclick = () => {
   showUnlearned = !showUnlearned;
   showRandom = false;
+  showQuiz = false;
   renderWords();
 };
 
 randomBtn.onclick = () => {
+  showRandom = true;
+  showUnlearned = false;
+  showQuiz = false;
   if (typeof renderRandom === "function") renderRandom();
 };
+
+if (quizBtn) {
+  quizBtn.onclick = () => {
+    showQuiz = true;
+    showRandom = false;
+    showUnlearned = false;
+    if (typeof renderQuiz === "function") renderQuiz();
+  };
+}
 
 renderWords();
 
@@ -316,6 +348,21 @@ window.container = container;
 window.paginationSection = paginationSection;
 window.unlearnBtn = unlearnBtn;
 window.randomBtn = randomBtn;
-Object.defineProperty(window, 'showRandom', { get: () => showRandom, set: (v) => showRandom = v });
-Object.defineProperty(window, 'showUnlearned', { get: () => showUnlearned, set: (v) => showUnlearned = v });
-Object.defineProperty(window, 'currentPage', { get: () => currentPage, set: (v) => currentPage = v });
+window.quizBtn = quizBtn;
+
+Object.defineProperty(window, "showRandom", {
+  get: () => showRandom,
+  set: (v) => (showRandom = v),
+});
+Object.defineProperty(window, "showUnlearned", {
+  get: () => showUnlearned,
+  set: (v) => (showUnlearned = v),
+});
+Object.defineProperty(window, "currentPage", {
+  get: () => currentPage,
+  set: (v) => (currentPage = v),
+});
+Object.defineProperty(window, "showQuiz", {
+  get: () => showQuiz,
+  set: (v) => (showQuiz = v),
+});
