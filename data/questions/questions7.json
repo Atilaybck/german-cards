@@ -1,0 +1,302 @@
+[
+    {
+        "id": 1,
+        "q": "___ Mann ist hier.",
+        "options": [
+            "die",
+            "das",
+            "der"
+        ],
+        "answer": "der"
+    },
+    {
+        "id": 2,
+        "q": "___ Frau arbeitet.",
+        "options": [
+            "der",
+            "die",
+            "das"
+        ],
+        "answer": "die"
+    },
+    {
+        "id": 3,
+        "q": "___ Kind spielt.",
+        "options": [
+            "der",
+            "die",
+            "das"
+        ],
+        "answer": "das"
+    },
+    {
+        "id": 4,
+        "q": "Ich sehe ___ Mann.",
+        "options": [
+            "ein",
+            "eine",
+            "einen"
+        ],
+        "answer": "einen"
+    },
+    {
+        "id": 5,
+        "q": "___ Frau ist nett.",
+        "options": [
+            "ein",
+            "eine",
+            "einen"
+        ],
+        "answer": "eine"
+    },
+    {
+        "id": 6,
+        "q": "___ Kind ist klein.",
+        "options": [
+            "ein",
+            "eine",
+            "einen"
+        ],
+        "answer": "ein"
+    },
+    {
+        "id": 7,
+        "q": "___ Männer sind hier.",
+        "options": [
+            "der",
+            "die",
+            "das"
+        ],
+        "answer": "die"
+    },
+    {
+        "id": 8,
+        "q": "___ Frauen arbeiten.",
+        "options": [
+            "der",
+            "die",
+            "das"
+        ],
+        "answer": "die"
+    },
+    {
+        "id": 9,
+        "q": "___ Kinder spielen.",
+        "options": [
+            "der",
+            "die",
+            "das"
+        ],
+        "answer": "die"
+    },
+    {
+        "id": 10,
+        "q": "Das ist ___ Mann.",
+        "options": [
+            "eine",
+            "ein",
+            "einen"
+        ],
+        "answer": "ein"
+    },
+    {
+        "id": 11,
+        "q": "Das ist ___ Frau.",
+        "options": [
+            "ein",
+            "eine",
+            "einen"
+        ],
+        "answer": "eine"
+    },
+    {
+        "id": 12,
+        "q": "Das ist ___ Kind.",
+        "options": [
+            "eine",
+            "einen",
+            "ein"
+        ],
+        "answer": "ein"
+    },
+    {
+        "id": 13,
+        "q": "___ Mann arbeitet.",
+        "options": [
+            "der",
+            "die",
+            "das"
+        ],
+        "answer": "der"
+    },
+    {
+        "id": 14,
+        "q": "___ Frau ist hier.",
+        "options": [
+            "der",
+            "die",
+            "das"
+        ],
+        "answer": "die"
+    },
+    {
+        "id": 15,
+        "q": "___ Kind ist müde.",
+        "options": [
+            "der",
+            "die",
+            "das"
+        ],
+        "answer": "das"
+    },
+    {
+        "id": 16,
+        "q": "Ich sehe ___ Mann.",
+        "options": [
+            "der",
+            "den",
+            "dem"
+        ],
+        "answer": "den"
+    },
+    {
+        "id": 17,
+        "q": "Sie besucht ___ Frau.",
+        "options": [
+            "die",
+            "der",
+            "den"
+        ],
+        "answer": "die"
+    },
+    {
+        "id": 18,
+        "q": "Wir haben ___ Kind.",
+        "options": [
+            "einen",
+            "eine",
+            "ein"
+        ],
+        "answer": "ein"
+    },
+    {
+        "id": 19,
+        "q": "Ich kaufe ___ Apfel.",
+        "options": [
+            "der",
+            "einen",
+            "ein"
+        ],
+        "answer": "einen"
+    },
+    {
+        "id": 20,
+        "q": "Er sieht ___ Hund.",
+        "options": [
+            "der",
+            "den",
+            "dem"
+        ],
+        "answer": "den"
+    },
+    {
+        "id": 21,
+        "q": "Sie hat ___ Auto.",
+        "options": [
+            "ein",
+            "eine",
+            "einen"
+        ],
+        "answer": "ein"
+    },
+    {
+        "id": 22,
+        "q": "Wir finden ___ Lösung.",
+        "options": [
+            "der",
+            "die",
+            "eine"
+        ],
+        "answer": "eine"
+    },
+    {
+        "id": 23,
+        "q": "Ich liebe ___ Frau.",
+        "options": [
+            "die",
+            "der",
+            "den"
+        ],
+        "answer": "die"
+    },
+    {
+        "id": 24,
+        "q": "Er hört ___ Musik.",
+        "options": [
+            "der",
+            "die",
+            "das"
+        ],
+        "answer": "die"
+    },
+    {
+        "id": 25,
+        "q": "Ich sehe ___ Kind.",
+        "options": [
+            "das",
+            "den",
+            "dem"
+        ],
+        "answer": "das"
+    },
+    {
+        "id": 26,
+        "q": "Sie kauft ___ Tasche.",
+        "options": [
+            "der",
+            "die",
+            "eine"
+        ],
+        "answer": "eine"
+    },
+    {
+        "id": 27,
+        "q": "Wir haben ___ Bruder.",
+        "options": [
+            "ein",
+            "einen",
+            "eine"
+        ],
+        "answer": "einen"
+    },
+    {
+        "id": 28,
+        "q": "Er findet ___ Problem.",
+        "options": [
+            "kein",
+            "keine",
+            "nicht"
+        ],
+        "answer": "kein"
+    },
+    {
+        "id": 29,
+        "q": "Ich sehe ___ Männer.",
+        "options": [
+            "der",
+            "die",
+            "den"
+        ],
+        "answer": "die"
+    },
+    {
+        "id": 30,
+        "q": "Sie liebt ___ Kinder.",
+        "options": [
+            "die",
+            "den",
+            "das"
+        ],
+        "answer": "die"
+    }
+]

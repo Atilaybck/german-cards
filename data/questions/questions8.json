@@ -1,0 +1,17 @@
+[
+  { "id": 1, "q": "der Mann → ___ Männer", "options": ["der", "die", "das"], "answer": "die" },
+  { "id": 2, "q": "die Frau → ___ Frauen", "options": ["der", "die", "das"], "answer": "die" },
+  { "id": 3, "q": "das Kind → ___ Kinder", "options": ["der", "die", "das"], "answer": "die" },
+  { "id": 4, "q": "der Hund → die ___", "options": ["Hunde", "Hunden", "Hund"], "answer": "Hunde" },
+  { "id": 5, "q": "das Auto → die ___", "options": ["Auto", "Auten", "Autos"], "answer": "Autos" },
+  { "id": 6, "q": "der Mann → die ___", "options": ["Mannen", "Männer", "Manne"], "answer": "Männer" },
+  { "id": 7, "q": "die Mutter → die ___", "options": ["Mutter", "Muttern", "Mütter"], "answer": "Mütter" },
+  { "id": 8, "q": "der Lehrer → die ___", "options": ["Lehrer", "Lehreren", "Lehrers"], "answer": "Lehrer" },
+  { "id": 9, "q": "das Hotel → die ___", "options": ["Hotel", "Hotels", "Hotelen"], "answer": "Hotels" },
+  { "id": 10, "q": "die Tochter → die ___", "options": ["Tochter", "Töchtern", "Töchter"], "answer": "Töchter" },
+  { "id": 11, "q": "___ Kinder sind hier.", "options": ["Der", "Die", "Das"], "answer": "Die" },
+  { "id": 12, "q": "___ Frauen arbeiten.", "options": ["Der", "Die", "Das"], "answer": "Die" },
+  { "id": 13, "q": "ein Mann → ___ Männer", "options": ["ein", "eine", "die"], "answer": "die" },
+  { "id": 14, "q": "die Studenten kommen.", "options": ["Doğru", "Yanlış"], "answer": "Doğru" },
+  { "id": 15, "q": "ein Autos", "options": ["Doğru", "Yanlış"], "answer": "Yanlış" }
+]

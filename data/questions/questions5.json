@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "q": "___ kommst du?",
+    "options": ["Wo", "Wann", "Wer"],
+    "answer": "Wo"
+  },
+  {
+    "id": 2,
+    "q": "___ lernst du?",
+    "options": ["Wer", "Was", "Wo"],
+    "answer": "Was"
+  },
+  {
+    "id": 3,
+    "q": "___ ist das?",
+    "options": ["Was", "Wer", "Wie"],
+    "answer": "Wer"
+  },
+  {
+    "id": 4,
+    "q": "___ wohnst du?",
+    "options": ["Wo", "Wann", "Wie"],
+    "answer": "Wo"
+  },
+  {
+    "id": 5,
+    "q": "___ arbeitest du?",
+    "options": ["Wie", "Wann", "Was"],
+    "answer": "Wann"
+  },
+  {
+    "id": 6,
+    "q": "___ heißt du?",
+    "options": ["Wie", "Wo", "Wer"],
+    "answer": "Wie"
+  },
+  {
+    "id": 7,
+    "q": "___ kostet das?",
+    "options": ["Woher", "Wie viel", "Wann"],
+    "answer": "Wie viel"
+  },
+  {
+    "id": 8,
+    "q": "___ kommst du?",
+    "options": ["Woher", "Wo", "Was"],
+    "answer": "Woher"
+  },
+  {
+    "id": 9,
+    "q": "Kommst du heute?",
+    "options": ["Evet / Hayır sorusu", "W-soru"],
+    "answer": "Evet / Hayır sorusu"
+  },
+  {
+    "id": 10,
+    "q": "Arbeitest du hier?",
+    "options": ["Evet / Hayır sorusu", "W-soru"],
+    "answer": "Evet / Hayır sorusu"
+  },
+  {
+    "id": 11,
+    "q": "Ist er Student?",
+    "options": ["Evet / Hayır sorusu", "W-soru"],
+    "answer": "Evet / Hayır sorusu"
+  },
+  {
+    "id": 12,
+    "q": "Hast du Zeit?",
+    "options": ["Evet / Hayır sorusu", "W-soru"],
+    "answer": "Evet / Hayır sorusu"
+  },
+  {
+    "id": 13,
+    "q": "Wo arbeitest du?",
+    "options": ["Evet / Hayır sorusu", "W-soru"],
+    "answer": "W-soru"
+  },
+  {
+    "id": 14,
+    "q": "Was lernst du?",
+    "options": ["Evet / Hayır sorusu", "W-soru"],
+    "answer": "W-soru"
+  },
+  {
+    "id": 15,
+    "q": "Wie geht es dir?",
+    "options": ["Evet / Hayır sorusu", "W-soru"],
+    "answer": "W-soru"
+  }
+]

@@ -1,6 +1,8 @@
 /* random.css */
 
-/* Random View (stacked cards) */
+/* ===============================
+   Random View (stacked cards)
+================================ */
 #cards.random-mode {
   display: flex;
   justify-content: center;
@@ -22,15 +24,15 @@
 #cards.random-mode .card.card-next {
   position: absolute;
   transform: translateY(14px) scale(0.96);
-  opacity: 0;              /* gizli */
-  visibility: hidden;      /* tıklanmasın + tam gizlensin */
+  opacity: 0;
+  visibility: hidden;
   z-index: 1;
   transition: transform 0.22s ease, opacity 0.22s ease;
 }
 
 /* ✅ Sadece swipe sırasında alttaki hafif görünsün */
 #cards.random-mode.swiping-stack .card.card-next {
-  opacity: 0.35;           /* swipe ile “altta var” hissi */
+  opacity: 0.35;
   visibility: visible;
 }
 
@@ -40,14 +42,16 @@
   z-index: 2;
 }
 
-/* ✅ swipe bitince alttaki kart “yukarı gelsin” hissi */
+/* ✅ swipe bitince alttaki kart yukarı gelsin */
 #cards.random-mode .card.card-next.reveal {
   transform: translateY(0px) scale(1);
   opacity: 1;
   visibility: visible;
 }
 
-/* Swipe animation (random mode) */
+/* ===============================
+   Swipe animations
+================================ */
 .card.swiping {
   transition: none !important;
 }
@@ -64,19 +68,68 @@
   opacity: 0;
 }
 
-/* ✅ Random mod alt buton + popover (Dosyalar) */
+/* ===============================
+   ✅ RANDOM CONTROLS (Dosyalar)
+   🔑 SADECE hidden=false iken görünür
+================================ */
+
+/* hidden ise ASLA görünmez */
+#randomControls[hidden] {
+  display: none !important;
+}
+
+/* random-controls class shared by both random and quiz */
 .random-controls {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
   margin-top: 0 !important;
   position: sticky;
   top: 12px;
   z-index: 50;
 }
 
+/* normalde görünür (JS kontrol ediyor) */
+#randomControls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-top: 0 !important;
+  position: sticky;
+  top: 12px;
+  z-index: 50;
+}
+
+/* ===============================
+   ✅ QUIZ CONTROLS
+   🔑 SADECE hidden=false iken görünür
+================================ */
+
+/* hidden ise ASLA görünmez */
+#quizControls[hidden] {
+  display: none !important;
+}
+
+/* normalde görünür (JS kontrol ediyor) */
+#quizControls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-top: 0 !important;
+  position: sticky;
+  top: 12px;
+  z-index: 50;
+}
+
+/* ===============================
+   Pages popover
+================================ */
 .pages-popover {
   position: absolute;
-  top: 56px;
+  top: 100px;
   width: 260px;
   background: rgba(15, 23, 42, 0.92);
   border: 1px solid rgba(255, 255, 255, 0.12);
@@ -85,12 +138,18 @@
   box-shadow: var(--shadow-lg);
   backdrop-filter: blur(10px);
   z-index: 60;
+  max-height: calc(100vh - 140px);
+  /* üstten/ alttan pay bırak */
+  overflow-y: auto;
 }
 
 .pages-list {
   display: grid;
   gap: 10px;
   padding: 8px 6px 14px;
+  max-height: calc(100vh - 320px);
+  overflow-y: auto;
+  padding-right: 6px;
 }
 
 .page-row {

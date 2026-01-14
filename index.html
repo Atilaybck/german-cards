@@ -12,8 +12,11 @@
 
   <link rel="stylesheet" href="landing.css" />
   <link rel="stylesheet" href="random.css" />
+  <link rel="stylesheet" href="quiz.css" />
+
   <script src="landing.js" defer></script>
   <script src="random.js" defer></script>
+  <script src="quiz.js" defer></script>
 </head>
 
 <body>
@@ -22,8 +25,11 @@
       <h1>🇩🇪 Almanca Kartları</h1>
       <div class="controls">
         <button id="reset" class="action-btn danger">Sıfırla</button>
-        <button id="unlearnedBtn" class="action-btn warning">Ezberlenmemiş</button>
+        <button id="unlearnedBtn" class="action-btn warning">
+          Ezberlenmemiş
+        </button>
         <button id="randomBtn" class="action-btn success">Rastgele</button>
+        <button id="quizBtn" class="action-btn success">Sorular</button>
       </div>
     </header>
 
@@ -35,17 +41,31 @@
 
       <!-- Kartların geleceği alan -->
       <section class="cards-section">
-        <div id="cards"></div>
-
         <!-- ✅ Random mod: dosya seçme -->
         <div id="randomControls" class="random-controls" hidden>
           <button id="randomPagesBtn" class="action-btn">Dosyalar</button>
 
           <div id="randomPagesPopover" class="pages-popover" hidden>
             <div id="randomPagesList" class="pages-list"></div>
-            <button id="applyRandomPages" class="pages-apply">Seçimleri Yükle</button>
+            <button id="applyRandomPages" class="pages-apply">
+              Seçimleri Yükle
+            </button>
           </div>
         </div>
+
+        <!-- ✅ Quiz mod: dosya seçme -->
+        <div id="quizControls" class="random-controls" hidden>
+          <button id="quizFilesBtn" class="action-btn">Dosyalar</button>
+
+          <div id="quizFilesPopover" class="pages-popover" hidden>
+            <div id="quizFilesList" class="pages-list"></div>
+            <button id="applyQuizFiles" class="pages-apply">
+              Seçimleri Yükle
+            </button>
+          </div>
+        </div>
+
+        <div id="cards"></div>
       </section>
     </main>
   </div>
