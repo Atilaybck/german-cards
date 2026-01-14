@@ -1,6 +1,8 @@
 /* random.css */
 
-/* Random View (stacked cards) */
+/* ===============================
+   Random View (stacked cards)
+================================ */
 #cards.random-mode {
   display: flex;
   justify-content: center;
@@ -22,15 +24,15 @@
 #cards.random-mode .card.card-next {
   position: absolute;
   transform: translateY(14px) scale(0.96);
-  opacity: 0;              /* gizli */
-  visibility: hidden;      /* tıklanmasın + tam gizlensin */
+  opacity: 0;
+  visibility: hidden;
   z-index: 1;
   transition: transform 0.22s ease, opacity 0.22s ease;
 }
 
 /* ✅ Sadece swipe sırasında alttaki hafif görünsün */
 #cards.random-mode.swiping-stack .card.card-next {
-  opacity: 0.35;           /* swipe ile “altta var” hissi */
+  opacity: 0.35;
   visibility: visible;
 }
 
@@ -40,14 +42,16 @@
   z-index: 2;
 }
 
-/* ✅ swipe bitince alttaki kart “yukarı gelsin” hissi */
+/* ✅ swipe bitince alttaki kart yukarı gelsin */
 #cards.random-mode .card.card-next.reveal {
   transform: translateY(0px) scale(1);
   opacity: 1;
   visibility: visible;
 }
 
-/* Swipe animation (random mode) */
+/* ===============================
+   Swipe animations
+================================ */
 .card.swiping {
   transition: none !important;
 }
@@ -64,8 +68,18 @@
   opacity: 0;
 }
 
-/* ✅ Random mod alt buton + popover (Dosyalar) */
-.random-controls {
+/* ===============================
+   ✅ RANDOM CONTROLS (Dosyalar)
+   🔑 SADECE hidden=false iken görünür
+================================ */
+
+/* hidden ise ASLA görünmez */
+#randomControls[hidden] {
+  display: none !important;
+}
+
+/* normalde görünür (JS kontrol ediyor) */
+#randomControls {
   display: flex;
   justify-content: center;
   margin-top: 0 !important;
@@ -74,6 +88,9 @@
   z-index: 50;
 }
 
+/* ===============================
+   Pages popover
+================================ */
 .pages-popover {
   position: absolute;
   top: 56px;
