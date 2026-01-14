@@ -142,7 +142,9 @@ function buildRandomPagesUI() {
   randomPagesList.innerHTML = "";
 
   const selected = new Set(
-    Array.isArray(getLS(RANDOM_PAGES_KEY)) ? getLS(RANDOM_PAGES_KEY).map(Number) : []
+    Array.isArray(getLS(RANDOM_PAGES_KEY))
+      ? getLS(RANDOM_PAGES_KEY).map(Number)
+      : []
   );
 
   for (let i = 1; i <= totalPages; i++) {
@@ -412,7 +414,9 @@ function advanceRandomDeck() {
     randomDeck.top = randomDeck.next || randomDeck.top;
 
     // yeni next seç (top ile çakışmasın)
-    const topKey = randomDeck.top ? keyOf(randomDeck.top.page, randomDeck.top.de) : "";
+    const topKey = randomDeck.top
+      ? keyOf(randomDeck.top.page, randomDeck.top.de)
+      : "";
     randomDeck.next = pickFromPool(randomDeck.pool, topKey) || randomDeck.top;
 
     renderRandomFromDeck();
@@ -447,7 +451,7 @@ function renderRandomFromDeck() {
   container.append(nextCard, topCard);
 }
 
-/** ✅ Random modda swipe davranışı */
+/** ✅ Random modda swipe davranışı + swipe başlayınca seslendir */
 function attachSwipeHandlers(card, key, selectedPages) {
   let startX = 0;
   let startY = 0;
@@ -455,10 +459,14 @@ function attachSwipeHandlers(card, key, selectedPages) {
   let dy = 0;
   let dragging = false;
 
+  let spokeOnSwipe = false; // ✅ eklendi
+
   const THRESHOLD = 80; // px
 
   function onStart(e) {
     if (!showRandom) return;
+
+    spokeOnSwipe = false; // ✅ eklendi
 
     const t = e.touches ? e.touches[0] : e;
     startX = t.clientX;
@@ -477,6 +485,13 @@ function attachSwipeHandlers(card, key, selectedPages) {
     const t = e.touches ? e.touches[0] : e;
     dx = t.clientX - startX;
     dy = t.clientY - startY;
+
+    // ✅ ilk yatay swipe anında 1 kere konuş
+    if (!spokeOnSwipe && Math.abs(dx) > 10 && Math.abs(dx) > Math.abs(dy)) {
+      const deText = card.querySelector(".front")?.textContent?.trim() || "";
+      speak(deText);
+      spokeOnSwipe = true;
+    }
 
     if (Math.abs(dx) > Math.abs(dy)) e.preventDefault();
 
