@@ -37,6 +37,8 @@ function clearRandomProgress() {
 function getRandomSig(selectedPages) {
   return (selectedPages || []).slice().sort((a, b) => a - b).join(",");
 }
+
+// ✅ sadece "öğrenildi" (sağ swipe) olunca çağıracağız
 function bumpRandomSeen(selectedPages) {
   if (!showRandom) return;
 
@@ -54,7 +56,6 @@ function bumpRandomSeen(selectedPages) {
 }
 
 // ✅ ARTIK: hiç seçilmemişse default = BOŞ ([])
-
 function getSelectedRandomPages() {
   const arr = getLS(RANDOM_PAGES_KEY);
   return (Array.isArray(arr) ? arr : [])
@@ -115,18 +116,17 @@ function pickFromPool(pool, avoidKey = "") {
     if (!avoidKey || k !== avoidKey) return w;
     tries++;
   }
-  // fallback
   return pool[Math.floor(Math.random() * pool.length)];
 }
 
 /** ✅ random deck'i hazırla / yenile */
 function prepareRandomDeck(words, selectedPages) {
-  const hidden = getLS("hiddenWords");
-  const unlearn = getLS("unlearnedWords");
+  const hidden = getLS("hiddenWords") || [];
 
+  // ✅ unlearned olanlar DA havuza girer (tekrar karşıma çıksın diye)
   const pool = (words || []).filter((w) => {
     const k = keyOf(w.page, w.de);
-    return !hidden.includes(k) && !unlearn.includes(k);
+    return !hidden.includes(k);
   });
 
   const sig = getRandomSig(selectedPages);
@@ -144,6 +144,8 @@ function prepareRandomDeck(words, selectedPages) {
   const prog2 = getRandomProgress();
   const total = Number(prog2.total) || pool.length;
   const seen = Math.min(Number(prog2.seen) || 0, total);
+
+  // UI’da gösterilen "x/y"
   const progressText = `${Math.min(seen + 1, total)}/${total}`;
 
   randomDeck.sig = sig;
@@ -172,9 +174,7 @@ function prepareRandomDeck(words, selectedPages) {
 function advanceRandomDeck() {
   if (!showRandom) return;
 
-  // DOM animasyon bitince yenilemek için küçük timeout
   setTimeout(() => {
-    // ✅ pool bitti mi? (swipe ile pool azalıyor)
     if (!randomDeck.pool || randomDeck.pool.length === 0) {
       randomDeck.top = null;
       randomDeck.next = null;
@@ -182,8 +182,7 @@ function advanceRandomDeck() {
       return;
     }
 
-    // seen ilerlediği için progress text'i güncelle
-    const selectedPages = randomDeck.selectedPages || [];
+    // progress text'i güncelle (NOT: seen sadece sağ swipe ile artacak)
     const prog2 = getRandomProgress();
     const total = Number(prog2.total) || (randomDeck.pool || []).length;
     const seen = Math.min(Number(prog2.seen) || 0, total);
@@ -193,9 +192,7 @@ function advanceRandomDeck() {
     randomDeck.top = randomDeck.next || randomDeck.top;
 
     // yeni next seç (top ile çakışmasın)
-    const topKey = randomDeck.top
-      ? keyOf(randomDeck.top.page, randomDeck.top.de)
-      : "";
+    const topKey = randomDeck.top ? keyOf(randomDeck.top.page, randomDeck.top.de) : "";
     randomDeck.next = pickFromPool(randomDeck.pool, topKey) || randomDeck.top;
 
     renderRandomFromDeck();
@@ -238,9 +235,8 @@ function attachSwipeHandlers(card, key, selectedPages) {
   let dy = 0;
   let dragging = false;
 
-  let spokeOnSwipe = false; // ✅ eklendi
-
-  const THRESHOLD = 80; // px
+  let spokeOnSwipe = false;
+  const THRESHOLD = 80;
 
   function onStart(e) {
     if (!showRandom) return;
@@ -287,27 +283,30 @@ function attachSwipeHandlers(card, key, selectedPages) {
     if (nextCard) nextCard.classList.add("reveal");
 
     if (direction === "right") {
+      // ✅ öğrenildi: learned'a yaz + pool'dan çıkar + sayaç artsın
       markLearned(key);
       card.classList.add("fly-right");
+
+      randomDeck.pool = (randomDeck.pool || []).filter(
+        (w) => keyOf(w.page, w.de) !== key
+      );
+      if (randomDeck.next && keyOf(randomDeck.next.page, randomDeck.next.de) === key) {
+        randomDeck.next = null;
+      }
+
+      bumpRandomSeen(selectedPages); // ✅ sadece burada
     } else {
+      // ✅ ezberlenmedi: unlearned'a yaz ama pool'da kalsın (tekrar gelebilsin)
       markUnlearned(key);
       card.classList.add("fly-left");
+
+      // hemen sıradaki kart aynı kelime olmasın
+      if (randomDeck.next && keyOf(randomDeck.next.page, randomDeck.next.de) === key) {
+        randomDeck.next = null;
+      }
+      // ❌ sayaç artmasın
     }
 
-    // ✅ FIX: aynı kelime tekrar seçilmesin diye pool'dan çıkar
-    randomDeck.pool = (randomDeck.pool || []).filter(
-      (w) => keyOf(w.page, w.de) !== key
-    );
-    if (
-      randomDeck.next &&
-      keyOf(randomDeck.next.page, randomDeck.next.de) === key
-    ) {
-      randomDeck.next = null;
-    }
-
-    bumpRandomSeen(selectedPages);
-
-    // ✅ kritik: renderRandom() yok -> flicker yok
     setTimeout(() => {
       if (showRandom) advanceRandomDeck();
     }, 260);
@@ -342,9 +341,9 @@ function attachSwipeHandlers(card, key, selectedPages) {
 function renderRandom() {
   showRandom = true;
   showUnlearned = false;
-  showQuiz = false; // ✅ eklendi (tutarlılık)
+  showQuiz = false;
 
-  // ✅ quiz UI kapat (Sorular → Rastgele geçişinde 2 buton bug fix)
+  // ✅ quiz UI kapat
   const quizControlsEl = document.getElementById("quizControls");
   const quizFilesPopoverEl = document.getElementById("quizFilesPopover");
   if (quizControlsEl) quizControlsEl.hidden = true;
@@ -354,7 +353,6 @@ function renderRandom() {
 
   if (randomControls) {
     randomControls.hidden = false;
-    // Temizle
     const existingHint = randomControls.querySelector("#randomHint");
     if (existingHint) existingHint.remove();
   }
@@ -368,8 +366,10 @@ function renderRandom() {
 
   if (selectedPages.length === 0) {
     if (!randomControls.querySelector("#randomHint")) {
-      randomControls.insertAdjacentHTML('afterbegin',
-        "<p id='randomHint' style='text-align:center;font-weight:700;opacity:.85;margin-bottom:10px'>Sayfa seç (Dosyalar butonundan).</p>");
+      randomControls.insertAdjacentHTML(
+        "afterbegin",
+        "<p id='randomHint' style='text-align:center;font-weight:700;opacity:.85;margin-bottom:10px'>Sayfa seç (Dosyalar butonundan).</p>"
+      );
     }
 
     pageButtons.forEach(({ btn }) => btn.classList.toggle("active", false));
@@ -398,12 +398,7 @@ function renderRandom() {
 }
 
 // ✅ Random mod: dosyalar butonu
-if (
-  randomPagesBtn &&
-  randomPagesPopover &&
-  randomPagesList &&
-  applyRandomPagesBtn
-) {
+if (randomPagesBtn && randomPagesPopover && randomPagesList && applyRandomPagesBtn) {
   randomPagesBtn.onclick = (e) => {
     e.stopPropagation();
     if (randomPagesPopover.hidden) openRandomPagesPopover();
@@ -421,13 +416,7 @@ if (
     clearRandomProgress();
 
     // deck reset (seçim değişince)
-    randomDeck.sig = "";
-    randomDeck.selectedPages = [];
-    randomDeck.pool = [];
-    randomDeck.top = null;
-    randomDeck.next = null;
-    randomDeck.progressText = "";
-    randomDeck.lastKey = "";
+    window.resetRandomDeck?.();
 
     closeRandomPagesPopover();
     if (showRandom) renderRandom();
