@@ -1,0 +1,17 @@
+[
+  { "de": "besuchen", "tr": "ziyaret etmek", "oku": "bezuuhın" },
+  { "de": "ankommen", "tr": "varmak / ulaşmak", "oku": "ankommen" },
+  { "de": "einkaufen", "tr": "alışveriş yapmak", "oku": "ayn-kaufen" },
+  { "de": "mitkommen", "tr": "birlikte gelmek", "oku": "mit-komen" },
+  { "de": "abfahren", "tr": "hareket etmek / kalkmak", "oku": "ap-faaren" },
+  { "de": "vorstellen", "tr": "tanıtmak / hayal etmek", "oku": "for-ştellın" },
+  { "de": "dort", "tr": "orada", "oku": "dort" },
+  { "de": "oben", "tr": "yukarıda", "oku": "oben" },
+  { "de": "unten", "tr": "aşağıda", "oku": "unten" },
+  { "de": "wenig", "tr": "az", "oku": "venig" },
+  { "de": "weil", "tr": "çünkü", "oku": "vayl" },
+  { "de": "eins", "tr": "bir", "oku": "ayns" },
+  { "de": "fünf", "tr": "beş", "oku": "fünf" },
+  { "de": "sechs", "tr": "altı", "oku": "zeks" },
+  { "de": "fünfzehn", "tr": "on beş", "oku": "fünf-tsen" }
+]

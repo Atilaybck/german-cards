@@ -1,0 +1,17 @@
+[
+  { "de": "acht", "tr": "sekiz", "oku": "aht" },
+  { "de": "dreißig", "tr": "otuz", "oku": "draysih" },
+  { "de": "das Viertel", "tr": "çeyrek", "oku": "fiyırtl" },
+  { "de": "halb", "tr": "yarım", "oku": "halb" },
+  { "de": "der Samstag", "tr": "Cumartesi", "oku": "zamstaag" },
+  { "de": "gehen", "tr": "gitmek", "oku": "geyen" },
+  { "de": "einkaufen", "tr": "alışveriş yapmak", "oku": "ayn-kaufen" },
+  { "de": "kaufen", "tr": "satın almak", "oku": "kaufen" },
+  { "de": "frisch", "tr": "taze", "oku": "friş" },
+  { "de": "das Obst", "tr": "meyve", "oku": "obst" },
+  { "de": "treffen", "tr": "buluşmak / karşılaşmak", "oku": "treffın" },
+  { "de": "spazieren (gehen)", "tr": "gezmek / yürüyüş yapmak", "oku": "şpatsiyırın" },
+  { "de": "der Sonntag", "tr": "Pazar", "oku": "zonntaag" },
+  { "de": "bleiben", "tr": "kalmak", "oku": "blaybın" },
+  { "de": "einfach", "tr": "kolay / basit", "oku": "ayn-fah" }
+]
