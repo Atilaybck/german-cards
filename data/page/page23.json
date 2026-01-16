@@ -7,5 +7,11 @@
   { "de": "oder", "tr": "veya", "oku": "odır" },
   { "de": "kurz", "tr": "kısa", "oku": "kurts" },
   { "de": "erreichen", "tr": "ulaşmak / başarmak", "oku": "erayhın" },
-  { "de": "danach", "tr": "ondan sonra", "oku": "danah" }
+  { "de": "danach", "tr": "ondan sonra", "oku": "danah" },
+  { "de": "bitte", "tr": "lütfen / rica ederim", "oku": "bitte" },
+  { "de": "vorne", "tr": "önde / ileride", "oku": "forne" },
+  { "de": "der Vater", "tr": "baba", "oku": "faatır" },
+  { "de": "wichtig", "tr": "önemli", "oku": "vihtiç" },
+  { "de": "die Mutter", "tr": "anne", "oku": "muttır" },
+  { "de": "dort", "tr": "orada", "oku": "dort" }
 ]
