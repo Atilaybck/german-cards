@@ -1,0 +1,17 @@
+[
+  { "de": "sechs", "tr": "altı", "oku": "zeks" },
+  { "de": "zwölf", "tr": "on iki", "oku": "tsvölf" },
+  { "de": "finden", "tr": "bulmak", "oku": "findın" },
+  { "de": "muss", "tr": "zorunda", "oku": "mus" },
+  { "de": "die Sprache", "tr": "dil", "oku": "şprahe" },
+  { "de": "die Hausaufgabe", "tr": "ödev ", "oku": "haus-auf-gabe" },
+  { "de": "die Vokabel", "tr": "kelime", "oku": "vokabıl" },
+  { "de": "wirklich", "tr": "gerçekten", "oku": "virklih" },
+  { "de": "entspannend", "tr": "rahatlatıcı", "oku": "ent-şpanınt" },
+  { "de": "aufstehen", "tr": "kalkmak", "oku": "auf-şteyın" },
+  { "de": "weil", "tr": "çünkü", "oku": "vayl" },
+  { "de": "geschlafen", "tr": "uyumuş", "oku": "geşlafın" },
+  { "de": "vorbei", "tr": "bitti / geçti", "oku": "forbay" },
+  { "de": "die Arbeit", "tr": "iş", "oku": "arbayt" },
+  { "de": "heiß", "tr": "sıcak", "oku": "hayıs" }
+]
