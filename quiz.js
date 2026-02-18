@@ -44,6 +44,11 @@ const QUIZ_FILES = [
     label: "6. Olumsuzluk (nicht / kein)",
     path: "data/questions/06-olumsuzluk.json",
   },
+  {
+    id: "q065",
+    label: "6.5 Ara Değerlendirme",
+    path: "data/questions/6.5-ara-degerlendirme.json",
+  },
 ];
 
 function getSelectedQuizFiles() {

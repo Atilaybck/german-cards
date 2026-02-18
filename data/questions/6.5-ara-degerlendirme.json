@@ -1,0 +1,220 @@
+[
+  {
+    "id": 1,
+    "q": "Max ___ heute nicht, weil er krank ist. (arbeiten)",
+    "options": ["arbeitest", "arbeitet", "arbeiten"],
+    "answer": "arbeitet",
+    "explain": "Max (er) için fiil çekimi 'arbeitet' olur. 'nicht' ile olumsuzluk pekiştirilmiş."
+  },
+  {
+    "id": 2,
+    "q": "___ du morgen Zeit für mich?",
+    "options": ["Hast", "Habt", "Haben"],
+    "answer": "Hast",
+    "explain": "Du (sen) öznesi için 'haben' fiili 'hast' olarak çekimlenir. Soru cümlesinde fiil başa gelir."
+  },
+  {
+    "id": 3,
+    "q": "Wir ___ heute keine Hausaufgaben.",
+    "options": ["haben", "hat", "hast"],
+    "answer": "haben",
+    "explain": "Hausaufgaben (ödevler) çoğuldur, 'keine' ile olumsuz yapılmış. 'Wir' çekimi 'haben' olur."
+  },
+  {
+    "id": 4,
+    "q": "Woher ___ senin arkadaşın (dein Freund)?",
+    "options": ["kommst", "kommt", "kommen"],
+    "answer": "kommt",
+    "explain": "Dein Freund (erkek arkadaşın) 'er' şahsına girer, bu yüzden 'kommt' kullanılır."
+  },
+  {
+    "id": 5,
+    "q": "Ich ___ nicht gern Pizza.",
+    "options": ["esse", "isst", "esst"],
+    "answer": "esse",
+    "explain": "Ich çekimi 'esse'dir. 'nicht gern' (sevmeden/hoşlanmayarak) yapısını pekiştirir."
+  },
+  {
+    "id": 6,
+    "q": "___ ihr Deutsch veya Englisch?",
+    "options": ["Sprechen", "Spricht", "Sprecht"],
+    "answer": "Sprecht",
+    "explain": "Siz (çoğul - ihr) için 'sprechen' fiili 'sprecht' olur."
+  },
+  {
+    "id": 7,
+    "q": "Das Kind ___ im Garten. (spielen)",
+    "options": ["spiele", "spielt", "spielen"],
+    "answer": "spielt",
+    "explain": "Das Kind (o - es) çekimi 'spielt' olur."
+  },
+  {
+    "id": 8,
+    "q": "Warum ___ du heute nicht zur Schule?",
+    "options": ["gehe", "geht", "gehst"],
+    "answer": "gehst",
+    "explain": "Du öznesi için 'gehst' çekimi kullanılır. 'Warum' (Neden) soru kelimesidir."
+  },
+  {
+    "id": 9,
+    "q": "Wir ___ morgen nach Berlin. (fahren)",
+    "options": ["fahren", "fahre", "fährt"],
+    "answer": "fahren",
+    "explain": "Wir çekimi fiilin yalın haliyle aynıdır: fahren."
+  },
+  {
+    "id": 10,
+    "q": "Hast du ein Auto? Nein, ich habe ___ Auto.",
+    "options": ["nicht", "kein", "keine"],
+    "answer": "kein",
+    "explain": "Auto'nun artikeli das olduğu için olumsuzu 'kein' olur."
+  },
+  {
+    "id": 11,
+    "q": "Hangi cümle kurallara göre doğrudur?",
+    "options": [
+      "Heute ich lerne Deutsch.",
+      "Heute lerne ich Deutsch.",
+      "Lerne heute ich Deutsch."
+    ],
+    "answer": "Heute lerne ich Deutsch.",
+    "explain": "Almancada düz cümlede fiil her zaman 2. sıradadır."
+  },
+  {
+    "id": 12,
+    "q": "Hangi soru cümlesi doğrudur?",
+    "options": [
+      "Du kommst woher?",
+      "Woher kommst du?",
+      "Woher du kommst?"
+    ],
+    "answer": "Woher kommst du?",
+    "explain": "W-sorularında (Woher, Was, Wo) fiil 2. sırada, özne ise fiilden hemen sonra gelir."
+  },
+  {
+    "id": 13,
+    "q": "Meine Mutter ___ sehr gut kochen. (können - çekimine dikkat)",
+    "options": ["kann", "kannst", "können"],
+    "answer": "kann",
+    "explain": "Meine Mutter (sie) için 'können' fiili 'kann' olarak çekimlenir."
+  },
+  {
+    "id": 14,
+    "q": "Trinkst du Kaffee? Nein, ich trinke ___ Kaffee.",
+    "options": ["nicht", "kein", "keinen"],
+    "answer": "keinen",
+    "explain": "Kaffee (der) Akkusativ nesne olduğu için 'kein' artikeli 'keinen' olur."
+  },
+  {
+    "id": 15,
+    "q": "___ ist dein Name?",
+    "options": ["Wer", "Wie", "Was"],
+    "answer": "Wie",
+    "explain": "İsim sorarken 'Wie ist dein Name?' (Adın ne?) kalıbı kullanılır."
+  },
+  {
+    "id": 16,
+    "q": "Wir wohnen ___ in Stuttgart.",
+    "options": ["kein", "keine", "nicht"],
+    "answer": "nicht",
+    "explain": "Fiili veya yer bildiren yapıyı olumsuz yaparken 'nicht' kullanılır."
+  },
+  {
+    "id": 17,
+    "q": "Sizin (ihr) zamanınız var mı?",
+    "options": ["Habt ihr Zeit?", "Haben ihr Zeit?", "Hast ihr Zeit?"],
+    "answer": "Habt ihr Zeit?",
+    "explain": "Ihr öznesi için 'haben' fiili 'habt' olur."
+  },
+  {
+    "id": 18,
+    "q": "Was ___ du beruflich? (machen)",
+    "options": ["macht", "mache", "machst"],
+    "answer": "machst",
+    "explain": "Meslek sorarken 'Was machst du beruflich?' denir."
+  },
+  {
+    "id": 19,
+    "q": "Ich bin ___ Lehrer, ich bin Student.",
+    "options": ["kein", "nicht", "keine"],
+    "answer": "kein",
+    "explain": "Meslek isimlerinin (der Lehrer) önüne belirsiz artikeli olumsuz yapmak için 'kein' gelir."
+  },
+  {
+    "id": 20,
+    "q": "Meine Freunde ___ heute Fußball. (spielen)",
+    "options": ["spielt", "spielen", "spielst"],
+    "answer": "spielen",
+    "explain": "Meine Freunde (onlar - sie) çoğul olduğu için 'spielen' olur."
+  },
+  {
+    "id": 21,
+    "q": "PARAGRAF: Hallo! Ich bin Thomas. Ich komme aus Österreich, ama şimdi Berlin'de yaşıyorum. Ben bir doktorum ama bugün çalışmıyorum. \n\nThomas nerede yaşıyor?",
+    "options": ["Österreich", "Berlin", "Türkiye"],
+    "answer": "Berlin",
+    "explain": "Metinde 'ich wohne jetzt in Berlin' (şimdi Berlin'de yaşıyorum) diyor."
+  },
+  {
+    "id": 22,
+    "q": "PARAGRAF: Maria hat zwei Kinder. Sie haben heute keine Schule. Maria kocht eine Suppe. Die Suppe schmeckt sehr gut.\n\nÇocukların bugün okulu var mı?",
+    "options": ["Ja, onlar okulda.", "Nein, bugün okul yok.", "Belki."],
+    "answer": "Nein, bugün okul yok.",
+    "explain": "Metinde 'Sie haben heute keine Schule' (Bugün okulları yok) ifadesi geçiyor."
+  },
+  {
+    "id": 23,
+    "q": "PARAGRAF: Das ist Herr Müller. Er ist 45 Jahre alt. Er spricht Deutsch und Französisch. Er lernt jetzt Türkisch.\n\nHerr Müller hangi dili öğreniyor?",
+    "options": ["Französisch", "Deutsch", "Türkisch"],
+    "answer": "Türkisch",
+    "explain": "Metinde 'Er lernt jetzt Türkisch' (Şimdi Türkçe öğreniyor) deniyor."
+  },
+  {
+    "id": 24,
+    "q": "PARAGRAF: Wir haben ein Haus in İzmit. Das Haus ist nicht groß, aber es ist schön. Wir haben keinen Garten.\n\nEvin bahçesi var mı?",
+    "options": ["Evet, büyük bir bahçe.", "Hayır, bahçe yok.", "Evet, küçük bir bahçe."],
+    "answer": "Hayır, bahçe yok.",
+    "explain": "Metinde 'Wir haben keinen Garten' (Bahçemiz yok) deniyor."
+  },
+  {
+    "id": 25,
+    "q": "PARAGRAF: Peter und Susi gehen ins Kino. Der Film ist sehr langweilig. Peter schläft, aber Susi schaut den Film.\n\nFilm nasıldır?",
+    "options": ["Interessant", "Gut", "Langweilig"],
+    "answer": "Langweilig",
+    "explain": "Metinde 'Der Film ist sehr langweilig' (Film çok sıkıcı) deniyor."
+  },
+  {
+    "id": 26,
+    "q": "PARAGRAF: Heute ist Montag. Ich stehe um 7 Uhr auf. Ich trinke Tee und esse Brot. Ich gehe um 8 Uhr zur Arbeit.\n\nKişi saat kaçta işe gidiyor?",
+    "options": ["7 Uhr", "8 Uhr", "9 Uhr"],
+    "answer": "8 Uhr",
+    "explain": "Metinde 'Ich gehe um 8 Uhr zur Arbeit' deniyor."
+  },
+  {
+    "id": 27,
+    "q": "PARAGRAF: Das ist mein Hund. Er heißt Bello. Bello ist sehr alt, aber er spielt noch gern.\n\nHund Bello yaşlı mı?",
+    "options": ["Nein, o genç.", "Ja, o yaşlı.", "O bir kedi."],
+    "answer": "Ja, o yaşlı.",
+    "explain": "Metinde 'Bello ist sehr alt' (Bello çok yaşlı) deniyor."
+  },
+  {
+    "id": 28,
+    "q": "PARAGRAF: Ich habe ein Problem. Mein Auto funktioniert nicht. Ich brauche einen Mechaniker. Wo ist die Werkstatt?\n\nKişinin neye ihtiyacı var?",
+    "options": ["Bir doktora", "Bir öğretmene", "Bir tamirciye"],
+    "answer": "Bir tamirciye",
+    "explain": "Mechaniker 'tamirci' demektir."
+  },
+  {
+    "id": 29,
+    "q": "PARAGRAF: Meine Freundin heißt Helga. Sie kommt aus Deutschland. Sie lernt Spanisch. Helga ist sehr klug.\n\nHelga nerelidir?",
+    "options": ["Spanien", "Deutschland", "Österreich"],
+    "answer": "Deutschland",
+    "explain": "Metinde 'Sie kommt aus Deutschland' deniyor."
+  },
+  {
+    "id": 30,
+    "q": "PARAGRAF: Es ist Winter. Es ist sehr kalt. Wir bleiben zu Hause. Wir trinken heiße Schokolade.\n\nHava nasıl?",
+    "options": ["Warm", "Heiß", "Kalt"],
+    "answer": "Kalt",
+    "explain": "Metinde 'Es ist sehr kalt' (Çok soğuk) deniyor."
+  }
+]
