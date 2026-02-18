@@ -1,0 +1,212 @@
+[
+  {
+    "id": 1,
+    "q": "Ich ___ aus Türkiye. (kommen)",
+    "options": ["kommt", "komme", "kommen"],
+    "answer": "komme",
+    "explain": "TR: Türkiye’den geliyorum."
+  },
+  {
+    "id": 2,
+    "q": "Du ___ Deutsch. (lernen)",
+    "options": ["lerne", "lernst", "lernt"],
+    "answer": "lernst",
+    "explain": "TR: Almanca öğreniyorsun."
+  },
+  {
+    "id": 3,
+    "q": "Er ___ zur Arbeit. (fahren)",
+    "options": ["fahren", "fahrt", "fährt"],
+    "answer": "fährt",
+    "explain": "TR: O (erkek) işe gidiyor."
+  },
+  {
+    "id": 4,
+    "q": "Wir ___ Zeit. (haben)",
+    "options": ["haben", "hat", "habt"],
+    "answer": "haben",
+    "explain": "TR: Zamanımız var."
+  },
+  {
+    "id": 5,
+    "q": "Ihr ___ nach Hause. (gehen)",
+    "options": ["gehe", "gehst", "geht"],
+    "answer": "geht",
+    "explain": "TR: Siz (çoğul) eve gidiyorsunuz."
+  },
+  {
+    "id": 6,
+    "q": "Sie ___ müde.",
+    "options": ["bist", "ist", "sind"],
+    "answer": "sind",
+    "explain": "TR: Onlar yorgun."
+  },
+  {
+    "id": 7,
+    "q": "Du ___ Kaffee.",
+    "options": ["habe", "hast", "hat"],
+    "answer": "hast",
+    "explain": "TR: Senin kahven var."
+  },
+  {
+    "id": 8,
+    "q": "Wir ___ hier.",
+    "options": ["seid", "sind", "bin"],
+    "answer": "sind",
+    "explain": "TR: Biz buradayız."
+  },
+  {
+    "id": 9,
+    "q": "Ihr ___ heute. (arbeiten)",
+    "options": ["arbeitet", "arbeite", "arbeiten"],
+    "answer": "arbeitet",
+    "explain": "TR: Siz (çoğul) bugün çalışıyorsunuz."
+  },
+  {
+    "id": 10,
+    "q": "Er ___ viel Zeit.",
+    "options": ["haben", "hat", "hast"],
+    "answer": "hat",
+    "explain": "TR: Onun (erkek) çok zamanı var."
+  },
+  {
+    "id": 11,
+    "q": "Heute lerne ich Deutsch.",
+    "options": ["Doğru", "Yanlış"],
+    "answer": "Doğru",
+    "explain": "TR: Bugün Almanca öğreniyorum."
+  },
+  {
+    "id": 12,
+    "q": "Ich komme aus Deutschland.",
+    "options": ["Doğru", "Yanlış"],
+    "answer": "Doğru",
+    "explain": "TR: Almanya’dan geliyorum."
+  },
+  {
+    "id": 13,
+    "q": "Wir lernt Deutsch.",
+    "options": ["Doğru", "Yanlış"],
+    "answer": "Yanlış",
+    "explain": "Wir lernen Deutsch.\n\nTR: Biz Almanca öğreniyoruz."
+  },
+  {
+    "id": 14,
+    "q": "Du bist hier.",
+    "options": ["Doğru", "Yanlış"],
+    "answer": "Doğru",
+    "explain": "TR: Sen buradasın."
+  },
+  {
+    "id": 15,
+    "q": "Er haben Zeit.",
+    "options": ["Doğru", "Yanlış"],
+    "answer": "Yanlış",
+    "explain": "Er hat Zeit.\n\nTR: Onun (erkek) zamanı var."
+  },
+  {
+    "id": 16,
+    "q": "Ich ___ Student. (sein)",
+    "options": ["bist", "bin", "sind"],
+    "answer": "bin",
+    "explain": "TR: Ben öğrenciyim."
+  },
+  {
+    "id": 17,
+    "q": "Du ___ hier. (sein)",
+    "options": ["bist", "bin", "ist"],
+    "answer": "bist",
+    "explain": "TR: Sen buradasın."
+  },
+  {
+    "id": 18,
+    "q": "Er ___ viel Arbeit. (haben)",
+    "options": ["haben", "hat", "hast"],
+    "answer": "hat",
+    "explain": "TR: Onun (erkek) çok işi var."
+  },
+  {
+    "id": 19,
+    "q": "Wir ___ Deutsch. (lernen)",
+    "options": ["lernt", "lernst", "lernen"],
+    "answer": "lernen",
+    "explain": "TR: Biz Almanca öğreniyoruz."
+  },
+  {
+    "id": 20,
+    "q": "Ihr ___ zu Hause. (sein)",
+    "options": ["seid", "sind", "bist"],
+    "answer": "seid",
+    "explain": "TR: Siz (çoğul) evdesiniz."
+  },
+  {
+    "id": 21,
+    "q": "Sie ___ in Berlin. (wohnen)",
+    "options": ["wohnt", "wohnen", "wohnst"],
+    "answer": "wohnen",
+    "explain": "TR: Onlar Berlin’de yaşıyor."
+  },
+  {
+    "id": 22,
+    "q": "Du ___ heute viel. (arbeiten)",
+    "options": ["arbeitet", "arbeite", "arbeitest"],
+    "answer": "arbeitest",
+    "explain": "TR: Sen bugün çok çalışıyorsun."
+  },
+  {
+    "id": 23,
+    "q": "Er ___ gern Kaffee. (trinken)",
+    "options": ["trinkt", "trinken", "trinke"],
+    "answer": "trinkt",
+    "explain": "TR: O (erkek) kahveyi severek içer."
+  },
+  {
+    "id": 24,
+    "q": "Wir ___ pünktlich. (kommen)",
+    "options": ["kommt", "kommen", "kommst"],
+    "answer": "kommen",
+    "explain": "TR: Biz dakik geliyoruz."
+  },
+  {
+    "id": 25,
+    "q": "Ihr ___ Deutsch. (sprechen)",
+    "options": ["sprecht", "spricht", "spreche"],
+    "answer": "sprecht",
+    "explain": "TR: Siz (çoğul) Almanca konuşuyorsunuz."
+  },
+  {
+    "id": 26,
+    "q": "Ich ___ ein Auto. (haben)",
+    "options": ["habe", "hast", "hat"],
+    "answer": "habe",
+    "explain": "TR: Benim bir arabam var."
+  },
+  {
+    "id": 27,
+    "q": "Du ___ sehr müde. (sein)",
+    "options": ["bin", "bist", "sind"],
+    "answer": "bist",
+    "explain": "TR: Sen çok yorgunsun."
+  },
+  {
+    "id": 28,
+    "q": "Er ___ nach Hause. (gehen)",
+    "options": ["gehe", "geht", "gehst"],
+    "answer": "geht",
+    "explain": "TR: O (erkek) eve gidiyor."
+  },
+  {
+    "id": 29,
+    "q": "Wir ___ Zeit. (haben)",
+    "options": ["habt", "hat", "haben"],
+    "answer": "haben",
+    "explain": "TR: Zamanımız var."
+  },
+  {
+    "id": 30,
+    "q": "Sie ___ Deutsch. (lernen)",
+    "options": ["lernt", "lernen", "lernst"],
+    "answer": "lernen",
+    "explain": "TR: Onlar Almanca öğreniyor."
+  }
+]

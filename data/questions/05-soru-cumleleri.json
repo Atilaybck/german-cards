@@ -3,90 +3,105 @@
     "id": 1,
     "q": "___ kommst du?",
     "options": ["Wo", "Wann", "Wer"],
-    "answer": "Wo"
+    "answer": "Wo",
+    "explain": "TR: Nereden geliyorsun?"
   },
   {
     "id": 2,
     "q": "___ lernst du?",
     "options": ["Wer", "Was", "Wo"],
-    "answer": "Was"
+    "answer": "Was",
+    "explain": "TR: Ne öğreniyorsun?"
   },
   {
     "id": 3,
     "q": "___ ist das?",
     "options": ["Was", "Wer", "Wie"],
-    "answer": "Wer"
+    "answer": "Wer",
+    "explain": "TR: Bu kim?"
   },
   {
     "id": 4,
     "q": "___ wohnst du?",
     "options": ["Wo", "Wann", "Wie"],
-    "answer": "Wo"
+    "answer": "Wo",
+    "explain": "TR: Nerede yaşıyorsun?"
   },
   {
     "id": 5,
     "q": "___ arbeitest du?",
     "options": ["Wie", "Wann", "Was"],
-    "answer": "Wann"
+    "answer": "Wann",
+    "explain": "TR: Ne zaman çalışıyorsun?"
   },
   {
     "id": 6,
     "q": "___ heißt du?",
     "options": ["Wie", "Wo", "Wer"],
-    "answer": "Wie"
+    "answer": "Wie",
+    "explain": "TR: Adın ne?"
   },
   {
     "id": 7,
     "q": "___ kostet das?",
     "options": ["Woher", "Wie viel", "Wann"],
-    "answer": "Wie viel"
+    "answer": "Wie viel",
+    "explain": "TR: Bu ne kadar?"
   },
   {
     "id": 8,
     "q": "___ kommst du?",
     "options": ["Woher", "Wo", "Was"],
-    "answer": "Woher"
+    "answer": "Woher",
+    "explain": "TR: Nerelisin?"
   },
   {
     "id": 9,
     "q": "Kommst du heute?",
     "options": ["Evet / Hayır sorusu", "W-soru"],
-    "answer": "Evet / Hayır sorusu"
+    "answer": "Evet / Hayır sorusu",
+    "explain": "TR: Bugün geliyor musun?"
   },
   {
     "id": 10,
     "q": "Arbeitest du hier?",
     "options": ["Evet / Hayır sorusu", "W-soru"],
-    "answer": "Evet / Hayır sorusu"
+    "answer": "Evet / Hayır sorusu",
+    "explain": "TR: Burada mı çalışıyorsun?"
   },
   {
     "id": 11,
     "q": "Ist er Student?",
     "options": ["Evet / Hayır sorusu", "W-soru"],
-    "answer": "Evet / Hayır sorusu"
+    "answer": "Evet / Hayır sorusu",
+    "explain": "TR: O öğrenci mi?"
   },
   {
     "id": 12,
     "q": "Hast du Zeit?",
     "options": ["Evet / Hayır sorusu", "W-soru"],
-    "answer": "Evet / Hayır sorusu"
+    "answer": "Evet / Hayır sorusu",
+    "explain": "TR: Zamanın var mı?"
   },
   {
     "id": 13,
     "q": "Wo arbeitest du?",
     "options": ["Evet / Hayır sorusu", "W-soru"],
-    "answer": "W-soru"
+    "answer": "W-soru",
+    "explain": "TR: Nerede çalışıyorsun?"
   },
   {
     "id": 14,
     "q": "Was lernst du?",
     "options": ["Evet / Hayır sorusu", "W-soru"],
-    "answer": "W-soru"
+    "answer": "W-soru",
+    "explain": "TR: Ne öğreniyorsun?"
   },
   {
     "id": 15,
     "q": "Wie geht es dir?",
     "options": ["Evet / Hayır sorusu", "W-soru"],
-    "answer": "W-soru"
+    "answer": "W-soru",
+    "explain": "TR: Nasılsın?"
   }
 ]

@@ -1,0 +1,107 @@
+[
+  {
+    "id": 1,
+    "q": "Ich ___ Deutsch.",
+    "options": ["lerne", "lernst", "lernt"],
+    "answer": "lerne",
+    "explain": "TR: Ben Almanca öğreniyorum."
+  },
+  {
+    "id": 2,
+    "q": "Heute ___ ich Deutsch.",
+    "options": ["lerne", "lernst", "lernt"],
+    "answer": "lerne",
+    "explain": "TR: Bugün Almanca öğreniyorum."
+  },
+  {
+    "id": 3,
+    "q": "Wir ___ aus Türkiye.",
+    "options": ["kommen", "kommt", "kommst"],
+    "answer": "kommen",
+    "explain": "TR: Biz Türkiye’den geliyoruz.\n\naus = -den / -dan / -ten / -tan"
+  },
+  {
+    "id": 4,
+    "q": "Morgen ___ ich.",
+    "options": ["komme", "kommst", "kommt"],
+    "answer": "komme",
+    "explain": "TR: Yarın geliyorum."
+  },
+  {
+    "id": 5,
+    "q": "Er ___ Zeit.",
+    "options": ["hat", "haben", "hast"],
+    "answer": "hat",
+    "explain": "TR: Onun (erkek) zamanı var."
+  },
+  {
+    "id": 6,
+    "q": "Heute ___ er Zeit.",
+    "options": ["hat", "haben", "hast"],
+    "answer": "hat",
+    "explain": "TR: Bugün onun zamanı var."
+  },
+  {
+    "id": 7,
+    "q": "Zu Hause ___ ich.",
+    "options": ["arbeite", "arbeitest", "arbeitet"],
+    "answer": "arbeite",
+    "explain": "TR: Evde çalışıyorum."
+  },
+  {
+    "id": 8,
+    "q": "Wir ___ heute Unterricht.",
+    "options": ["haben", "hat", "habt"],
+    "answer": "haben",
+    "explain": "TR: Bugün dersimiz var."
+  },
+  {
+    "id": 9,
+    "q": "Jetzt ___ ich.",
+    "options": ["komme", "kommst", "kommt"],
+    "answer": "komme",
+    "explain": "TR: Şimdi geliyorum."
+  },
+  {
+    "id": 10,
+    "q": "In Berlin ___ ich.",
+    "options": ["wohne", "wohnt", "wohnst"],
+    "answer": "wohne",
+    "explain": "TR: Berlin’de yaşıyorum."
+  },
+  {
+    "id": 11,
+    "q": "Heute ich lerne Deutsch.",
+    "options": ["Doğru", "Yanlış"],
+    "answer": "Yanlış",
+    "explain": "Doğrusu:\n👉Heute lerne ich Deutsch.\n\nTR: Bugün Almanca öğreniyorum."
+  },
+  {
+    "id": 12,
+    "q": "Morgen arbeite ich.",
+    "options": ["Doğru", "Yanlış"],
+    "answer": "Doğru",
+    "explain": "TR: Yarın çalışıyorum."
+  },
+  {
+    "id": 13,
+    "q": "Zu Hause ich arbeite.",
+    "options": ["Doğru", "Yanlış"],
+    "answer": "Yanlış",
+    "explain": "TR: Evde çalışıyorum."
+  },
+  {
+    "id": 14,
+    "q": "Hier ist ein Café.",
+    "options": ["Doğru", "Yanlış"],
+    "answer": "Doğru",
+    "explain": "TR: Burada bir kafe var."
+  },
+  {
+    "id": 15,
+    "q": "Heute lerne ich Deutsch.",
+    "options": ["Doğru", "Yanlış"],
+    "answer": "Doğru",
+    "explain": "TR: Bugün Almanca öğreniyorum."
+  }
+]

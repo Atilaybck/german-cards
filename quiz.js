@@ -24,14 +24,27 @@ const QUIZ_FILES_KEY = "quizSelectedFiles";
 
 // mevcut questions dosyaları (buraya yenilerini ekleyebilirsin)
 const QUIZ_FILES = [
-  { id: "questions3", label: "3", path: "data/questions/questions3.json" },
-  { id: "questions4", label: "4", path: "data/questions/questions4.json" },
-  { id: "questions5", label: "5", path: "data/questions/questions5.json" },
-  { id: "questions6", label: "6", path: "data/questions/questions6.json" },
-  { id: "questions7", label: "7", path: "data/questions/questions7.json" },
-  { id: "questions8", label: "8", path: "data/questions/questions8.json" },
+  {
+    id: "q03",
+    label: "3. Fiiller – Präsens (Şimdiki Zaman)",
+    path: "data/questions/03-verbs-present.json",
+  },
+  {
+    id: "q04",
+    label: "4. Cümle Yapısı",
+    path: "data/questions/04-cumle-yapisi.json",
+  },
+  {
+    id: "q05",
+    label: "5. Soru Cümleleri",
+    path: "data/questions/05-soru-cumleleri.json",
+  },
+  {
+    id: "q06",
+    label: "6. Olumsuzluk (nicht / kein)",
+    path: "data/questions/06-olumsuzluk.json",
+  },
 ];
-
 
 function getSelectedQuizFiles() {
   const arr = JSON.parse(localStorage.getItem(QUIZ_FILES_KEY) || "[]");
@@ -62,7 +75,8 @@ function buildQuizFilesUI() {
     cb.checked = selected.has(f.id);
 
     const txt = document.createElement("span");
-    txt.textContent = `questions${f.label}.json`;
+    // ✅ Dosya adı gibi değil, başlığı göster
+    txt.textContent = f.label;
 
     row.append(cb, txt);
     quizFilesList.appendChild(row);
@@ -181,6 +195,21 @@ function attachSwipe(el) {
   );
 }
 
+// ✅ explain içeriğini doğru şekilde bas (HTML gelirse bozmadan)
+function applyExplain(explainBox, quizTop) {
+  const ex = quizTop && quizTop.explain != null ? quizTop.explain : "";
+  const s = String(ex || "").trim();
+  if (!s) {
+    explainBox.hidden = true;
+    explainBox.innerHTML = "";
+    return;
+  }
+
+  // JSON'da <br> vs varsa gösterelim; yoksa düz metin gibi durur zaten.
+  explainBox.innerHTML = s;
+  explainBox.hidden = false;
+}
+
 function renderQuizCard() {
   container.innerHTML = "";
   container.classList.add("quiz-mode");
@@ -231,6 +260,11 @@ function renderQuizCard() {
 
   const correct = String(quizTop.answer || "").trim();
 
+  // ✅ açıklama alanı (cevaplanınca / geri dönünce gösterilecek)
+  const explainBox = document.createElement("div");
+  explainBox.className = "quiz-explain";
+  explainBox.hidden = true;
+
   (quizTop.options || []).forEach((optText) => {
     const btn = document.createElement("button");
     btn.className = "quiz-opt";
@@ -254,6 +288,9 @@ function renderQuizCard() {
 
       // yanlışsa seçtiğini kırmızı yap
       if (picked !== correct) btn.classList.add("wrong");
+
+      // ✅ explain göster
+      applyExplain(explainBox, quizTop);
     };
 
     opts.appendChild(btn);
@@ -269,8 +306,12 @@ function renderQuizCard() {
       if (txt === saved.picked && saved.picked !== saved.correct)
         b.classList.add("wrong");
     });
+
+    // ✅ geri dönünce explain de göster
+    applyExplain(explainBox, quizTop);
   } else {
     quizLocked = false;
+    explainBox.hidden = true;
   }
 
   const footer = document.createElement("div");
@@ -287,7 +328,7 @@ function renderQuizCard() {
 
   footer.append(meta, next);
 
-  wrap.append(progressContainer, q, opts, footer);
+  wrap.append(progressContainer, q, opts, explainBox, footer);
   container.appendChild(wrap);
 }
 
@@ -326,8 +367,10 @@ function renderQuiz() {
 
     if (!quizTotalCount) {
       if (!quizControls.querySelector("#quizHint")) {
-        quizControls.insertAdjacentHTML('afterbegin',
-          "<p id='quizHint' style='text-align:center;font-weight:700;opacity:.85;margin-bottom:10px'>Dosya seç (Dosyalar butonundan).</p>");
+        quizControls.insertAdjacentHTML(
+          "afterbegin",
+          "<p id='quizHint' style='text-align:center;font-weight:700;opacity:.85;margin-bottom:10px'>Dosya seç (Dosyalar butonundan).</p>"
+        );
       }
       return;
     }

@@ -1,0 +1,112 @@
+[
+  {
+    "id": 1,
+    "q": "Ich habe ___ Zeit.",
+    "options": ["nicht", "keine", "kein"],
+    "answer": "keine",
+    "explain": "Açıklama (kısa):\n\nZeit → artikeli die\n\nCümlede “zamanım yok” deniyor → isim + artikel var\n\n📌 die → keine\n\nBu yüzden doğru cevap b) keine ✅"
+  },
+  {
+    "id": 2,
+    "q": "Ich lerne ___ Deutsch.",
+    "options": ["kein", "keine", "nicht"],
+    "answer": "nicht",
+    "explain": "Açıklama (kısa):\n\nDeutsch → artikel almaz (özel isim / dil)\n\nİsim + artikel yok\n\n📌 Bu yüzden kein / keine kullanılmaz, nicht kullanılır."
+  },
+  {
+    "id": 3,
+    "q": "Das ist ___ Problem.",
+    "options": ["nicht", "kein", "keine"],
+    "answer": "kein",
+    "explain": "Açıklama (kısa):\n\nProblem → artikeli das\n\nCümlede “bir problem değil” deniyor\n\n📌 das / ein → kein\n\nBu yüzden doğru cevap b) kein ✅"
+  },
+  {
+    "id": 4,
+    "q": "Wir haben ___ Auto.",
+    "options": ["nicht", "kein", "keine"],
+    "answer": "kein",
+    "explain": "Açıklama (kısa):\n\nAuto → artikeli das\n\nCümlede “araba yok” deniyor\n\n📌 das / ein → kein\n\nBu yüzden doğru cevap b) kein ✅"
+  },
+  {
+    "id": 5,
+    "q": "Er ist ___ müde.",
+    "options": ["kein", "keine", "nicht"],
+    "answer": "nicht",
+    "explain": "Açıklama (kısa):\n\nmüde → sıfat (isim değil)\n\nArtikel yok\n\n📌 Sıfatlar nicht ile olumsuz yapılır\n\nBu yüzden doğru cevap c) nicht ✅"
+  },
+  {
+    "id": 6,
+    "q": "Ich arbeite ___ heute.",
+    "options": ["kein", "keine", "nicht"],
+    "answer": "nicht",
+    "explain": "Açıklama (kısa):\n\narbeite → fiil\n\nİsim + artikel yok\n\n📌 Fiiller nicht ile olumsuz yapılır\n\nBu yüzden doğru cevap c) nicht ✅"
+  },
+  {
+    "id": 7,
+    "q": "Sie hat ___ Schwester.",
+    "options": ["nicht", "keine", "kein"],
+    "answer": "keine",
+    "explain": "Açıklama (kısa):\n\nSchwester → artikeli die\n\nCümlede “kız kardeşi yok” deniyor\n\n📌 die / eine → keine\n\nBu yüzden doğru cevap b) keine ✅"
+  },
+  {
+    "id": 8,
+    "q": "Das ist ___ gut.",
+    "options": ["kein", "keine", "nicht"],
+    "answer": "nicht",
+    "explain": "Açıklama (kısa):\n\ngut → sıfat\n\nArtikel yok\n\n📌 Sıfatlar nicht ile olumsuz yapılır\n\nBu yüzden doğru cevap c) nicht ✅"
+  },
+  {
+    "id": 9,
+    "q": "Wir haben ___ Freunde hier.",
+    "options": ["kein", "keine", "nicht"],
+    "answer": "keine",
+    "explain": "Açıklama (kısa):\n\nFreunde → çoğul (die Freunde)\n\nCümlede “arkadaş yok” deniyor\n\n📌 çoğul → keine\n\nBu yüzden doğru cevap b) keine ✅"
+  },
+  {
+    "id": 10,
+    "q": "Ich komme ___ aus Berlin.",
+    "options": ["kein", "keine", "nicht"],
+    "answer": "nicht",
+    "tr": "Berlin’den gelmiyorum.",
+    "explain": "Açıklama (kısa):\n\nkommen aus → fiil + edat yapısı\n\nİsim + artikel yok\n\n📌 Fiil / yapı olumsuzluğu nicht ile yapılır\n\nBu yüzden doğru cevap c) nicht ✅"
+  },
+  {
+    "id": 11,
+    "q": "Er hat ___ Arbeit.",
+    "options": ["nicht", "keine", "kein"],
+    "answer": "keine",
+    "explain": "Açıklama (kısa):\n\nArbeit → artikeli die\n\nCümlede “işi yok” deniyor\n\n📌 die / eine → keine\n\nBu yüzden doğru cevap b) keine ✅"
+  },
+  {
+    "id": 12,
+    "q": "Das ist ___ teuer.",
+    "options": ["kein", "keine", "nicht"],
+    "answer": "nicht",
+    "tr": "Bu pahalı değil.",
+    "explain": "Açıklama (kısa):\n\nteuer → sıfat\n\nArtikel yok\n\n📌 Sıfatlar nicht ile olumsuz yapılır\n\nBu yüzden doğru cevap c) nicht ✅"
+  },
+  {
+    "id": 13,
+    "q": "Ich habe ___ Bruder.",
+    "options": ["nicht", "keinen", "keine"],
+    "answer": "keinen",
+    "tr": "Erkek kardeşim yok.",
+    "explain": "Açıklama (kısa):\n\nBruder → artikeli der\n\nCümlede “erkek kardeş yok” deniyor\n\nhaben fiilinden sonra Akkusativ olur\n\n📌 der / ein → keinen\n\nBu yüzden doğru cevap b) keinen ✅"
+  },
+  {
+    "id": 14,
+    "q": "Wir lernen ___ Deutsch.",
+    "options": ["kein", "keine", "nicht"],
+    "answer": "nicht",
+    "tr": "Almanca öğrenmiyoruz.",
+    "explain": "Açıklama (kısa):\n\nDeutsch → dil adı, artikel almaz\n\nİsim + artikel yok\n\n📌 Bu yüzden kein / keine kullanılmaz, nicht kullanılır\n\nDoğru cevap c) nicht ✅"
+  },
+  {
+    "id": 15,
+    "q": "Sie ist ___ hier.",
+    "options": ["kein", "keine", "nicht"],
+    "answer": "nicht",
+    "tr": "O burada değil.",
+    "explain": "Açıklama (kısa):\n\nhier → zarf (yer bildirir)\n\nİsim + artikel yok\n\n📌 Zarflar nicht ile olumsuz yapılır\n\nBu yüzden doğru cevap c) nicht ✅"
+  }
+]
