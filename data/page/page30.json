@@ -1,0 +1,77 @@
+[
+    {
+        "de": "der Kunde",
+        "tr": "müşteri",
+        "oku": "der kundı"
+    },
+    {
+        "de": "verdienen",
+        "tr": "kazanmak",
+        "oku": "ferdiynın"
+    },
+    {
+        "de": "unterschreiben",
+        "tr": "imzalamak",
+        "oku": "untır-şraybın"
+    },
+    {
+        "de": "prüfen",
+        "tr": "kontrol etmek",
+        "oku": "prüfın"
+    },
+    {
+        "de": "teilnehmen",
+        "tr": "katılmak",
+        "oku": "tayl-neymın"
+    },
+    {
+        "de": "helfen",
+        "tr": "yardım etmek",
+        "oku": "helfın"
+    },
+    {
+        "de": "kaufen",
+        "tr": "satın almak",
+        "oku": "kaufın"
+    },
+    {
+        "de": "verkaufen",
+        "tr": "satmak",
+        "oku": "fer-kaufın"
+    },
+    {
+        "de": "bezahlen",
+        "tr": "ödemek",
+        "oku": "betsalın"
+    },
+    {
+        "de": "die Entschuldigung",
+        "tr": "özür",
+        "oku": "di ent-şuldigung"
+    },
+    {
+        "de": "die Zeit",
+        "tr": "zaman",
+        "oku": "di tsayt"
+    },
+    {
+        "de": "die Stunde",
+        "tr": "saat",
+        "oku": "di ştundı"
+    },
+    {
+        "de": "die Minute",
+        "tr": "dakika",
+        "oku": "di minutı"
+    },
+    {
+        "de": "der Tag",
+        "tr": "gün",
+        "oku": "der tak"
+    },
+    {
+        "de": "die Woche",
+        "tr": "hafta",
+        "oku": "di vohı"
+    }
+]

@@ -11,7 +11,7 @@ let currentPage = 1;
 let showUnlearned = false;
 let showRandom = false;
 let showQuiz = false;
-const totalPages = 25;
+const totalPages = 30;
 
 const getLS = (key) => JSON.parse(localStorage.getItem(key) || "[]");
 const setLS = (key, val) => localStorage.setItem(key, JSON.stringify(val));
@@ -119,7 +119,7 @@ function updateStrike() {
 
         if (visible.length === 0) btn.classList.add("completed");
       })
-      .catch(() => {});
+      .catch(() => { });
   });
 }
 
