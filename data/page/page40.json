@@ -1,0 +1,77 @@
+[
+    {
+        "de": "der LKW",
+        "tr": "kamyon",
+        "oku": "der el-ka-ve"
+    },
+    {
+        "de": "die U-Bahn",
+        "tr": "metro",
+        "oku": "di u-baan"
+    },
+    {
+        "de": "die S-Bahn",
+        "tr": "banliyö treni",
+        "oku": "di es-baan"
+    },
+    {
+        "de": "die Fähre",
+        "tr": "feribot",
+        "oku": "di fey-rı"
+    },
+    {
+        "de": "das Flugzeug",
+        "tr": "uçak",
+        "oku": "das fluk-tsoyk"
+    },
+    {
+        "de": "der Flughafen",
+        "tr": "havaalanı",
+        "oku": "der fluk-ha-fın"
+    },
+    {
+        "de": "der Bahnhof",
+        "tr": "tren istasyonu",
+        "oku": "der baan-hof"
+    },
+    {
+        "de": "die Bushaltestelle",
+        "tr": "otobüs durağı",
+        "oku": "di bus-hal-te-ştel-le"
+    },
+    {
+        "de": "das Ticket",
+        "tr": "bilet",
+        "oku": "das tikıt"
+    },
+    {
+        "de": "die Fahrkarte",
+        "tr": "yolculuk bileti",
+        "oku": "di faar-kar-tı"
+    },
+    {
+        "de": "der Ausflug",
+        "tr": "gezi",
+        "oku": "der aus-fluk"
+    },
+    {
+        "de": "die Reise",
+        "tr": "seyahat",
+        "oku": "di ray-zı"
+    },
+    {
+        "de": "das Gepäck",
+        "tr": "bagaj",
+        "oku": "das ge-pek"
+    },
+    {
+        "de": "der Koffer",
+        "tr": "valiz",
+        "oku": "der kof-fır"
+    },
+    {
+        "de": "die Verspätung",
+        "tr": "gecikme",
+        "oku": "di fer-şpey-tung"
+    }
+]

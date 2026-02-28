@@ -1,0 +1,77 @@
+[
+    {
+        "de": "orange",
+        "tr": "turuncu",
+        "oku": "oran-ji"
+    },
+    {
+        "de": "lila",
+        "tr": "mor",
+        "oku": "lila"
+    },
+    {
+        "de": "bunt",
+        "tr": "renkli",
+        "oku": "bunt"
+    },
+    {
+        "de": "hellblau",
+        "tr": "açık mavi",
+        "oku": "hel-blau"
+    },
+    {
+        "de": "dunkelgrün",
+        "tr": "koyu yeşil",
+        "oku": "dun-kıl-grün"
+    },
+    {
+        "de": "riesig",
+        "tr": "kocaman",
+        "oku": "riy-zih"
+    },
+    {
+        "de": "winzig",
+        "tr": "küçücük",
+        "oku": "vin-tsih"
+    },
+    {
+        "de": "breit",
+        "tr": "geniş",
+        "oku": "brayt"
+    },
+    {
+        "de": "schmal",
+        "tr": "dar",
+        "oku": "şmal"
+    },
+    {
+        "de": "dick",
+        "tr": "kalın/şişman",
+        "oku": "dik"
+    },
+    {
+        "de": "dünn",
+        "tr": "ince/zayıf",
+        "oku": "dün"
+    },
+    {
+        "de": "hart",
+        "tr": "sert",
+        "oku": "hart"
+    },
+    {
+        "de": "weich",
+        "tr": "yumuşak",
+        "oku": "vaih"
+    },
+    {
+        "de": "ruhig",
+        "tr": "sakin",
+        "oku": "ru-ih"
+    },
+    {
+        "de": "laut",
+        "tr": "gürültülü",
+        "oku": "laut"
+    }
+]
