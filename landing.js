@@ -11,7 +11,7 @@ let currentPage = 1;
 let showUnlearned = false;
 let showRandom = false;
 let showQuiz = false;
-const totalPages = 30;
+const totalPages = 40;
 
 const getLS = (key) => JSON.parse(localStorage.getItem(key) || "[]");
 const setLS = (key, val) => localStorage.setItem(key, JSON.stringify(val));
