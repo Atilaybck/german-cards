@@ -25,19 +25,9 @@
         "oku": "der artst"
     },
     {
-        "de": "hören",
-        "tr": "duymak",
-        "oku": "hörın"
-    },
-    {
         "de": "sehen",
         "tr": "görmek",
         "oku": "zeyın"
-    },
-    {
-        "de": "lesen",
-        "tr": "okumak",
-        "oku": "leyzın"
     },
     {
         "de": "schreiben",
@@ -73,5 +63,15 @@
         "de": "der Mund",
         "tr": "ağız",
         "oku": "der munt"
+    },
+    {
+    "de": "die Nase",
+    "tr": "burun",
+    "oku": "di nazı"
+    },
+    {
+    "de": "das Herz",
+    "tr": "kalp",
+    "oku": "das herts"
     }
 ]

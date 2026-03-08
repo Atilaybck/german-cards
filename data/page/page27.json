@@ -25,26 +25,6 @@
         "oku": "imır"
     },
     {
-        "de": "das Brot",
-        "tr": "ekmek",
-        "oku": "das brot"
-    },
-    {
-        "de": "die Milch",
-        "tr": "süt",
-        "oku": "di milh"
-    },
-    {
-        "de": "das Wasser",
-        "tr": "su",
-        "oku": "das vasır"
-    },
-    {
-        "de": "der Kaffee",
-        "tr": "kahve",
-        "oku": "der kafey"
-    },
-    {
         "de": "der Tee",
         "tr": "çay",
         "oku": "der tey"
@@ -55,23 +35,43 @@
         "oku": "das opst"
     },
     {
-        "de": "das Gemüse",
-        "tr": "sebze",
-        "oku": "das gemüzı"
+    "de": "die Meinung",
+    "tr": "görüş",
+    "oku": "di maynung"
     },
     {
-        "de": "der Apfel",
-        "tr": "elma",
-        "oku": "der apfıl"
+    "de": "die Verantwortung",
+    "tr": "sorumluluk",
+    "oku": "di ferantvortung"
     },
     {
-        "de": "die Banane",
-        "tr": "muz",
-        "oku": "di bananır"
+    "de": "der Vorteil",
+    "tr": "avantaj",
+    "oku": "der for-tayl"
     },
     {
-        "de": "das Fleisch",
-        "tr": "et",
-        "oku": "das flayş"
+    "de": "der Nachteil",
+    "tr": "dezavantaj",
+    "oku": "der nah-tayl"
+    },
+    {
+    "de": "möglich",
+    "tr": "mümkün",
+    "oku": "möğlih"
+    },
+    {
+    "de": "erklären",
+    "tr": "açıklamak",
+    "oku": "erkleyren"
+    },
+    {
+    "de": "vergleichen",
+    "tr": "karşılaştırmak",
+    "oku": "ferglayhın"
+    },
+    {
+    "de": "benutzen",
+    "tr": "kullanmak",
+    "oku": "benutsın"
     }
 ]

@@ -25,53 +25,53 @@
         "oku": "das tsimır"
     },
     {
-        "de": "essen",
-        "tr": "yemek yemek",
-        "oku": "esın"
-    },
-    {
-        "de": "trinken",
-        "tr": "içmek",
-        "oku": "trinkın"
-    },
-    {
-        "de": "schlafen",
-        "tr": "uyumak",
-        "oku": "şlafın"
-    },
-    {
-        "de": "gehen",
-        "tr": "gitmek",
-        "oku": "geyın"
-    },
-    {
-        "de": "kommen",
-        "tr": "gelmek",
-        "oku": "komın"
-    },
-    {
         "de": "laufen",
         "tr": "koşmak",
         "oku": "laufın"
     },
     {
-        "de": "fahren",
-        "tr": "sürmek/gitmek",
-        "oku": "faarın"
+    "de": "die Familie",
+    "tr": "aile",
+    "oku": "di familye"
     },
     {
-        "de": "fliegen",
-        "tr": "uçmak",
-        "oku": "fliygın"
+    "de": "der Weg",
+    "tr": "yol",
+    "oku": "der veek"
     },
     {
-        "de": "schwimmen",
-        "tr": "yüzmek",
-        "oku": "şvimın"
+    "de": "das Ziel",
+    "tr": "hedef",
+    "oku": "das tsiil"
     },
     {
-        "de": "tanzen",
-        "tr": "dans etmek",
-        "oku": "tantsın"
+    "de": "das Beispiel",
+    "tr": "örnek",
+    "oku": "das bayşpil"
+    },
+    {
+    "de": "denken",
+    "tr": "düşünmek",
+    "oku": "denkın"
+    },
+    {
+    "de": "die Entscheidung",
+    "tr": "karar",
+    "oku": "di entşaydung"
+    },
+    {
+    "de": "die Möglichkeit",
+    "tr": "olasılık",
+    "oku": "di möglih-kayt"
+    },
+    {
+    "de": "die Entwicklung",
+    "tr": "gelişim",
+    "oku": "di entviklung"
+    },
+    {
+    "de": "der Versuch",
+    "tr": "deneme",
+    "oku": "der fersuh"
     }
 ]
