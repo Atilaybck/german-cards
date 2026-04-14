@@ -69,16 +69,20 @@
 }
 
 /* ===============================
-   ✅ RANDOM CONTROLS (Dosyalar)
-   🔑 SADECE hidden=false iken görünür
+   Hidden fix
 ================================ */
-
-/* hidden ise ASLA görünmez */
-#randomControls[hidden] {
+#randomControls[hidden],
+#quizControls[hidden],
+#sentencesControls[hidden],
+#randomPagesPopover[hidden],
+#quizFilesPopover[hidden],
+#sentencesPagesPopover[hidden] {
   display: none !important;
 }
 
-/* random-controls class shared by both random and quiz */
+/* ===============================
+   ✅ RANDOM / QUIZ / SENTENCES CONTROLS
+================================ */
 .random-controls {
   display: flex;
   flex-direction: column;
@@ -90,30 +94,9 @@
   z-index: 50;
 }
 
-/* normalde görünür (JS kontrol ediyor) */
-#randomControls {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
-  margin-top: 0 !important;
-  position: sticky;
-  top: 12px;
-  z-index: 50;
-}
-
-/* ===============================
-   ✅ QUIZ CONTROLS
-   🔑 SADECE hidden=false iken görünür
-================================ */
-
-/* hidden ise ASLA görünmez */
-#quizControls[hidden] {
-  display: none !important;
-}
-
-/* normalde görünür (JS kontrol ediyor) */
-#quizControls {
+#randomControls,
+#quizControls,
+#sentencesControls {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -139,7 +122,6 @@
   backdrop-filter: blur(10px);
   z-index: 60;
   max-height: calc(100vh - 140px);
-  /* üstten/ alttan pay bırak */
   overflow-y: auto;
 }
 

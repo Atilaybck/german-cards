@@ -8,21 +8,27 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap"
+    rel="stylesheet"
+  />
 
   <link rel="stylesheet" href="landing.css" />
   <link rel="stylesheet" href="random.css" />
   <link rel="stylesheet" href="quiz.css" />
+  <link rel="stylesheet" href="sentences.css" />
 
   <script src="landing.js" defer></script>
   <script src="random.js" defer></script>
   <script src="quiz.js" defer></script>
+  <script src="sentences.js" defer></script>
 </head>
 
 <body>
   <div class="app-container">
     <header>
       <h1>🇩🇪</h1>
+
       <div class="controls">
         <button id="reset" class="action-btn danger">Sıfırla</button>
         <button id="unlearnedBtn" class="action-btn warning">
@@ -30,18 +36,19 @@
         </button>
         <button id="randomBtn" class="action-btn success">Rastgele</button>
         <button id="quizBtn" class="action-btn success">Sorular</button>
+        <button id="sentencesBtn" class="action-btn success">Cümleler</button>
       </div>
     </header>
 
     <main>
-      <!-- Sayfa düğmelerinin ekleneceği alan -->
+      <!-- Sayfa düğmeleri -->
       <section id="paginationSection" class="pagination-section">
         <div id="pageButtons" class="pagination-grid"></div>
       </section>
 
-      <!-- Kartların geleceği alan -->
+      <!-- Kart alanı -->
       <section class="cards-section">
-        <!-- ✅ Random mod: dosya seçme -->
+        <!-- Random mod -->
         <div id="randomControls" class="random-controls" hidden>
           <button id="randomPagesBtn" class="action-btn">Dosyalar</button>
 
@@ -53,13 +60,25 @@
           </div>
         </div>
 
-        <!-- ✅ Quiz mod: dosya seçme -->
+        <!-- Quiz mod -->
         <div id="quizControls" class="random-controls" hidden>
           <button id="quizFilesBtn" class="action-btn">Dosyalar</button>
 
           <div id="quizFilesPopover" class="pages-popover" hidden>
             <div id="quizFilesList" class="pages-list"></div>
             <button id="applyQuizFiles" class="pages-apply">
+              Seçimleri Yükle
+            </button>
+          </div>
+        </div>
+
+        <!-- Sentences mod -->
+        <div id="sentencesControls" class="random-controls" hidden>
+          <button id="sentencesPagesBtn" class="action-btn">Dosyalar</button>
+
+          <div id="sentencesPagesPopover" class="pages-popover" hidden>
+            <div id="sentencesPagesList" class="pages-list"></div>
+            <button id="applySentencesPages" class="pages-apply">
               Seçimleri Yükle
             </button>
           </div>

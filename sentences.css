@@ -1,0 +1,245 @@
+/* sentences.css */
+
+/* ===============================
+   Sentences View (stacked cards)
+================================ */
+#cards.sentences-mode.random-mode {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 0 !important;
+  min-height: 420px;
+  position: relative;
+}
+
+/* sentences mode: kart alanı */
+#cards.sentences-mode .card {
+  width: 260px;
+  max-width: 100%;
+  height: 300px;
+  touch-action: pan-y;
+}
+
+/* alttaki kart default gizli */
+#cards.sentences-mode .card.card-next {
+  position: absolute;
+  transform: translateY(14px) scale(0.96);
+  opacity: 0;
+  visibility: hidden;
+  z-index: 1;
+  transition: transform 0.22s ease, opacity 0.22s ease;
+}
+
+/* swipe sırasında alttaki kart hafif görünsün */
+#cards.sentences-mode.swiping-stack .card.card-next {
+  opacity: 0.35;
+  visibility: visible;
+}
+
+/* üst kart */
+#cards.sentences-mode .card.card-top {
+  position: absolute;
+  z-index: 2;
+}
+
+/* swipe bitince alttaki kart yukarı gelsin */
+#cards.sentences-mode .card.card-next.reveal {
+  transform: translateY(0px) scale(1);
+  opacity: 1;
+  visibility: visible;
+}
+
+/* ===============================
+   Sentence card text
+================================ */
+.sentence-card .inner {
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+  position: relative;
+  box-shadow: var(--shadow-md);
+  border-radius: var(--radius-lg);
+}
+
+.sentence-card:hover .inner {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-4px);
+}
+
+.sentence-card.flipped .inner {
+  transform: rotateY(180deg);
+}
+
+.sentence-card .side {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 18px;
+  text-align: center;
+  border-radius: var(--radius-lg);
+  backface-visibility: hidden;
+  border: 1px solid #e2e8f0;
+}
+
+.sentence-card .front {
+  font-size: 1rem;
+  line-height: 1.5;
+  text-align: center;
+  word-break: break-word;
+  font-weight: 600;
+  color: var(--color-text-main);
+  background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%);
+}
+
+.sentence-card .back {
+  transform: rotateY(180deg);
+  font-size: 0.95rem;
+  line-height: 1.45;
+  text-align: center;
+  word-break: break-word;
+  background: #f0fdf4;
+  color: #15803d;
+}
+
+.sentence-card .back span {
+  margin-top: 8px;
+  display: block;
+  font-size: 0.9rem;
+  color: #64748b !important;
+}
+
+/* ===============================
+   Tick / Cross Buttons
+================================ */
+.sentence-card .tick,
+.sentence-card .unlearn {
+  position: absolute;
+  top: -10px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  box-shadow: var(--shadow-md);
+  transition: transform 0.2s;
+}
+
+.sentence-card .tick:hover,
+.sentence-card .unlearn:hover {
+  transform: scale(1.1);
+}
+
+.sentence-card .tick {
+  right: -10px;
+  background: var(--color-success);
+  color: white;
+}
+
+.sentence-card .unlearn {
+  left: -10px;
+  background: var(--color-warning);
+  color: white;
+}
+
+/* ===============================
+   Hidden fix
+================================ */
+#sentencesControls[hidden],
+#sentencesPagesPopover[hidden] {
+  display: none !important;
+}
+
+/* ===============================
+   SENTENCES CONTROLS
+================================ */
+#sentencesControls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-top: 0 !important;
+  position: sticky;
+  top: 12px;
+  z-index: 50;
+}
+
+/* ===============================
+   🔥 DOSYALAR BUTONU (Sadece sentences)
+================================ */
+#sentencesPagesBtn {
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  color: white;
+  font-weight: 600;
+}
+
+#sentencesPagesBtn:hover {
+  filter: brightness(1.1);
+}
+
+/* ===============================
+   Sentences popover
+================================ */
+#sentencesPagesPopover {
+  position: absolute;
+  top: 100px;
+  width: 260px;
+  background: rgba(15, 23, 42, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  padding: 14px;
+  box-shadow: var(--shadow-lg);
+  backdrop-filter: blur(10px);
+  z-index: 60;
+  max-height: calc(100vh - 140px);
+  overflow-y: auto;
+}
+
+#sentencesPagesList {
+  display: grid;
+  gap: 10px;
+  padding: 8px 6px 14px;
+  max-height: calc(100vh - 320px);
+  overflow-y: auto;
+  padding-right: 6px;
+}
+
+#sentencesPagesList .page-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #e2e8f0;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+#sentencesPagesList .page-row input {
+  width: 18px;
+  height: 18px;
+  accent-color: #38bdf8;
+}
+
+#applySentencesPages {
+  width: 100%;
+  border: none;
+  border-radius: 12px;
+  padding: 12px 14px;
+  font-family: var(--font-main);
+  font-weight: 700;
+  cursor: pointer;
+  background: rgba(2, 6, 23, 0.65);
+  color: #e2e8f0;
+  box-shadow: var(--shadow-md);
+}
+
+#applySentencesPages:hover {
+  filter: brightness(1.08);
+}

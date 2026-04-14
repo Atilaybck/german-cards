@@ -13,7 +13,7 @@ const RANDOM_PAGES_KEY = "randomSelectedPages";
 // ✅ Random progress
 const RANDOM_PROGRESS_KEY = "randomProgress"; // { sig: "1,2,3", seen: 0, total: 60 }
 
-// ✅ Random "deck" state (flicker fix)
+// ✅ Random "deck" state
 const randomDeck = {
   sig: "",
   selectedPages: [],
@@ -28,17 +28,20 @@ function getRandomProgress() {
   const obj = JSON.parse(localStorage.getItem(RANDOM_PROGRESS_KEY) || "{}");
   return obj && typeof obj === "object" ? obj : {};
 }
+
 function setRandomProgress(obj) {
   localStorage.setItem(RANDOM_PROGRESS_KEY, JSON.stringify(obj || {}));
 }
+
 function clearRandomProgress() {
   localStorage.removeItem(RANDOM_PROGRESS_KEY);
 }
+
 function getRandomSig(selectedPages) {
   return (selectedPages || []).slice().sort((a, b) => a - b).join(",");
 }
 
-// ✅ sadece "öğrenildi" (sağ swipe) olunca çağıracağız
+// ✅ sadece öğrenildiğinde artar
 function bumpRandomSeen(selectedPages) {
   if (!showRandom) return;
 
@@ -52,23 +55,29 @@ function bumpRandomSeen(selectedPages) {
 
   const total = Number(prog.total) || 0;
   const seen = Number(prog.seen) || 0;
-  setRandomProgress({ sig, total, seen: Math.min(seen + 1, total) });
+
+  setRandomProgress({
+    sig,
+    total,
+    seen: Math.min(seen + 1, total),
+  });
 }
 
-// ✅ ARTIK: hiç seçilmemişse default = BOŞ ([])
 function getSelectedRandomPages() {
   const arr = getLS(RANDOM_PAGES_KEY);
   return (Array.isArray(arr) ? arr : [])
-    .map((n) => Number(n))
+    .map(Number)
     .filter((n) => Number.isFinite(n) && n >= 1 && n <= totalPages);
 }
+
 function setSelectedRandomPages(pages) {
   setLS(RANDOM_PAGES_KEY, pages);
 }
 
-// ✅ Random sayfa seçim UI (popover)
+// ✅ Random sayfa seçim UI
 function buildRandomPagesUI() {
   if (!randomPagesList) return;
+
   randomPagesList.innerHTML = "";
 
   const selected = new Set(
@@ -99,12 +108,13 @@ function openRandomPagesPopover() {
   buildRandomPagesUI();
   randomPagesPopover.hidden = false;
 }
+
 function closeRandomPagesPopover() {
   if (!randomPagesPopover) return;
   randomPagesPopover.hidden = true;
 }
 
-/** ✅ pool içinden bir kart seç (top/next çakışmasın) */
+/** ✅ pool içinden kart seç */
 function pickFromPool(pool, avoidKey = "") {
   if (!pool || pool.length === 0) return null;
   if (pool.length === 1) return pool[0];
@@ -116,14 +126,14 @@ function pickFromPool(pool, avoidKey = "") {
     if (!avoidKey || k !== avoidKey) return w;
     tries++;
   }
+
   return pool[Math.floor(Math.random() * pool.length)];
 }
 
-/** ✅ random deck'i hazırla / yenile */
+/** ✅ random deck hazırla */
 function prepareRandomDeck(words, selectedPages) {
   const hidden = getLS("hiddenWords") || [];
 
-  // ✅ unlearned olanlar DA havuza girer (tekrar karşıma çıksın diye)
   const pool = (words || []).filter((w) => {
     const k = keyOf(w.page, w.de);
     return !hidden.includes(k);
@@ -137,7 +147,10 @@ function prepareRandomDeck(words, selectedPages) {
 
   if (progSig !== sig) {
     setRandomProgress({ sig, seen: 0, total: pool.length });
-  } else if (!Number.isFinite(Number(prog.total)) || Number(prog.total) === 0) {
+  } else if (
+    !Number.isFinite(Number(prog.total)) ||
+    Number(prog.total) === 0
+  ) {
     setRandomProgress({ sig, seen: progSeen, total: pool.length });
   }
 
@@ -145,13 +158,10 @@ function prepareRandomDeck(words, selectedPages) {
   const total = Number(prog2.total) || pool.length;
   const seen = Math.min(Number(prog2.seen) || 0, total);
 
-  // UI’da gösterilen "x/y"
-  const progressText = `${Math.min(seen + 1, total)}/${total}`;
-
+  randomDeck.progressText = `${Math.min(seen + 1, total)}/${total}`;
   randomDeck.sig = sig;
   randomDeck.selectedPages = selectedPages.slice();
   randomDeck.pool = pool;
-  randomDeck.progressText = progressText;
 
   if (pool.length === 0) {
     randomDeck.top = null;
@@ -170,7 +180,7 @@ function prepareRandomDeck(words, selectedPages) {
   randomDeck.lastKey = nextKey || topKey;
 }
 
-/** ✅ top -> next, next -> yeni next (DOM'u bir kere değiştirir) */
+/** ✅ sıradaki karta geç */
 function advanceRandomDeck() {
   if (!showRandom) return;
 
@@ -182,27 +192,30 @@ function advanceRandomDeck() {
       return;
     }
 
-    // progress text'i güncelle (NOT: seen sadece sağ swipe ile artacak)
     const prog2 = getRandomProgress();
     const total = Number(prog2.total) || (randomDeck.pool || []).length;
     const seen = Math.min(Number(prog2.seen) || 0, total);
     randomDeck.progressText = `${Math.min(seen + 1, total)}/${total}`;
 
-    // top'u next yap
     randomDeck.top = randomDeck.next || randomDeck.top;
 
-    // yeni next seç (top ile çakışmasın)
-    const topKey = randomDeck.top ? keyOf(randomDeck.top.page, randomDeck.top.de) : "";
-    randomDeck.next = pickFromPool(randomDeck.pool, topKey) || randomDeck.top;
+    const topKey = randomDeck.top
+      ? keyOf(randomDeck.top.page, randomDeck.top.de)
+      : "";
+
+    randomDeck.next =
+      pickFromPool(randomDeck.pool, topKey) || randomDeck.top;
 
     renderRandomFromDeck();
   }, 0);
 }
 
-/** ✅ deck'ten render: flicker yok */
+/** ✅ deck render */
 function renderRandomFromDeck() {
   container.innerHTML = "";
   container.classList.add("random-mode");
+  container.classList.remove("quiz-mode");
+  container.classList.remove("sentences-mode");
   container.classList.remove("swiping-stack");
 
   if (!randomDeck.top) {
@@ -227,7 +240,7 @@ function renderRandomFromDeck() {
   container.append(nextCard, topCard);
 }
 
-/** ✅ Random modda swipe davranışı + swipe başlayınca seslendir */
+/** ✅ Swipe handlers */
 function attachSwipeHandlers(card, key, selectedPages) {
   let startX = 0;
   let startY = 0;
@@ -261,7 +274,6 @@ function attachSwipeHandlers(card, key, selectedPages) {
     dx = t.clientX - startX;
     dy = t.clientY - startY;
 
-    // ✅ ilk yatay swipe anında 1 kere konuş
     if (!spokeOnSwipe && Math.abs(dx) > 10 && Math.abs(dx) > Math.abs(dy)) {
       const deText = card.querySelector(".front")?.textContent?.trim() || "";
       speak(deText);
@@ -283,28 +295,31 @@ function attachSwipeHandlers(card, key, selectedPages) {
     if (nextCard) nextCard.classList.add("reveal");
 
     if (direction === "right") {
-      // ✅ öğrenildi: learned'a yaz + pool'dan çıkar + sayaç artsın
       markLearned(key);
       card.classList.add("fly-right");
 
       randomDeck.pool = (randomDeck.pool || []).filter(
         (w) => keyOf(w.page, w.de) !== key
       );
-      if (randomDeck.next && keyOf(randomDeck.next.page, randomDeck.next.de) === key) {
+
+      if (
+        randomDeck.next &&
+        keyOf(randomDeck.next.page, randomDeck.next.de) === key
+      ) {
         randomDeck.next = null;
       }
 
-      bumpRandomSeen(selectedPages); // ✅ sadece burada
+      bumpRandomSeen(selectedPages);
     } else {
-      // ✅ ezberlenmedi: unlearned'a yaz ama pool'da kalsın (tekrar gelebilsin)
       markUnlearned(key);
       card.classList.add("fly-left");
 
-      // hemen sıradaki kart aynı kelime olmasın
-      if (randomDeck.next && keyOf(randomDeck.next.page, randomDeck.next.de) === key) {
+      if (
+        randomDeck.next &&
+        keyOf(randomDeck.next.page, randomDeck.next.de) === key
+      ) {
         randomDeck.next = null;
       }
-      // ❌ sayaç artmasın
     }
 
     setTimeout(() => {
@@ -326,6 +341,7 @@ function attachSwipeHandlers(card, key, selectedPages) {
 
     card.style.transition = "transform 0.15s ease";
     card.style.transform = "translateX(0px) rotate(0deg)";
+
     setTimeout(() => {
       card.style.transition = "";
       card.style.transform = "";
@@ -342,24 +358,28 @@ function renderRandom() {
   showRandom = true;
   showUnlearned = false;
   showQuiz = false;
+  showSentences = false;
 
-  // ✅ quiz UI kapat
-  const quizControlsEl = document.getElementById("quizControls");
-  const quizFilesPopoverEl = document.getElementById("quizFilesPopover");
-  if (quizControlsEl) quizControlsEl.hidden = true;
-  if (quizFilesPopoverEl) quizFilesPopoverEl.hidden = true;
+  // ✅ tüm mod kontrollerini kapat
+  if (typeof hideAllModeControls === "function") {
+    hideAllModeControls();
+  }
 
   if (paginationSection) paginationSection.style.display = "none";
 
   if (randomControls) {
     randomControls.hidden = false;
+
     const existingHint = randomControls.querySelector("#randomHint");
     if (existingHint) existingHint.remove();
   }
+
   if (randomPagesPopover) randomPagesPopover.hidden = true;
 
   container.innerHTML = "";
   container.classList.add("random-mode");
+  container.classList.remove("quiz-mode");
+  container.classList.remove("sentences-mode");
   container.classList.remove("swiping-stack");
 
   const selectedPages = getSelectedRandomPages();
@@ -372,10 +392,7 @@ function renderRandom() {
       );
     }
 
-    pageButtons.forEach(({ btn }) => btn.classList.toggle("active", false));
-    unlearnBtn.classList.toggle("active", false);
-    randomBtn.classList.toggle("active", true);
-    if (quizBtn) quizBtn.classList.toggle("active", false);
+    if (typeof updateActiveButtons === "function") updateActiveButtons();
     return;
   }
 
@@ -385,22 +402,27 @@ function renderRandom() {
     if (!randomDeck.pool || randomDeck.pool.length === 0) {
       container.innerHTML =
         "<p style='text-align:center;font-weight:800;opacity:.9'>Tebrikler! Seçtiğin sayfalardaki tüm kartları gördün ✅</p>";
+
+      if (typeof updateActiveButtons === "function") updateActiveButtons();
       return;
     }
 
     renderRandomFromDeck();
 
-    pageButtons.forEach(({ btn }) => btn.classList.toggle("active", false));
-    unlearnBtn.classList.toggle("active", false);
-    randomBtn.classList.toggle("active", true);
-    if (quizBtn) quizBtn.classList.toggle("active", false);
+    if (typeof updateActiveButtons === "function") updateActiveButtons();
   });
 }
 
-// ✅ Random mod: dosyalar butonu
-if (randomPagesBtn && randomPagesPopover && randomPagesList && applyRandomPagesBtn) {
+// ✅ Dosyalar butonu
+if (
+  randomPagesBtn &&
+  randomPagesPopover &&
+  randomPagesList &&
+  applyRandomPagesBtn
+) {
   randomPagesBtn.onclick = (e) => {
     e.stopPropagation();
+
     if (randomPagesPopover.hidden) openRandomPagesPopover();
     else closeRandomPagesPopover();
   };
@@ -415,10 +437,10 @@ if (randomPagesBtn && randomPagesPopover && randomPagesList && applyRandomPagesB
     setSelectedRandomPages(checked);
     clearRandomProgress();
 
-    // deck reset (seçim değişince)
     window.resetRandomDeck?.();
 
     closeRandomPagesPopover();
+
     if (showRandom) renderRandom();
   };
 
@@ -427,12 +449,14 @@ if (randomPagesBtn && randomPagesPopover && randomPagesList && applyRandomPagesB
     if (randomPagesPopover.hidden) return;
 
     const inside =
-      randomPagesPopover.contains(e.target) || randomPagesBtn.contains(e.target);
+      randomPagesPopover.contains(e.target) ||
+      randomPagesBtn.contains(e.target);
+
     if (!inside) closeRandomPagesPopover();
   });
 }
 
-// Global hook for reset
+// ✅ Reset hook
 window.resetRandomDeck = () => {
   randomDeck.sig = "";
   randomDeck.selectedPages = [];
@@ -443,7 +467,7 @@ window.resetRandomDeck = () => {
   randomDeck.lastKey = "";
 };
 
-// expose for landing.js makeCard()
+// ✅ Global
 window.renderRandom = renderRandom;
 window.bumpRandomSeen = bumpRandomSeen;
 window.advanceRandomDeck = advanceRandomDeck;

@@ -1,14 +1,13 @@
 // quiz.js
 
 let quizQuestions = [];
-let quizOrder = []; // shuffle edilmiş sabit sıra
-let quizIndex = 0; // o anki soru index
+let quizOrder = [];
+let quizIndex = 0;
 let quizTop = null;
 let quizLocked = false;
-
 let quizTotalCount = 0;
 
-// her soru için seçimi sakla (index -> { picked, correct })
+// her soru için seçimi sakla
 const quizState = {};
 
 /* =========================
@@ -22,7 +21,6 @@ const applyQuizFilesBtn = document.getElementById("applyQuizFiles");
 
 const QUIZ_FILES_KEY = "quizSelectedFiles";
 
-// mevcut questions dosyaları (buraya yenilerini ekleyebilirsin)
 const QUIZ_FILES = [
   {
     id: "q03",
@@ -56,18 +54,17 @@ function getSelectedQuizFiles() {
   const selected = Array.isArray(arr) ? arr : [];
 
   const allowed = new Set(QUIZ_FILES.map((f) => f.id));
-  const cleaned = selected.filter((id) => allowed.has(id));
-
-  return cleaned;
+  return selected.filter((id) => allowed.has(id));
 }
+
 function setSelectedQuizFiles(ids) {
   localStorage.setItem(QUIZ_FILES_KEY, JSON.stringify(ids || []));
 }
 
 function buildQuizFilesUI() {
   if (!quizFilesList) return;
-  quizFilesList.innerHTML = "";
 
+  quizFilesList.innerHTML = "";
   const selected = new Set(getSelectedQuizFiles());
 
   QUIZ_FILES.forEach((f) => {
@@ -80,7 +77,6 @@ function buildQuizFilesUI() {
     cb.checked = selected.has(f.id);
 
     const txt = document.createElement("span");
-    // ✅ Dosya adı gibi değil, başlığı göster
     txt.textContent = f.label;
 
     row.append(cb, txt);
@@ -93,6 +89,7 @@ function openQuizFilesPopover() {
   buildQuizFilesUI();
   quizFilesPopover.hidden = false;
 }
+
 function closeQuizFilesPopover() {
   if (!quizFilesPopover) return;
   quizFilesPopover.hidden = true;
@@ -111,7 +108,6 @@ function shuffleLocal(arr) {
 function loadQuestions() {
   const selected = getSelectedQuizFiles();
 
-  // hiç seçilmediyse boş döndür
   if (!selected.length) return Promise.resolve([]);
 
   const paths = selected
@@ -131,11 +127,12 @@ function answeredCount() {
 }
 
 function goNext() {
-  if (!quizLocked) return; // ✅ sadece cevapladıysan
+  if (!quizLocked) return;
+
   if (quizIndex < quizTotalCount - 1) {
     quizIndex++;
     quizTop = quizOrder[quizIndex] || null;
-    quizLocked = !!quizState[quizIndex]; // daha önce görüldüyse kilitli gelsin
+    quizLocked = !!quizState[quizIndex];
     renderQuizCard();
   } else {
     quizTop = null;
@@ -144,11 +141,12 @@ function goNext() {
 }
 
 function goPrev() {
-  if (!quizLocked) return; // ✅ sadece cevapladıysan
+  if (!quizLocked) return;
+
   if (quizIndex > 0) {
     quizIndex--;
     quizTop = quizOrder[quizIndex] || null;
-    quizLocked = !!quizState[quizIndex]; // önceki soru zaten cevaplı ise kilitli
+    quizLocked = !!quizState[quizIndex];
     renderQuizCard();
   }
 }
@@ -159,8 +157,8 @@ function attachSwipe(el) {
   let sy = 0;
   let tracking = false;
 
-  const TH = 50; // px
-  const VLOCK = 80; // dikey scroll güvenliği
+  const TH = 50;
+  const VLOCK = 80;
 
   el.addEventListener(
     "touchstart",
@@ -185,14 +183,11 @@ function attachSwipe(el) {
       const dx = t.clientX - sx;
       const dy = t.clientY - sy;
 
-      // dikey hareket fazlaysa swipe sayma
       if (Math.abs(dy) > VLOCK) return;
 
       if (dx <= -TH) {
-        // sola swipe => geri
         goPrev();
       } else if (dx >= TH) {
-        // sağa swipe => ileri
         goNext();
       }
     },
@@ -200,17 +195,16 @@ function attachSwipe(el) {
   );
 }
 
-// ✅ explain içeriğini doğru şekilde bas (HTML gelirse bozmadan)
 function applyExplain(explainBox, quizTop) {
   const ex = quizTop && quizTop.explain != null ? quizTop.explain : "";
   const s = String(ex || "").trim();
+
   if (!s) {
     explainBox.hidden = true;
     explainBox.innerHTML = "";
     return;
   }
 
-  // JSON'da <br> vs varsa gösterelim; yoksa düz metin gibi durur zaten.
   explainBox.innerHTML = s;
   explainBox.hidden = false;
 }
@@ -219,40 +213,44 @@ function renderQuizCard() {
   container.innerHTML = "";
   container.classList.add("quiz-mode");
   container.classList.remove("random-mode");
+  container.classList.remove("sentences-mode");
   container.classList.remove("swiping-stack");
 
-  // random UI kapat
-  const randomControlsEl = document.getElementById("randomControls");
-  const randomPopoverEl = document.getElementById("randomPagesPopover");
-  if (randomControlsEl) randomControlsEl.hidden = true;
-  if (randomPopoverEl) randomPopoverEl.hidden = true;
+  // ✅ tüm mod kontrollerini kapat
+  if (typeof hideAllModeControls === "function") {
+    hideAllModeControls();
+  }
 
-  // quiz dosya seçimi UI göster
+  // ✅ sadece quiz kontrolleri açık kalsın
   if (quizControls) quizControls.hidden = false;
   if (quizFilesPopover) quizFilesPopover.hidden = true;
 
   if (!quizTop) {
     container.innerHTML = `
-      <div class='quiz-finished'>
+      <div class="quiz-finished">
         <h2>🎉 Tebrikler!</h2>
         <p>Tüm soruları başarıyla tamamladın.</p>
         <button class="action-btn" onclick="renderQuiz()">Yeniden Başla</button>
-      </div>`;
+      </div>
+    `;
     return;
   }
 
   const wrap = document.createElement("div");
   wrap.className = "quiz-card";
 
-  // swipe dinle (mobil)
   attachSwipe(wrap);
 
-  // Progress Bar (cevaplanan sayısına göre)
   const progressContainer = document.createElement("div");
   progressContainer.className = "quiz-progress-container";
+
   const progressBar = document.createElement("div");
   progressBar.className = "quiz-progress-bar";
-  const percent = quizTotalCount ? (answeredCount() / quizTotalCount) * 100 : 0;
+
+  const percent = quizTotalCount
+    ? (answeredCount() / quizTotalCount) * 100
+    : 0;
+
   progressBar.style.width = `${percent}%`;
   progressContainer.appendChild(progressBar);
 
@@ -265,7 +263,6 @@ function renderQuizCard() {
 
   const correct = String(quizTop.answer || "").trim();
 
-  // ✅ açıklama alanı (cevaplanınca / geri dönünce gösterilecek)
   const explainBox = document.createElement("div");
   explainBox.className = "quiz-explain";
   explainBox.hidden = true;
@@ -282,37 +279,38 @@ function renderQuizCard() {
       quizLocked = true;
 
       const picked = String(optText).trim();
-
-      // state kaydet
       quizState[quizIndex] = { picked, correct };
 
-      // doğruyu yeşil yap
       Array.from(opts.querySelectorAll(".quiz-opt")).forEach((b) => {
-        if (String(b.textContent).trim() === correct) b.classList.add("correct");
+        if (String(b.textContent).trim() === correct) {
+          b.classList.add("correct");
+        }
       });
 
-      // yanlışsa seçtiğini kırmızı yap
-      if (picked !== correct) btn.classList.add("wrong");
+      if (picked !== correct) {
+        btn.classList.add("wrong");
+      }
 
-      // ✅ explain göster
       applyExplain(explainBox, quizTop);
     };
 
     opts.appendChild(btn);
   });
 
-  // ✅ daha önce bu soruya dönüldüyse: aynı işaretlemeleri geri bas
   const saved = quizState[quizIndex];
+
   if (saved) {
     quizLocked = true;
+
     Array.from(opts.querySelectorAll(".quiz-opt")).forEach((b) => {
       const txt = String(b.textContent).trim();
+
       if (txt === saved.correct) b.classList.add("correct");
-      if (txt === saved.picked && saved.picked !== saved.correct)
+      if (txt === saved.picked && saved.picked !== saved.correct) {
         b.classList.add("wrong");
+      }
     });
 
-    // ✅ geri dönünce explain de göster
     applyExplain(explainBox, quizTop);
   } else {
     quizLocked = false;
@@ -332,7 +330,6 @@ function renderQuizCard() {
   next.onclick = goNext;
 
   footer.append(meta, next);
-
   wrap.append(progressContainer, q, opts, explainBox, footer);
   container.appendChild(wrap);
 }
@@ -341,30 +338,32 @@ function renderQuiz() {
   showQuiz = true;
   showRandom = false;
   showUnlearned = false;
+  showSentences = false;
 
-  // ✅ Hemen temizle (Landing'deki kelimeler kalmasın)
+  // ✅ tüm mod kontrollerini kapat
+  if (typeof hideAllModeControls === "function") {
+    hideAllModeControls();
+  }
+
   container.innerHTML = "";
-
-  // ✅ FIX: Random UI kapat (Rastgele → Sorular geçişinde 2 Dosyalar bug fix)
-  const randomControlsEl = document.getElementById("randomControls");
-  const randomPopoverEl = document.getElementById("randomPagesPopover");
-  if (randomControlsEl) randomControlsEl.hidden = true;
-  if (randomPopoverEl) randomPopoverEl.hidden = true;
 
   if (paginationSection) paginationSection.style.display = "none";
 
-  pageButtons.forEach(({ btn }) => btn.classList.toggle("active", false));
-  unlearnBtn.classList.toggle("active", false);
-  randomBtn.classList.toggle("active", false);
-  quizBtn.classList.toggle("active", true);
-
-  // quiz dosya seçimi UI
   if (quizControls) {
     quizControls.hidden = false;
+
     const existingHint = quizControls.querySelector("#quizHint");
     if (existingHint) existingHint.remove();
   }
+
   if (quizFilesPopover) quizFilesPopover.hidden = true;
+
+  container.classList.remove("random-mode");
+  container.classList.remove("sentences-mode");
+  container.classList.remove("swiping-stack");
+  container.classList.add("quiz-mode");
+
+  if (typeof updateActiveButtons === "function") updateActiveButtons();
 
   loadQuestions().then((qs) => {
     quizQuestions = Array.isArray(qs) ? qs : [];
@@ -399,6 +398,7 @@ function renderQuiz() {
 if (quizFilesBtn && quizFilesPopover && quizFilesList && applyQuizFilesBtn) {
   quizFilesBtn.onclick = (e) => {
     e.stopPropagation();
+
     if (quizFilesPopover.hidden) openQuizFilesPopover();
     else closeQuizFilesPopover();
   };
@@ -411,8 +411,8 @@ if (quizFilesBtn && quizFilesPopover && quizFilesList && applyQuizFilesBtn) {
     ).map((el) => el.value);
 
     setSelectedQuizFiles(checked);
-
     closeQuizFilesPopover();
+
     if (showQuiz) renderQuiz();
   };
 
@@ -422,9 +422,9 @@ if (quizFilesBtn && quizFilesPopover && quizFilesList && applyQuizFilesBtn) {
 
     const inside =
       quizFilesPopover.contains(e.target) || quizFilesBtn.contains(e.target);
+
     if (!inside) closeQuizFilesPopover();
   });
 }
 
-// global
 window.renderQuiz = renderQuiz;

@@ -4,6 +4,7 @@ const resetBtn = document.getElementById("reset");
 const unlearnBtn = document.getElementById("unlearnedBtn");
 const randomBtn = document.getElementById("randomBtn");
 const quizBtn = document.getElementById("quizBtn");
+const sentencesBtn = document.getElementById("sentencesBtn");
 const pageButtonsContainer = document.getElementById("pageButtons");
 const paginationSection = document.getElementById("paginationSection");
 
@@ -11,6 +12,8 @@ let currentPage = 1;
 let showUnlearned = false;
 let showRandom = false;
 let showQuiz = false;
+let showSentences = false;
+
 const totalPages = 52;
 
 const getLS = (key) => JSON.parse(localStorage.getItem(key) || "[]");
@@ -84,6 +87,7 @@ for (let i = 1; i <= totalPages; i++) {
     showUnlearned = false;
     showRandom = false;
     showQuiz = false;
+    showSentences = false;
     renderWords();
   };
   pageButtons.push({ page: i, btn });
@@ -94,7 +98,7 @@ for (let i = 1; i <= totalPages; i++) {
  * ✅ Fix: page dosyası yok/bozuk/boşsa completed yapma
  */
 function updateStrike() {
-  if (showUnlearned || showRandom || showQuiz) return;
+  if (showUnlearned || showRandom || showQuiz || showSentences) return;
 
   const hidden = getLS("hiddenWords");
   const unlearn = getLS("unlearnedWords");
@@ -119,7 +123,7 @@ function updateStrike() {
 
         if (visible.length === 0) btn.classList.add("completed");
       })
-      .catch(() => { });
+      .catch(() => {});
   });
 }
 
@@ -137,6 +141,7 @@ function markLearned(key) {
     setLS("unlearnedWords", unlearn);
   }
 }
+
 function markUnlearned(key) {
   const unlearn = getLS("unlearnedWords");
   if (!unlearn.includes(key)) {
@@ -198,9 +203,12 @@ function makeCard({ de, tr, oku, page }, opts = {}) {
     markLearned(key);
 
     if (showRandom) {
-      if (typeof bumpRandomSeen === "function")
+      if (typeof bumpRandomSeen === "function") {
         bumpRandomSeen(opts.selectedPages || []);
-      if (typeof advanceRandomDeck === "function") advanceRandomDeck();
+      }
+      if (typeof advanceRandomDeck === "function") {
+        advanceRandomDeck();
+      }
     } else {
       card.remove();
       updateStrike();
@@ -212,9 +220,12 @@ function makeCard({ de, tr, oku, page }, opts = {}) {
     markUnlearned(key);
 
     if (showRandom) {
-      if (typeof bumpRandomSeen === "function")
+      if (typeof bumpRandomSeen === "function") {
         bumpRandomSeen(opts.selectedPages || []);
-      if (typeof advanceRandomDeck === "function") advanceRandomDeck();
+      }
+      if (typeof advanceRandomDeck === "function") {
+        advanceRandomDeck();
+      }
     } else {
       card.remove();
       updateStrike();
@@ -227,7 +238,7 @@ function makeCard({ de, tr, oku, page }, opts = {}) {
   };
 
   // ✅ Random modda swipe
-  if (typeof attachSwipeHandlers === "function") {
+  if (showRandom && typeof attachSwipeHandlers === "function") {
     attachSwipeHandlers(card, key, opts.selectedPages || []);
   }
 
@@ -236,30 +247,59 @@ function makeCard({ de, tr, oku, page }, opts = {}) {
   return card;
 }
 
-function renderWords() {
-  if (paginationSection) paginationSection.style.display = "";
-
-  // random elements handling
+function hideAllModeControls() {
   const randomControls = document.getElementById("randomControls");
   const randomPagesPopover = document.getElementById("randomPagesPopover");
+  const quizControls = document.getElementById("quizControls");
+  const quizFilesPopover = document.getElementById("quizFilesPopover");
+  const sentencesControls = document.getElementById("sentencesControls");
+  const sentencesPagesPopover = document.getElementById("sentencesPagesPopover");
+
   if (randomControls) randomControls.hidden = true;
   if (randomPagesPopover) randomPagesPopover.hidden = true;
 
-  // quiz elements handling
-  const quizControls = document.getElementById("quizControls");
-  const quizFilesPopover = document.getElementById("quizFilesPopover");
   if (quizControls) quizControls.hidden = true;
   if (quizFilesPopover) quizFilesPopover.hidden = true;
+
+  if (sentencesControls) sentencesControls.hidden = true;
+  if (sentencesPagesPopover) sentencesPagesPopover.hidden = true;
+}
+
+function updateActiveButtons() {
+  pageButtons.forEach(({ btn, page }) =>
+    btn.classList.toggle(
+      "active",
+      !showUnlearned &&
+        !showRandom &&
+        !showQuiz &&
+        !showSentences &&
+        page === currentPage
+    )
+  );
+
+  if (unlearnBtn) unlearnBtn.classList.toggle("active", showUnlearned);
+  if (randomBtn) randomBtn.classList.toggle("active", showRandom);
+  if (quizBtn) quizBtn.classList.toggle("active", showQuiz);
+  if (sentencesBtn) sentencesBtn.classList.toggle("active", showSentences);
+}
+
+function renderWords() {
+  if (paginationSection) paginationSection.style.display = "";
+
+  hideAllModeControls();
 
   container.classList.remove("random-mode");
   container.classList.remove("quiz-mode");
   container.classList.remove("swiping-stack");
+  container.classList.remove("sentences-mode");
   container.innerHTML = "";
 
   const hidden = getLS("hiddenWords");
   const unlearn = getLS("unlearnedWords");
 
-  const pagesToFetch = showUnlearned ? pageButtons.map((p) => p.page) : [currentPage];
+  const pagesToFetch = showUnlearned
+    ? pageButtons.map((p) => p.page)
+    : [currentPage];
 
   fetchPages(pagesToFetch).then((words) => {
     shuffle(words);
@@ -267,23 +307,18 @@ function renderWords() {
     words.forEach((w) => {
       const key = keyOf(w.page, w.de);
 
-      if (!showUnlearned && (hidden.includes(key) || unlearn.includes(key))) return;
-      if (showUnlearned && !unlearn.includes(key)) return;
+      if (!showUnlearned && (hidden.includes(key) || unlearn.includes(key))) {
+        return;
+      }
+      if (showUnlearned && !unlearn.includes(key)) {
+        return;
+      }
 
       container.append(makeCard(w));
     });
 
     updateStrike();
-
-    pageButtons.forEach(({ btn, page }) =>
-      btn.classList.toggle(
-        "active",
-        !showUnlearned && !showRandom && !showQuiz && page === currentPage
-      )
-    );
-    unlearnBtn.classList.toggle("active", showUnlearned);
-    randomBtn.classList.toggle("active", showRandom);
-    if (quizBtn) quizBtn.classList.toggle("active", showQuiz);
+    updateActiveButtons();
   });
 }
 
@@ -291,14 +326,17 @@ resetBtn.onclick = () => {
   localStorage.removeItem("hiddenWords");
   localStorage.removeItem("unlearnedWords");
   localStorage.removeItem("randomSelectedPages");
+  localStorage.removeItem("sentenceSelectedPages");
+
   if (typeof clearRandomProgress === "function") clearRandomProgress();
 
-  // quiz storage (varsa)
+  // quiz storage
   localStorage.removeItem("quizSelectedFiles");
 
   showUnlearned = false;
   showRandom = false;
   showQuiz = false;
+  showSentences = false;
 
   if (typeof window.resetRandomDeck === "function") window.resetRandomDeck();
   if (typeof window.resetQuizDeck === "function") window.resetQuizDeck();
@@ -311,6 +349,7 @@ unlearnBtn.onclick = () => {
   showUnlearned = !showUnlearned;
   showRandom = false;
   showQuiz = false;
+  showSentences = false;
   renderWords();
 };
 
@@ -318,7 +357,11 @@ randomBtn.onclick = () => {
   showRandom = true;
   showUnlearned = false;
   showQuiz = false;
-  if (typeof renderRandom === "function") renderRandom();
+  showSentences = false;
+
+  if (typeof renderRandom === "function") {
+    renderRandom();
+  }
 };
 
 if (quizBtn) {
@@ -326,7 +369,24 @@ if (quizBtn) {
     showQuiz = true;
     showRandom = false;
     showUnlearned = false;
-    if (typeof renderQuiz === "function") renderQuiz();
+    showSentences = false;
+
+    if (typeof renderQuiz === "function") {
+      renderQuiz();
+    }
+  };
+}
+
+if (sentencesBtn) {
+  sentencesBtn.onclick = () => {
+    showSentences = true;
+    showQuiz = false;
+    showRandom = false;
+    showUnlearned = false;
+
+    if (typeof renderSentences === "function") {
+      renderSentences();
+    }
   };
 }
 
@@ -351,20 +411,31 @@ window.paginationSection = paginationSection;
 window.unlearnBtn = unlearnBtn;
 window.randomBtn = randomBtn;
 window.quizBtn = quizBtn;
+window.sentencesBtn = sentencesBtn;
+window.updateActiveButtons = updateActiveButtons;
+window.hideAllModeControls = hideAllModeControls;
 
 Object.defineProperty(window, "showRandom", {
   get: () => showRandom,
   set: (v) => (showRandom = v),
 });
+
 Object.defineProperty(window, "showUnlearned", {
   get: () => showUnlearned,
   set: (v) => (showUnlearned = v),
 });
+
 Object.defineProperty(window, "currentPage", {
   get: () => currentPage,
   set: (v) => (currentPage = v),
 });
+
 Object.defineProperty(window, "showQuiz", {
   get: () => showQuiz,
   set: (v) => (showQuiz = v),
+});
+
+Object.defineProperty(window, "showSentences", {
+  get: () => showSentences,
+  set: (v) => (showSentences = v),
 });
