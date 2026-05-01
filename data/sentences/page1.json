@@ -1,12 +1,77 @@
 [
   {
-    "de": "Ich gehe heute ins Fitnessstudio.",
-    "tr": "Bugün spor salonuna gidiyorum.",
-    "oku": "ih gehe hoyte ins fitnısştudyo"
+    "de": "Das ist ein Haus.",
+    "tr": "Bu bir ev.",
+    "oku": "das ist ayn haus"
   },
   {
-    "de": "Das Wetter ist heute sehr schön.",
-    "tr": "Hava bugün çok güzel.",
-    "oku": "das veta ist hoyte zehr şön"
+    "de": "Die Tür ist offen.",
+    "tr": "Kapı açık.",
+    "oku": "di tür ist ofın"
+  },
+  {
+    "de": "Ich gehe zur Schule.",
+    "tr": "Okula gidiyorum.",
+    "oku": "ih geehe tsur şuule"
+  },
+  {
+    "de": "Er kommt aus Deutschland.",
+    "tr": "O Almanya’dan geliyor.",
+    "oku": "er komt aus doychland"
+  },
+  {
+    "de": "Wir essen Pizza.",
+    "tr": "Pizza yiyiyoruz.",
+    "oku": "vir ezın pitsa"
+  },
+  {
+    "de": "Das Fenster ist zu.",
+    "tr": "Pencere kapalı.",
+    "oku": "das fenstır ist tsu"
+  },
+  {
+    "de": "Der Hund schläft.",
+    "tr": "Köpek uyuyor.",
+    "oku": "der hund şleft"
+  },
+  {
+    "de": "Die Kinder spielen im Garten.",
+    "tr": "Çocuklar bahçede oynuyor.",
+    "oku": "di kinder şpilın im garten"
+  },
+  {
+    "de": "Ich habe keine Uhr.",
+    "tr": "Saatim yok.",
+    "oku": "ih habe kayne uur"
+  },
+  {
+    "de": "Ich esse Brot mit Käse.",
+    "tr": "Peynirle ekmek yiyiyorum.",
+    "oku": "ih ezı brot mit keze"
+  },
+  {
+    "de": "Die Katze sitzt auf dem Sofa.",
+    "tr": "Kedi kanepede oturuyor.",
+    "oku": "di katsı zits auf dem sofa"
+  },
+  {
+    "de": "Ich lese ein Buch.",
+    "tr": "Bir kitap okuyorum.",
+    "oku": "ih leze ayn buh"
+  },
+  {
+    "de": "Mein Freund heißt Lukas.",
+    "tr": "Erkek arkadaşımın adı Lukas.",
+    "oku": "mayn froynt hayst lukas"
+  },
+  {
+    "de": "Berlin ist eine große Stadt.",
+    "tr": "Berlin büyük bir şehirdir.",
+    "oku": "berlin ist ayne grose ştat"
+  },
+  {
+    "de": "Ich spreche ein bisschen Deutsch.",
+    "tr": "Biraz Almanca konuşuyorum.",
+    "oku": "ih şprehhe ayn bişın doych"
   }
 ]
