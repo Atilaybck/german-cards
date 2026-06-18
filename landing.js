@@ -14,7 +14,7 @@ let showRandom = false;
 let showQuiz = false;
 let showSentences = false;
 
-const totalPages = 52;
+const totalPages = 56;
 
 const getLS = (key) => JSON.parse(localStorage.getItem(key) || "[]");
 const setLS = (key, val) => localStorage.setItem(key, JSON.stringify(val));
