@@ -3,7 +3,6 @@ const container = document.getElementById("cards");
 const resetBtn = document.getElementById("reset");
 const unlearnBtn = document.getElementById("unlearnedBtn");
 const randomBtn = document.getElementById("randomBtn");
-const quizBtn = document.getElementById("quizBtn");
 const sentencesBtn = document.getElementById("sentencesBtn");
 const pageButtonsContainer = document.getElementById("pageButtons");
 const paginationSection = document.getElementById("paginationSection");
@@ -11,7 +10,6 @@ const paginationSection = document.getElementById("paginationSection");
 let currentPage = 1;
 let showUnlearned = false;
 let showRandom = false;
-let showQuiz = false;
 let showSentences = false;
 
 const totalPages = 3;
@@ -86,7 +84,6 @@ for (let i = 1; i <= totalPages; i++) {
     currentPage = i;
     showUnlearned = false;
     showRandom = false;
-    showQuiz = false;
     showSentences = false;
     renderWords();
   };
@@ -98,7 +95,7 @@ for (let i = 1; i <= totalPages; i++) {
  * ✅ Fix: page dosyası yok/bozuk/boşsa completed yapma
  */
 function updateStrike() {
-  if (showUnlearned || showRandom || showQuiz || showSentences) return;
+  if (showUnlearned || showRandom || showSentences) return;
 
   const hidden = getLS("hiddenWords");
   const unlearn = getLS("unlearnedWords");
@@ -250,16 +247,11 @@ function makeCard({ de, tr, oku, page }, opts = {}) {
 function hideAllModeControls() {
   const randomControls = document.getElementById("randomControls");
   const randomPagesPopover = document.getElementById("randomPagesPopover");
-  const quizControls = document.getElementById("quizControls");
-  const quizFilesPopover = document.getElementById("quizFilesPopover");
   const sentencesControls = document.getElementById("sentencesControls");
   const sentencesPagesPopover = document.getElementById("sentencesPagesPopover");
 
   if (randomControls) randomControls.hidden = true;
   if (randomPagesPopover) randomPagesPopover.hidden = true;
-
-  if (quizControls) quizControls.hidden = true;
-  if (quizFilesPopover) quizFilesPopover.hidden = true;
 
   if (sentencesControls) sentencesControls.hidden = true;
   if (sentencesPagesPopover) sentencesPagesPopover.hidden = true;
@@ -271,7 +263,6 @@ function updateActiveButtons() {
       "active",
       !showUnlearned &&
         !showRandom &&
-        !showQuiz &&
         !showSentences &&
         page === currentPage
     )
@@ -279,7 +270,6 @@ function updateActiveButtons() {
 
   if (unlearnBtn) unlearnBtn.classList.toggle("active", showUnlearned);
   if (randomBtn) randomBtn.classList.toggle("active", showRandom);
-  if (quizBtn) quizBtn.classList.toggle("active", showQuiz);
   if (sentencesBtn) sentencesBtn.classList.toggle("active", showSentences);
 }
 
@@ -289,7 +279,6 @@ function renderWords() {
   hideAllModeControls();
 
   container.classList.remove("random-mode");
-  container.classList.remove("quiz-mode");
   container.classList.remove("swiping-stack");
   container.classList.remove("sentences-mode");
   container.innerHTML = "";
@@ -330,16 +319,11 @@ resetBtn.onclick = () => {
 
   if (typeof clearRandomProgress === "function") clearRandomProgress();
 
-  // quiz storage
-  localStorage.removeItem("quizSelectedFiles");
-
   showUnlearned = false;
   showRandom = false;
-  showQuiz = false;
   showSentences = false;
 
   if (typeof window.resetRandomDeck === "function") window.resetRandomDeck();
-  if (typeof window.resetQuizDeck === "function") window.resetQuizDeck();
 
   pageButtons.forEach(({ btn }) => btn.classList.remove("completed"));
   renderWords();
@@ -348,7 +332,6 @@ resetBtn.onclick = () => {
 unlearnBtn.onclick = () => {
   showUnlearned = !showUnlearned;
   showRandom = false;
-  showQuiz = false;
   showSentences = false;
   renderWords();
 };
@@ -356,7 +339,6 @@ unlearnBtn.onclick = () => {
 randomBtn.onclick = () => {
   showRandom = true;
   showUnlearned = false;
-  showQuiz = false;
   showSentences = false;
 
   if (typeof renderRandom === "function") {
@@ -364,23 +346,10 @@ randomBtn.onclick = () => {
   }
 };
 
-if (quizBtn) {
-  quizBtn.onclick = () => {
-    showQuiz = true;
-    showRandom = false;
-    showUnlearned = false;
-    showSentences = false;
-
-    if (typeof renderQuiz === "function") {
-      renderQuiz();
-    }
-  };
-}
 
 if (sentencesBtn) {
   sentencesBtn.onclick = () => {
     showSentences = true;
-    showQuiz = false;
     showRandom = false;
     showUnlearned = false;
 
@@ -410,7 +379,6 @@ window.container = container;
 window.paginationSection = paginationSection;
 window.unlearnBtn = unlearnBtn;
 window.randomBtn = randomBtn;
-window.quizBtn = quizBtn;
 window.sentencesBtn = sentencesBtn;
 window.updateActiveButtons = updateActiveButtons;
 window.hideAllModeControls = hideAllModeControls;
@@ -428,11 +396,6 @@ Object.defineProperty(window, "showUnlearned", {
 Object.defineProperty(window, "currentPage", {
   get: () => currentPage,
   set: (v) => (currentPage = v),
-});
-
-Object.defineProperty(window, "showQuiz", {
-  get: () => showQuiz,
-  set: (v) => (showQuiz = v),
 });
 
 Object.defineProperty(window, "showSentences", {
